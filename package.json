@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "start": "nodemon server/server.js && tsc && concurrently \"npm run tsc:w\" ", 
+    "start": "nodemon server/server.js --exec babel-node --presets es2015 && tsc && concurrently \"npm run tsc:w\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"
   },
-  "babel": {},
+  "babel": {
+    "presets": ["es2015"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tabithablagdon/UnLoadX.git"
@@ -49,8 +51,10 @@
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
     "concurrently": "^2.0.0",
     "typescript": "^1.8.10",
     "typings":"^1.0.4"
+
   }
 }
