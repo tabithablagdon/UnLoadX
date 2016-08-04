@@ -1,0 +1,31 @@
+{
+  "name": "unload",
+  "version": "1.0.0",
+  "description": "Load balancing and testing tool with UI measuring performance",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "nodemon server/server.js"
+  },
+  "babel": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tabithablagdon/UnLoadX.git"
+  },
+  "author": "Andrew Brown, James Ramadan, Tabitha Blagdon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tabithablagdon/UnLoadX/issues"
+  },
+  "homepage": "https://github.com/tabithablagdon/UnLoadX#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.0",
+    "sequelize": "^3.23.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4"
+  }
+}
