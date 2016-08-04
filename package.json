@@ -20,7 +20,9 @@
   "homepage": "https://github.com/tabithablagdon/UnLoadX#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "express": "^4.14.0",
+    "mocha": "^3.0.0",
     "morgan": "^1.7.0",
     "nodemon": "^1.10.0",
     "sequelize": "^3.23.6"
