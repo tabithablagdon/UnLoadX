@@ -3,7 +3,8 @@ import nodeController from './node-server.controller';
 
 const nodeRouter = express.Router();
 
-nodeRouter.post('/', nodeController.sendIP);
+nodeRouter.post('/', nodeController.createServerNode);
 
+nodeRouter.get('/', nodeController.getServers);
 
 export default nodeRouter;
