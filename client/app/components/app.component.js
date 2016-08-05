@@ -9,29 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Test = (function () {
-    function Test() {
-    }
-    return Test;
-}());
-exports.Test = Test;
+var form_component_1 = require('./form/form.component');
 var AppComponent = (function () {
     function AppComponent() {
-        this.test = [];
     }
-    AppComponent.prototype.onClick = function () {
-        this.test.push({ id: 2, ip: this.ipAddress, port: this.port });
-    };
-    AppComponent.prototype.onRemove = function (num) {
-        this.test.splice(num, 1);
-    };
-    AppComponent.prototype.onLog = function () {
-        console.log(this.test);
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "<h1>UnLoadX </h1>\n  \t\t\t<h4>Enter Server IP Address & Port Number:</h4>\n  \t\t\t<input [(ngModel)]=\"ipAddress\" placeholder=\"IP Address\">\n  \t\t\t<input [(ngModel)]=\"port\" placeholder=\"Port\">\n  \t\t\t<button (click)= \"onClick()\"> Add IP & Port </button>\n  \t\t\t<h4>Current List of IP Address & Port Numbers:</h4>\n  \t\t\t<ul>\n  \t\t\t<li *ngFor=\"let item of test\"> IP:{{item.ip}} / Port: {{item.port}} <button (click)= \"onRemove($index)\"> Remove </button> \n  \t\t\t</li>\n  \t\t\t</ul>\n  \t\t\t<input [(ngModel)]=\"reqNum\" placeholder=\"Number of Requests\">\n  \t\t\t<button (click)= \"onLog()\"> Submit Test </button>"
+            template: "<my-form></my-form>",
+            directives: [form_component_1.FormComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
