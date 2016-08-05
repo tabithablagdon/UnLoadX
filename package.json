@@ -4,7 +4,9 @@
   "description": "Load balancing and testing tool with UI measuring performance",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
+    "test": "npm run test-client && npm run test-server",
+    "test-client": "mocha spec/clientspec.js",
+    "test-server": "mocha spec/serverspec.js",
     "start": "nodemon server/server.js --exec babel-node --presets es2015 && tsc && concurrently \"npm run tsc:w\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
