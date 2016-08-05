@@ -30,7 +30,6 @@ Request.belongsTo(NodeServer, {foreignKey: 'serverId', targetKey: 'id'});
 Request.belongsTo(Test, {foreignKey: 'testId', targetKey: 'id'});
 
 // Test Table - add foreign key to User
-Test.belongsTo(NodeServer, {foreignKey: 'serverId', targetKey: 'id'});
 Test.belongsTo(User, {foreignKey: 'userId', targetKey: 'id'});
 
 // User Table (contains no foreign keys)
