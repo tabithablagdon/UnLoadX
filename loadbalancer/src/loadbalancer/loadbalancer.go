@@ -33,6 +33,6 @@ func RoundRobin(servers []*url.URL) *httputil.ReverseProxy {
 // and an array of servers which it will pass to the strategy function
 
 func LoadBalance(fn strategy, servers[]*url.URL) {
-  proxy := RoundRobin(servers)
+  proxy := fn(servers)
   http.ListenAndServe(":9090", proxy)
 }
