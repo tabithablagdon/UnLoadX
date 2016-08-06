@@ -1,5 +1,14 @@
 import { NodeServer, Test, User } from '../../db/db';
 import { handleError } from '../../config/utils';
+import request from 'request';
+
+const testBody = {
+  servers: [
+     {ip: '12.5.235.2', port: '80', application_type: 'image processor'},
+     {ip: '12.5.100.2', port: '30', application_type: 'web server'},
+     {ip: '127.2.232.1', port: '8080', application_type: 'image processor'}
+  ]
+};
 
 const nodeController = {};
 
@@ -42,6 +51,8 @@ nodeController.createServerNode = (req, res) => {
 
   res.send(req.body);
 
+  // ajax request to loadBalancerURI
+  nodeController.sendTestToLB(req.body);
 };
 
 /**
@@ -56,5 +67,28 @@ nodeController.getServers = (req, res) => {
     .catch(handleError(res));
 
 };
+
+/**
+ * function postToLB
+ * Sends loadBalancer all servers in the database
+ */
+
+nodeController.sendTestToLB = (res) => {
+
+  request({
+    url: 'http://52.8.16.173:9000/iptables',
+    method: 'POST',
+    body: JSON.stringify(res)
+  }, (err, res, body) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(res.statusCode, body);
+    }
+  });
+
+};
+
+// nodeController.sendTestToLB([{"ip": "12.5.235.2", "port": "80", "application": "image processor"}]);
 
 export default nodeController;
