@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-const db = new Sequelize('unloadx', 'root', 'mainstreet', {dialect: 'mysql'});
+const db = new Sequelize('unloadx', 'root', 'password', {dialect: 'mysql'});
 // postgres://postgres@54.67.125.238/unloadx
 
 /**
