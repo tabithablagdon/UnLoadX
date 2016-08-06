@@ -1,40 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Validators } from '@angular/common';
+import { NgForm }    from '@angular/common';
+import {  
+  REACTIVE_FORM_DIRECTIVES, 
+  FormGroup, 
+  FormControl, 
+  FormBuilder
+} from '@angular/forms';
+import {FORM_DIRECTIVES} from '@angular/forms';
 import { ipPort } from './ipPort';
+import { FormService } from './formServices/form.service';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 @Component({
   selector: 'my-form',
-  template: `<h1 [style.color]="'orange'">UnLoadX </h1>
-  			<h4>Enter Server IP Address & Port Number:</h4>
-  			<input [(ngModel)]="ipAddress" placeholder="IP Address">
-  			<input [(ngModel)]="port" placeholder="Port">
-        <button (click)= "onClick()"> Add IP/Port </button>
-  		
-  			<h4>Current List of IP Address & Port Numbers:</h4>
-  			<ul>
-  			<li *ngFor="let item of test"> IP:{{item.ip}} / Port: {{item.port}} <button (click)= "onRemove($index)"> Remove </button> 
-  			</li>
-  			</ul>
-  			<input [(ngModel)]="reqNum" placeholder="Number of Requests">
-  			<button (click)= "onLog()"> Submit Test </button>`
+  templateUrl: "./client/app/components/form/form.component.html",
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
+  providers: [FormService, HTTP_PROVIDERS]
 })
 export class FormComponent { 
+ 
+
+  constructor(
+
+    private _FormService: FormService
+
+  ) { } // form builder simplify form initialization
+
+  types = ['web server', 'image processor', 'other'];
+  type = 'other';
+
+  model = new ipPort('123.456.789', '8080', 'web processor');
 
 
-	constructor () {
-	}
+  submitted = false;
 
-	onClick() {
-		this.test.push({id:2, ip: this.ipAddress, port: this.port});
-	}
+  onSubmit() { 
+    console.log(this.model);
+    this._FormService.sendTest(this.model);
+  }
 
-	onRemove(num) {
-		this.test.splice(num,1);
-	}
-
-	onLog() {
-		console.log(this.test);
-	}
-
-	test: Test[] = [];
+  onChange(value){
+    this.type = value;
+    this.model.type =value;
+  }
 
 }

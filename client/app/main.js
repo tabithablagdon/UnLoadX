@@ -1,6 +1,10 @@
 "use strict";
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var app_component_1 = require('./components/app.component');
-platform_browser_dynamic_1.bootstrap(app_component_1.AppComponent)
+var forms_1 = require('@angular/forms');
+platform_browser_dynamic_1.bootstrap(app_component_1.AppComponent, [
+    forms_1.disableDeprecatedForms(),
+    forms_1.provideForms(),
+])
     .catch(function (err) { return console.log("Error bootstrapping App " + err); });
 //# sourceMappingURL=main.js.map

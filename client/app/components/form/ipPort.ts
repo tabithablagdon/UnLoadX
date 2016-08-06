@@ -1,5 +1,6 @@
 export class ipPort {
-  id: number;
-  ip: string;
-  port: string;
+  public ip: string;
+  public port: string;
+  public type: string;
+  public numReq: number;
 }

@@ -4,7 +4,8 @@ import { ipPort } from './form/ipPort';
 
 @Component({
   selector: 'my-app',
-  template: `<my-form></my-form>`,
+  template: `<h1 [style.color]="'orange'">UnLoadX </h1>
+              <my-form></my-form>`,
   directives: [FormComponent]
 })
 

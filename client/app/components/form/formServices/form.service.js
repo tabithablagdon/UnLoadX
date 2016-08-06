@@ -9,19 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var form_component_1 = require('./form/form.component');
-var AppComponent = (function () {
-    function AppComponent() {
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+var FormService = (function () {
+    function FormService(_http) {
+        this._http = _http;
+        this.uriPath = 'api/nodeserver';
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n              <my-form></my-form>",
-            directives: [form_component_1.FormComponent]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    FormService.prototype.sendTest = function (object) {
+        return this._http.post(this.uriPath, JSON.stringify(object))
+            .map(function (testResult) { return testResult.json(); });
+    };
+    FormService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], FormService);
+    return FormService;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.FormService = FormService;
+//# sourceMappingURL=form.service.js.map

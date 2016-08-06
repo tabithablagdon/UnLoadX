@@ -9,25 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
+var forms_2 = require('@angular/forms');
+var ipPort_1 = require('./ipPort');
+var form_service_1 = require('./formServices/form.service');
+var http_1 = require('@angular/http');
 var FormComponent = (function () {
-    function FormComponent() {
-        this.test = [];
-    }
-    FormComponent.prototype.onClick = function () {
-        this.test.push({ id: 2, ip: this.ipAddress, port: this.port });
+    function FormComponent(_FormService) {
+        this._FormService = _FormService;
+        this.types = ['web server', 'image processor', 'other'];
+        this.type = 'other';
+        this.model = new ipPort_1.ipPort('123.456.789', '8080', 'web processor');
+        this.submitted = false;
+    } // form builder simplify form initialization
+    FormComponent.prototype.onSubmit = function () {
+        console.log(this.model);
+        this._FormService.sendTest(this.model);
     };
-    FormComponent.prototype.onRemove = function (num) {
-        this.test.splice(num, 1);
-    };
-    FormComponent.prototype.onLog = function () {
-        console.log(this.test);
+    FormComponent.prototype.onChange = function (value) {
+        this.type = value;
+        this.model.type = value;
     };
     FormComponent = __decorate([
         core_1.Component({
             selector: 'my-form',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n  \t\t\t<h4>Enter Server IP Address & Port Number:</h4>\n  \t\t\t<input [(ngModel)]=\"ipAddress\" placeholder=\"IP Address\">\n  \t\t\t<input [(ngModel)]=\"port\" placeholder=\"Port\">\n        <button (click)= \"onClick()\"> Add IP/Port </button>\n  \t\t\n  \t\t\t<h4>Current List of IP Address & Port Numbers:</h4>\n  \t\t\t<ul>\n  \t\t\t<li *ngFor=\"let item of test\"> IP:{{item.ip}} / Port: {{item.port}} <button (click)= \"onRemove($index)\"> Remove </button> \n  \t\t\t</li>\n  \t\t\t</ul>\n  \t\t\t<input [(ngModel)]=\"reqNum\" placeholder=\"Number of Requests\">\n  \t\t\t<button (click)= \"onLog()\"> Submit Test </button>"
+            templateUrl: "./client/app/components/form/form.component.html",
+            directives: [forms_2.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES],
+            providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [form_service_1.FormService])
     ], FormComponent);
     return FormComponent;
 }());
