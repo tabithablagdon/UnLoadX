@@ -10,15 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-require('rxjs/add/operator/map');
+require('rxjs/add/operator/toPromise');
 var FormService = (function () {
     function FormService(_http) {
         this._http = _http;
-        this.uriPath = 'api/nodeserver';
+        this.uriPath = '/api/nodeserver';
     }
+    FormService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body.data || {};
+    };
     FormService.prototype.sendTest = function (object) {
-        return this._http.post(this.uriPath, JSON.stringify(object))
-            .map(function (testResult) { return testResult.json(); });
+        console.log('heyo', object);
+        return this._http.post(this.uriPath, object)
+            .toPromise()
+            .then(this.extractData)
+            .catch(function (err) {
+            console.error(err);
+            return Promise.reject('Post Failed');
+        });
     };
     FormService = __decorate([
         core_1.Injectable(), 

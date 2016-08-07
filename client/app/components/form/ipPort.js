@@ -5,4 +5,10 @@ var ipPort = (function () {
     return ipPort;
 }());
 exports.ipPort = ipPort;
+var numReq = (function () {
+    function numReq() {
+    }
+    return numReq;
+}());
+exports.numReq = numReq;
 //# sourceMappingURL=ipPort.js.map

@@ -1,23 +1,105 @@
-       <form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()">
+  <h4>Enter Server IP Address, Port Number, & Type:</h4>
+
+ <div class = "form-group">
+    <label for= "ip"> IP Address</label>
+    <input type = "text" [(ngModel)]="model.ip" name="ip" class = "form-control" required placeholder="IP Address">
+  </div>
+  <div class= "form-group">
+    <label for= "port"> Port</label>
+    <input type = "text" [(ngModel)]="model.port" name="port" class = "form-control" required placeholder="Port">
+  </div>
+  <div class= "form-group">
+    <label for= "application_type"> Application Type </label>
+    <select class="form-control" (ngModelChange)="onChange($event)" [ngModel]="model.application_type" name="application_type" required>
+        <option  *ngFor="let type of types" [value]="type">{{type}}</option>
+    </select>
+  </div>
+
+  <div class = "form-group">
+    <label for= "ip"> IP Address</label>
+    <input type = "text" [(ngModel)]="model2.ip" name="ip" class = "form-control" required placeholder="IP Address">
+  </div>
+  <div class= "form-group">
+    <label for= "port"> Port</label>
+    <input type = "text" [(ngModel)]="model2.port" name="port" class = "form-control" required placeholder="Port">
+  </div>
+  <div class= "form-group">
+    <label for= "application_type"> Type </label>
+    <select class="form-control" (ngModelChange)="onChange2($event)" [ngModel]="model2.application_type" name="application_type" required>
+        <option  *ngFor="let type of types" [value]="type">{{type}}</option>
+    </select>
+  </div>
+
+  <div class= "form-group">
+    <label for= "NumReqs"> Number of Requests</label>
+    <input type = "text" [(ngModel)]="numReqModel.numReq" name="numReq" class = "form-control" required placeholder="Number of Requests">
+  </div>
+  <button (click)="onSubmit()" class="btn btn-default"> Submit </button>
+<form>
+
+
+
+
+
+
+
+<!-- 
+
+
+
+       <form (ngSubmit)="onSubmit(registrationForm.value)">
         <h4>Enter Server IP Address, Port Number, & Type:</h4>
-       <div class = "form-group">
+
+       <div class= "form-group">
           <label for= "ip"> IP Address</label>
-          <input type = "text" [(ngModel)]="model.ip" name="ip" class = "form-control" required placeholder="IP Address">
+          <input type = "text" [(ngModel)]="model.ip" name="ip" required placeholder="IP Address">
         </div>
         <div class= "form-group">
           <label for= "port"> Port</label>
-          <input type = "text" [(ngModel)]="model.port" name="port" class = "form-control" required placeholder="Port">
+          <input type = "text" [(ngModel)]="model.port" name="port" required placeholder="Port">
         </div>
         <div class= "form-group">
           <label for= "type"> Type </label>
-          <select class="form-control" (ngModelChange)="onChange($event)" [ngModel]="model.type" name="type" required>
-              <option  *ngFor="let type of types" [value]="type">{{type}}</option>
+          <select (ngModelChange)="onChange($event)" [ngModel]="model.type" name="type" required>
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
           </select>
         </div>
+
         <div class= "form-group">
+          <label for= "ip"> IP Address</label>
+          <input type = "text" [(ngModel)]="model2.ip" name="ip" required placeholder="IP Address">
+        </div>
+        <div class= "form-group">
+          <label for= "port"> Port</label>
+          <input type = "text" [(ngModel)]="model2.port" name="port" required placeholder="Port">
+        </div>
+        <div class= "form-group">
+          <label for= "type"> Type </label>
+          <select (ngModelChange)="onChange2($event)" [ngModel]="model2.type" name="type" required>
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+          </select>
+        </div>
+
+        <div class= "form-group">
+          <label for= "ip"> IP Address</label>
+          <input type = "text" [(ngModel)]="model3.ip" name="ip" required placeholder="IP Address">
+        </div>
+        <div class= "form-group">
+          <label for= "port"> Port</label>
+          <input type = "text" [(ngModel)]="model3.port" name="port" required placeholder="Port">
+        </div>
+        <div class= "form-group">
+          <label for= "type"> Type </label>
+          <select (ngModelChange)="onChange3($event)" [ngModel]="model3.type" name="type" required>
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+          </select>
+        </div>
+
+        <div>
           <label for= "NumReqs"> Number of Requests</label>
-          <input type = "text" [(ngModel)]="model.numReq" name="numReq" class = "form-control" required placeholder="Number of Requests">
+          <input type = "text" [(ngModel)]="numReq" name="numReq" required placeholder="Number of Requests">
         </div>
         <button type="submit" class="btn btn-default"> Submit </button>
         <form>
-
+ -->

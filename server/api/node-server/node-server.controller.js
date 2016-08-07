@@ -23,10 +23,13 @@ const nodeController = {};
 
 nodeController.createServerNode = (req, res) => {
   const servers = req.body.servers;
+  console.log('servers', servers);
+  console.log('req.body', req.body)
 
   //TO ADD: Query for UserId, when authentication is added
 
   servers.forEach(server => {
+    console.log('server here', server);
     NodeServer.create({
       ip: server.ip,
       port: server.port,
