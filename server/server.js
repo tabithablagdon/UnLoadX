@@ -15,3 +15,5 @@ db.sync()
     });
   })
   .catch(err => console.log(`Error loading server ${err}`));
+
+export default app;
