@@ -31,8 +31,7 @@ export class FormComponent {
   numReqModel = new numReq(0);
 
   onSubmit() { 
-    console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
-    // this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+    this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
   }
 
   onChange(value){
