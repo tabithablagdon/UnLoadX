@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/common';
-import { NgForm }    from '@angular/common';
+import { Validators, NgForm } from '@angular/common';
 import {  
   REACTIVE_FORM_DIRECTIVES, 
   FormGroup, 
   FormControl, 
-  FormBuilder
+  FormBuilder,
+  FORM_DIRECTIVES
 } from '@angular/forms';
-import {FORM_DIRECTIVES} from '@angular/forms';
-import { ipPort } from './ipPort';
-import { numReq } from './ipPort';
+import { ipPort, numReq } from './ipPort';
 import { FormService } from './formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 
