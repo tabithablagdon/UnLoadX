@@ -25,6 +25,7 @@ const nodeController = {};
 nodeController.createServerNode = (req, res) => {
   const servers = req.body.servers;
 
+
   //TO ADD: Query for UserId, when authentication is added
 
   servers.forEach(server => {
