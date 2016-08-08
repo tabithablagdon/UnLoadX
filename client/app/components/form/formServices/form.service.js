@@ -21,7 +21,6 @@ var FormService = (function () {
         return body.data || {};
     };
     FormService.prototype.sendTest = function (object) {
-        console.log('heyo', object);
         return this._http.post(this.uriPath, object)
             .toPromise()
             .then(this.extractData)
