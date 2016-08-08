@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 const db = new Sequelize('unloadx', 'root', 'mainstreet', {dialect: 'mysql'});
-// postgres://postgres@54.67.125.238/unloadx
+// 'postgres://postgres@52.9.136.53/unloadx',{dialect: 'postgres'}
+// const db = new Sequelize('unloadx', 'root', 'password', {dialect: 'mysql'});
 
 /**
  * CONNECT TO THE DATABASE

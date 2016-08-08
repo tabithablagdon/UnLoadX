@@ -1,5 +1,6 @@
 import { NodeServer, Test, User } from '../../db/db';
 import { handleError } from '../../config/utils';
+import request from 'request';
 
 const nodeController = {};
 
@@ -24,6 +25,7 @@ const nodeController = {};
 nodeController.createServerNode = (req, res) => {
   const servers = req.body.servers;
 
+
   //TO ADD: Query for UserId, when authentication is added
 
   servers.forEach(server => {
@@ -42,6 +44,8 @@ nodeController.createServerNode = (req, res) => {
 
   res.send(req.body);
 
+  // ajax request to loadBalancerURI
+  nodeController.sendTestToLB(req.body.servers);
 };
 
 /**
@@ -54,6 +58,27 @@ nodeController.getServers = (req, res) => {
   NodeServer.findAll()
     .then(servers => res.json(servers))
     .catch(handleError(res));
+
+};
+
+/**
+ * function postToLB
+ * Sends loadBalancer all servers in the database
+ */
+
+nodeController.sendTestToLB = (res) => {
+
+  request({
+    url: 'http://52.8.16.173:9000/iptables',
+    method: 'POST',
+    body: JSON.stringify(res)
+  }, (err, res, body) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(res.statusCode, body);
+    }
+  });
 
 };
 
