@@ -24,8 +24,8 @@ var FormComponent = (function () {
         this.numReqModel = new ipPort_1.numReq(0);
     } // form builder simplify form initialization
     FormComponent.prototype.onSubmit = function () {
-        console.log({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
-        // this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+        this._FormService.sendTest({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
+
     };
     FormComponent.prototype.onChange = function (value) {
         this.application_type = value;
@@ -41,7 +41,7 @@ var FormComponent = (function () {
             templateUrl: "./client/app/components/form/form.component.html",
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES],
             providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS]
-        }), 
+        }),
         __metadata('design:paramtypes', [form_service_1.FormService])
     ], FormComponent);
     return FormComponent;
