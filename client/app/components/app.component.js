@@ -10,30 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var form_component_1 = require('./form/form.component');
+var graphs_component_1 = require('./graphs/graphs.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
+        //
         core_1.Component({
             selector: 'my-app',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n              <my-form></my-form>",
-            directives: [form_component_1.FormComponent]
+            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n              <my-form></my-form>\n              <main></main>",
+            directives: [form_component_1.FormComponent, graphs_component_1.Main]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-// bootstrap(AppComponent);
-// <h1 class="title"> Angular 2 + d3</h1>
-// <bar-graph
-//   bind-data="graphData"
-//   width="900"
-//   height="1000"
-// >
-// </bar-graph>
-// directives: [FormComponent, BarGraph]
-// constructor() {
-//    this.graphData = [10, 20, 30, 40, 60];
-//  } 
 //# sourceMappingURL=app.component.js.map
