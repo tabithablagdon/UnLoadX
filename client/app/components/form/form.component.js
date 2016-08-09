@@ -25,6 +25,7 @@ var FormComponent = (function () {
     } // form builder simplify form initialization
     FormComponent.prototype.onSubmit = function () {
         this._FormService.sendTest({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
+        alert('submitted!');
     };
     FormComponent.prototype.onChange = function (value) {
         this.application_type = value;
