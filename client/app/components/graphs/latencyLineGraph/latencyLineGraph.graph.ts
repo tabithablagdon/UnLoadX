@@ -20,7 +20,7 @@ export class latencyLineGraph implements OnInit{
   ngOnInit(){
     this.options = {
       chart: {
-        type: 'discreteBarChart',
+        type: 'lineChart',
         height: 450,
         margin : {
           top: 20,
@@ -28,8 +28,15 @@ export class latencyLineGraph implements OnInit{
           bottom: 50,
           left: 55
         },
-        x: function(d){return d.label;},
-        y: function(d){return d.value;},
+        x: function(d){ return d.x; },
+        y: function(d){ return d.y; },
+        useInteractiveGuideline: true,
+        dispatch: {
+                stateChange: function(e){ console.log("stateChange"); },
+                changeState: function(e){ console.log("changeState"); },
+                tooltipShow: function(e){ console.log("tooltipShow"); },
+                tooltipHide: function(e){ console.log("tooltipHide"); }
+        },
         showValues: true,
         valueFormat: function(d){
           return d3.format(',.4f')(d);

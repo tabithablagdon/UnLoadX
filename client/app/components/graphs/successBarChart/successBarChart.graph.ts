@@ -6,6 +6,7 @@ declare let d3: any;
   selector: 'successBarChart',
   directives: [nvD3],
   template: `
+    <h3 [style.color]="'blue'"> % of Successfully Handled Requests (by Server) </h3>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
@@ -32,14 +33,14 @@ export class successBarChart implements OnInit{
         y: function(d){return d.value;},
         showValues: true,
         valueFormat: function(d){
-          return d3.format(',.4f')(d);
+          return d3.format(',0%')(d);
         },
         duration: 500,
         xAxis: {
           axisLabel: 'Server #'
         },
         yAxis: {
-          axisLabel: 'Time Latency',
+          axisLabel: '% requests successfully handled by load balancer',
           axisLabelDistance: -10
         }
       }
@@ -50,11 +51,11 @@ export class successBarChart implements OnInit{
         values: [
           {
             "label" : "Server1" ,
-            "value" : 29.765957771107
+            "value" : 80
           } ,
           {
             "label" : "Server2" ,
-            "value" : 50
+            "value" : 90
           } 
         ]
       }

@@ -11,14 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var successBarChart_graph_1 = require('./successBarChart/successBarChart.graph');
 var latencyLineGraph_graph_1 = require('./latencyLineGraph/latencyLineGraph.graph');
+var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
 var Graphs = (function () {
     function Graphs() {
     }
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            directives: [successBarChart_graph_1.successBarChart, latencyLineGraph_graph_1.latencyLineGraph],
-            template: "\n    <div>\n      <successBarChart></successBarChart>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  "
+            directives: [successBarChart_graph_1.successBarChart, latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo],
+            template: "\n    <div>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], Graphs);

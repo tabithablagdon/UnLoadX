@@ -28,14 +28,14 @@ var successBarChart = (function () {
                 y: function (d) { return d.value; },
                 showValues: true,
                 valueFormat: function (d) {
-                    return d3.format(',.4f')(d);
+                    return d3.format(',0%')(d);
                 },
                 duration: 500,
                 xAxis: {
                     axisLabel: 'Server #'
                 },
                 yAxis: {
-                    axisLabel: 'Time Latency',
+                    axisLabel: '% requests successfully handled by load balancer',
                     axisLabelDistance: -10
                 }
             }
@@ -46,11 +46,11 @@ var successBarChart = (function () {
                 values: [
                     {
                         "label": "Server1",
-                        "value": 29.765957771107
+                        "value": 80
                     },
                     {
                         "label": "Server2",
-                        "value": 50
+                        "value": 90
                     }
                 ]
             }
@@ -67,7 +67,7 @@ var successBarChart = (function () {
         core_1.Component({
             selector: 'successBarChart',
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            template: "\n    <h3 [style.color]=\"'blue'\"> % of Successfully Handled Requests (by Server) </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], successBarChart);
