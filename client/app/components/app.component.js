@@ -24,4 +24,16 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
+// bootstrap(AppComponent);
+// <h1 class="title"> Angular 2 + d3</h1>
+// <bar-graph
+//   bind-data="graphData"
+//   width="900"
+//   height="1000"
+// >
+// </bar-graph>
+// directives: [FormComponent, BarGraph]
+// constructor() {
+//    this.graphData = [10, 20, 30, 40, 60];
+//  } 
 //# sourceMappingURL=app.component.js.map

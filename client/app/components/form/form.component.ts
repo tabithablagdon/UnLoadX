@@ -32,6 +32,7 @@ export class FormComponent {
 
   onSubmit() { 
     this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+    alert('submitted!');
   }
 
   onChange(value){

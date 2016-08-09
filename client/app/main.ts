@@ -8,3 +8,4 @@ bootstrap(AppComponent, [
   provideForms(), // enable new forms module
 ])
 .catch(err => console.log(`Error bootstrapping App ${err}`));
+
