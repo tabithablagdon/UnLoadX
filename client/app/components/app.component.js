@@ -18,8 +18,8 @@ var AppComponent = (function () {
         //
         core_1.Component({
             selector: 'my-app',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n              <my-form></my-form>\n              <main></main>",
-            directives: [form_component_1.FormComponent, graphs_component_1.Main]
+            template: "<h1 [style.color]=\"'orange'\">UnLoadX </h1>\n              <my-form></my-form>\n              <graphs></graphs>",
+            directives: [form_component_1.FormComponent, graphs_component_1.Graphs]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
