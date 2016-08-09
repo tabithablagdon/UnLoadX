@@ -11,7 +11,6 @@ export default function Request(db, DataTypes) {
 
 }
 
-
 // Return JSON array for /GET request from api/requests/:testId
 // [
 //   { id: 1,
@@ -27,6 +26,7 @@ export default function Request(db, DataTypes) {
 //   },
 //   { id: 1,
 //     statusCode: '200',
+//
 //     latency: '0.00',
 //     size: '862',
 //     method: 'GET',
@@ -37,3 +37,14 @@ export default function Request(db, DataTypes) {
 //     testID: 2
 //   }
 // ]
+//
+//summaryData = {
+// 	latency: [0, 1, 2, 4, 1],
+// 	averageLat: 2,
+// 	minLat: 0,
+// 	maxLat: 2,
+// 	latStdDev: .2,
+// 	numSuccess: 100,
+// 	numFailures: 0,
+// 	totalReqs: 100
+// }
