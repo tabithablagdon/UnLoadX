@@ -2,10 +2,13 @@ import cmd from 'node-cmd';
 import fs from 'fs';
 import SiegeController from './siege.controller';
 
+// const cmd = require('node-cmd');
+// const fs = require('fs');
+// const SiegeController = require('./siege.controller');
+
 const SiegeService = {};
 
-const LB_URL = 'http://52.8.16.173:9000/iptables';
-
+const LB_URL = 'http://52.8.16.173:9090';
 
 /**
  * function runSiege - runs siege test and logs response time for each request in siegelog.txt
@@ -16,9 +19,10 @@ SiegeService.runSiege = (data) => {
   // Assumes that data coming from siegeController is:  {Volume: 100, testId: 2}
   const volume = data.Volume;
   const testId = data.testId;
-  const filename = `log/siegelog${testId}`;
+  const filename = `logs/siegelog${testId}.txt`;
 
   // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
+  console.log(`Running siege utility with this command - siege ${LB_URL} -c${volume} > ${filename}`);
 
   cmd.get(`siege ${LB_URL} -c${volume} > ${filename}`, data => {
     console.log(`Siege data ${data}`);
@@ -29,6 +33,8 @@ SiegeService.runSiege = (data) => {
       requests: dataArray,
       testId: testId
     };
+
+    console.log(`Request Body ${requestBody}`);
     // sent array back to siegeController to create
     // entry in Requests Table
     SiegeController.createRequest(requestBody);
@@ -43,6 +49,7 @@ SiegeService.runSiege = (data) => {
  *
  */
 SiegeService.parseSiegeLog = (filename) => {
+
   fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
       console.log(`Error reading file ${err}`);
@@ -62,14 +69,15 @@ SiegeService.parseSiegeLog = (filename) => {
           });
         }
       });
+      console.log(parsedDataArray);
       return parsedDataArray;
     }
   });
 }
 
-// parseSiegeLog('logs/siegelog.txt');
+// SiegeService.parseSiegeLog('logs/siegelog.txt');
 
 // Path of siege.log (for future reference)
 // /usr/local/var/siege.log
-
+//
 export default SiegeService;
