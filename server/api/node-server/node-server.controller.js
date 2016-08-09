@@ -25,7 +25,6 @@ const nodeController = {};
 nodeController.createServerNode = (req, res) => {
   const servers = req.body.servers;
 
-
   //TO ADD: Query for UserId, when authentication is added
 
   servers.forEach(server => {
@@ -37,15 +36,24 @@ nodeController.createServerNode = (req, res) => {
     .catch(handleError(res));
   });
 
+  // Create record in Test Table
   Test.create({
     volume: req.body.volume
   })
+  .then(data => {
+    // Create data structure to send to Load Balancer Service
+    const dataForLB = {
+      servers: servers,
+      volume: data.dataValues.volume || req.body.volume,
+      testId: data.dataValues.id
+    };
+
+    // Send /POST request to Load Balancer
+    nodeController.sendTestToLB(dataForLB);
+  })
   .catch(handleError(res));
 
-  res.send(req.body);
-
-  // ajax request to loadBalancerURI
-  nodeController.sendTestToLB(req.body.servers);
+  res.send('Test and Servers posted to databases');
 };
 
 /**

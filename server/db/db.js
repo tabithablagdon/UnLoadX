@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 const db = new Sequelize('postgres://postgres@52.9.136.53/unloadx',{dialect: 'postgres'});
-// postgres://postgres@54.67.125.238/unloadx
+// 'postgres://postgres@52.9.136.53/unloadx',{dialect: 'postgres'}
 // const db = new Sequelize('unloadx', 'root', 'password', {dialect: 'mysql'});
 
 /**
@@ -27,7 +27,6 @@ export const Test = db.import('../api/test/test.model');
 NodeServer.belongsTo(User, {foreignKey: 'userId', targetKey: 'id'});
 
 // Request Table - add foreign key to Node-Server and Test
-Request.belongsTo(NodeServer, {foreignKey: 'serverId', targetKey: 'id'});
 Request.belongsTo(Test, {foreignKey: 'testId', targetKey: 'id'});
 
 // Test Table - add foreign key to User
