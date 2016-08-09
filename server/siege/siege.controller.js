@@ -5,7 +5,7 @@ import { SiegeService } from './siege.service';
 const SiegeController = {};
 
 SiegeController.startSiege = (req, res) => {
-  // Assumes that req.body coming from Load Balancer is: [volume, testId]
+  // Assumes that req.body coming from Load Balancer is: [ {Volume: 100, testId: 2}
   SiegeService.runSiege(req.body);
 
 };
