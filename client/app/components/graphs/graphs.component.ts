@@ -2,12 +2,14 @@ import {Component} from '@angular/core';
 import { successBarChart} from './successBarChart/successBarChart.graph';
 import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
 import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
+import { networkGraph } from './networkGraph/networkGraph.graph';
  
 @Component({
   selector: 'graphs',
-  directives: [successBarChart, latencyLineGraph, descriptiveInfo],
+  directives: [successBarChart, latencyLineGraph, descriptiveInfo, networkGraph],
   template: `
     <div>
+      <networkGraph></networkGraph>
       <descriptiveInfo></descriptiveInfo>
       <successBarChart></successBarChart>
       <latencyLineGraph></latencyLineGraph>

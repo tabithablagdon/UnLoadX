@@ -39,10 +39,10 @@ var latencyLineGraph = (function () {
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Request (across time)'
+                    axisLabel: 'Requests (across time)'
                 },
                 yAxis: {
-                    axisLabel: 'Time Latency',
+                    axisLabel: 'Time Latency (ms)',
                     axisLabelDistance: -10
                 }
             }
@@ -71,7 +71,7 @@ var latencyLineGraph = (function () {
         core_1.Component({
             selector: 'latencyLineGraph',
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            template: "\n    <h3 [style.color]=\"'blue'\"> Latency over Time (by Server) </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], latencyLineGraph);

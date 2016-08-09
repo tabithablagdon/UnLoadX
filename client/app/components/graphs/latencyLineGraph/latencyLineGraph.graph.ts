@@ -6,6 +6,7 @@ declare let d3: any;
   selector: 'latencyLineGraph',
   directives: [nvD3],
   template: `
+    <h3 [style.color]="'blue'"> Latency over Time (by Server) </h3>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
@@ -43,7 +44,7 @@ export class latencyLineGraph implements OnInit{
         },
         duration: 500,
         xAxis: {
-          axisLabel: 'Request (across time)'
+          axisLabel: 'Requests (across time)'
         },
         yAxis: {
           axisLabel: 'Time Latency (ms)',
