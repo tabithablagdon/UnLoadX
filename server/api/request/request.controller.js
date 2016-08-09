@@ -15,7 +15,6 @@ requestController.createRequest = (req, res) => {
     CPU: req.body.CPU || null,
     GPU: req.body.GPU || null,
     memory: req.body.memory || null,
-    serverId: serverId,
     testId: testId
   })
   .catch(handleError(res));
