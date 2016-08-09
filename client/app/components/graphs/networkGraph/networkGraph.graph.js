@@ -21,16 +21,18 @@ var networkGraph = (function () {
                 height: 200,
                 width: (function () { return nv.utils.windowSize().width; })(),
                 margin: { top: 20, right: 20, bottom: 20, left: 20 },
+                radius: 15,
+                linkDist: 100,
                 color: function (d) {
                     return color(d.group);
                 },
                 nodeExtras: function (node) {
                     node && node
                         .append("text")
-                        .attr("dx", 8)
+                        .attr("dx", 15)
                         .attr("dy", ".35em")
                         .text(function (d) { return d.name; })
-                        .style('font-size', '10px');
+                        .style('font-size', '15px');
                 }
             }
         };
@@ -41,7 +43,7 @@ var networkGraph = (function () {
                 { "name": "Server 2", "group": 3 }
             ],
             "links": [
-                { "source": 1, "target": 0, "value": 1 },
+                { "source": 1, "target": 0, "value": 10 },
                 { "source": 2, "target": 0, "value": 2 },
                 { "source": 3, "target": 0, "value": 2 }
             ]
