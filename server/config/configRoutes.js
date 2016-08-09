@@ -2,14 +2,12 @@ import path from 'path';
 import nodeRouter from '../api/node-server/node-server.router';
 import requestRouter from '../api/request/request.router';
 import testRouter from '../api/test/test.router';
-import siegeRouter from '../siege/siege.router';
 
 export default app => {
 
   app.use('/api/nodeserver', nodeRouter);
   app.use('/api/test', testRouter);
   app.use('/api/request', requestRouter);
-  app.use('/siege', siegeRouter);
 
   /**
    * Serves index.html from home directory

@@ -1,5 +1,5 @@
-import { Request } from '../db/db';
-import { handleError } from '../config/utils';
+import { Request } from '../server/db/db';
+import { handleError } from '../server/config/utils';
 import { SiegeService } from './siege.service';
 
 const SiegeController = {};
