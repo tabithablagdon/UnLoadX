@@ -7,7 +7,7 @@ import {OnInit, AfterViewInit, ViewChild} from '@angular/core'; //
 
 @Component({
   selector: 'my-app',
-  template: `<h1 [style.color]="'orange'">UnLoadX </h1>
+  template: `<h1 [style.color]="'orange'">UnLoadX</h1>
               <my-form></my-form>
               <graphs></graphs>`,
   directives: [FormComponent, Graphs]

@@ -4,9 +4,9 @@ import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class FormService {
-	
-  uriPath = '/api/nodeserver';
+export class GraphsService {
+  
+  uriPath = '/api/requests'; //will also need testID
 
   constructor(private _http: Http) {}
 
@@ -15,9 +15,9 @@ export class FormService {
     return body.data || {};
   }
 
-  sendTest (object) {
-  	return this._http.post(this.uriPath, object)
-  	.toPromise()
+  getSummaryTestInfo () {
+    return this._http.get(this.uriPath)
+    .toPromise()
     .then(this.extractData)
     .catch(err => {
       console.error(err);

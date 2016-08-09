@@ -15,41 +15,44 @@ var successBarChart = (function () {
     }
     successBarChart.prototype.ngOnInit = function () {
         this.options = {
-            multiBarChart: {
-                chart: {
-                    type: 'multiBarChart',
-                    height: 450,
-                    margin: {
-                        top: 20,
-                        right: 20,
-                        bottom: 45,
-                        left: 45
-                    },
-                    clipEdge: true,
-                    //staggerLabels: true,
-                    duration: 500,
-                    stacked: true,
-                    xAxis: {
-                        axisLabel: 'Time (ms)',
-                        showMaxMin: false,
-                        tickFormat: function (d) {
-                            return d3.format(',f')(d);
-                        }
-                    },
-                    yAxis: {
-                        axisLabel: 'Y Axis',
-                        axisLabelDistance: -20,
-                        tickFormat: function (d) {
-                            return d3.format(',.1f')(d);
-                        }
-                    }
+            chart: {
+                type: 'discreteBarChart',
+                height: 450,
+                margin: {
+                    top: 20,
+                    right: 20,
+                    bottom: 50,
+                    left: 55
+                },
+                x: function (d) { return d.label; },
+                y: function (d) { return d.value; },
+                showValues: true,
+                valueFormat: function (d) {
+                    return d3.format(',.4f')(d);
+                },
+                duration: 500,
+                xAxis: {
+                    axisLabel: 'Server #'
+                },
+                yAxis: {
+                    axisLabel: 'Time Latency',
+                    axisLabelDistance: -10
                 }
             }
         };
         this.data = [
             {
-                key: 'Stream',
-                values: { x: 10, y: 10 }
+                key: "Server Latencies",
+                values: [
+                    {
+                        "label": "Server1",
+                        "value": 29.765957771107
+                    },
+                    {
+                        "label": "Server2",
+                        "value": 50
+                    }
+                ]
             }
         ];
     };
@@ -73,49 +76,46 @@ var successBarChart = (function () {
 exports.successBarChart = successBarChart;
 //   ngOnInit(){
 //     this.options = {
-//       chart: {
-//         type: 'discreteBarChart',
-//         height: 450,
-//         margin : {
-//           top: 20,
-//           right: 20,
-//           bottom: 50,
-//           left: 55
-//         },
-//         x: function(d){return d.label;},
-//         y: function(d){return d.value;},
-//         showValues: true,
-//         valueFormat: function(d){
-//           return d3.format(',.4f')(d);
-//         },
-//         duration: 500,
-//         xAxis: {
-//           axisLabel: 'Server #'
-//         },
-//         yAxis: {
-//           axisLabel: 'Time Latency',
-//           axisLabelDistance: -10
+//       multiBarChart: {
+//     chart: {
+//       type: 'multiBarChart',
+//       height: 450,
+//       margin : {
+//         top: 20,
+//         right: 20,
+//         bottom: 45,
+//         left: 45
+//       },
+//       clipEdge: true,
+//       //staggerLabels: true,
+//       duration: 500,
+//       stacked: true,
+//       xAxis: {
+//         axisLabel: 'Time (ms)',
+//         showMaxMin: false,
+//         tickFormat: function(d){
+//           return d3.format(',f')(d);
 //         }
+//       },
+//       yAxis: {
+//         axisLabel: 'Y Axis',
+//         axisLabelDistance: -20,
+//         tickFormat: function(d){
+//           return d3.format(',.1f')(d);
+//         }
+//       }
+//       }
 //       }
 //     }
 //     this.data = [
 //       {
-//         key: "Server Latencies",
-//         values: [
-//           {
-//             "label" : "Server1" ,
-//             "value" : 29.765957771107
-//           } ,
-//           {
-//             "label" : "Server2" ,
-//             "value" : 50
-//           } 
-//         ]
+//       key: 'Stream',
+//       values: {x:10,y:10}
 //       }
 //     ];
 //   }
 //   ngAfterViewInit() {
 //       this.nvD3.chart.update()
 //   } 
-// } 
+// }
 //# sourceMappingURL=successBarChart.graph.js.map
