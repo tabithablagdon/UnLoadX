@@ -43,27 +43,24 @@ export class latencyLineGraph implements OnInit{
         },
         duration: 500,
         xAxis: {
-          axisLabel: 'Server #'
+          axisLabel: 'Request (across time)'
         },
         yAxis: {
-          axisLabel: 'Time Latency',
+          axisLabel: 'Time Latency (ms)',
           axisLabelDistance: -10
         }
       }
     }
     this.data = [
       {
-        key: "Server Latencies",
-        values: [
-          {
-            "label" : "Server1" ,
-            "value" : 29.765957771107
-          } ,
-          {
-            "label" : "Server2" ,
-            "value" : 50
-          } 
-        ]
+        values: [{x:1,y:2}, {x:2,y:2.5}, {x:3, y:5}],      //values - represents the array of {x,y} data points
+        key: 'Server 1', //key  - the name of the series.
+        color: '#ff7f0e'  //color - optional: choose your own line color.
+      },
+      {
+        values: [{x:1,y:2.5}, {x:2,y:3.5}, {x:3, y:2}],
+        key: 'Server 2',
+        color: '#2ca02c'
       }
     ];
   }

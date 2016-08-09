@@ -10,6 +10,7 @@ import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
     <div>
       <descriptiveInfo></descriptiveInfo>
       <successBarChart></successBarChart>
+      <latencyLineGraph></latencyLineGraph>
     </div>
   `
 })

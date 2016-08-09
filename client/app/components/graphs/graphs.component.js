@@ -19,7 +19,7 @@ var Graphs = (function () {
         core_1.Component({
             selector: 'graphs',
             directives: [successBarChart_graph_1.successBarChart, latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo],
-            template: "\n    <div>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n    </div>\n  "
+            template: "\n    <div>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], Graphs);
