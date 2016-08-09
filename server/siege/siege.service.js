@@ -1,8 +1,7 @@
-// import cmd from 'node-cmd';
-// import fs from 'fs';
-const cmd = require('node-cmd');
-const fs = require('fs');
-const SiegeController = require('./siege.controller');
+import cmd from 'node-cmd';
+import fs from 'fs';
+import SiegeController from './siege.controller';
+
 const SiegeService = {};
 
 const LB_URL = 'http://52.8.16.173:9000/iptables';
@@ -14,10 +13,12 @@ const LB_URL = 'http://52.8.16.173:9000/iptables';
  * @param  {[INTEGER]} volume [number of concurrent users]
  */
 SiegeService.runSiege = (data) => {
-  // Assumes that data coming from siegeController is: [volume, testId]
-  const volume = data[0];
-  const testId = data[1];
+  // Assumes that data coming from siegeController is:  {Volume: 100, testId: 2}
+  const volume = data.Volume;
+  const testId = data.testId;
   const filename = `log/siegelog${testId}`;
+
+  // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
 
   cmd.get(`siege ${LB_URL} -c${volume} > ${filename}`, data => {
     console.log(`Siege data ${data}`);
@@ -39,7 +40,7 @@ SiegeService.runSiege = (data) => {
  * function parseSiegeLog parses text log into a usable data structure - an array of objects
  * @param  {[STRING]} filename [path to the log text file]
  * @return {[ARRAY]}          [{ statusCode: '200', latency: '0.00', size: '862', method: 'GET' }, { statusCode: '200', latency: '0.00', size: '862', method: 'GET' } ]
- * 
+ *
  */
 SiegeService.parseSiegeLog = (filename) => {
   fs.readFile(filename, 'utf8', (err, data) => {
