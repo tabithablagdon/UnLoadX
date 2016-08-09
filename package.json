@@ -7,7 +7,9 @@
     "test": "npm run test-client && npm run test-server",
     "test-client": "mocha spec/clientspec.js",
     "test-server": "mocha spec/serverspec.js",
-    "start": "nodemon server/server.js --exec babel-node --presets es2015 && tsc && concurrently \"npm run tsc:w\" ",
+    "start": "npm run startsiege | npm run startserver",
+    "startsiege": "nodemon siege-service/server.js --exec babel-node --presets es2015",
+    "startserver": "nodemon server/server.js --exec babel-node --presets es2015 && tsc && concurrently \"npm run tsc:w\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"
