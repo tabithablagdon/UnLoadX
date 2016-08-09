@@ -27,7 +27,6 @@ export const Test = db.import('../api/test/test.model');
 NodeServer.belongsTo(User, {foreignKey: 'userId', targetKey: 'id'});
 
 // Request Table - add foreign key to Node-Server and Test
-Request.belongsTo(NodeServer, {foreignKey: 'serverId', targetKey: 'id'});
 Request.belongsTo(Test, {foreignKey: 'testId', targetKey: 'id'});
 
 // Test Table - add foreign key to User
