@@ -49,6 +49,7 @@ nodeController.createServerNode = (req, res) => {
     };
 
     // Send /POST request to Load Balancer
+    console.log(dataForLB)
     nodeController.sendTestToLB(dataForLB);
   })
   .catch(handleError(res));
