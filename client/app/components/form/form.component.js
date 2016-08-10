@@ -15,8 +15,9 @@ var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var FormComponent = (function () {
-    function FormComponent(_FormService) {
+    function FormComponent(_FormService, Router) {
         this._FormService = _FormService;
+        this.Router = Router;
         this.types = ['web server', 'image processor', 'other'];
         this.application_type = 'other';
         this.application_type2 = 'other';
@@ -27,6 +28,7 @@ var FormComponent = (function () {
     FormComponent.prototype.onSubmit = function () {
         this._FormService.sendTest({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
         alert('test submitted!...retrieving test summary data');
+        this.Router.navigate(['/graphs']);
     };
     FormComponent.prototype.onChange = function (value) {
         this.application_type = value;
@@ -43,7 +45,7 @@ var FormComponent = (function () {
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES],
             providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [form_service_1.FormService])
+        __metadata('design:paramtypes', [form_service_1.FormService, router_1.Router])
     ], FormComponent);
     return FormComponent;
 }());

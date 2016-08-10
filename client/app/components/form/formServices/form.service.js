@@ -21,13 +21,14 @@ var FormService = (function () {
         return body.data || {};
     };
     FormService.prototype.sendTest = function (object) {
-        return this._http.post(this.uriPath, object)
-            .toPromise()
-            .then(this.extractData)
-            .catch(function (err) {
-            console.error(err);
-            return Promise.reject('Post Failed');
-        });
+        console.log(object);
+        // return this._http.post(this.uriPath, object)
+        // .toPromise()
+        // .then(this.extractData)
+        // .catch(err => {
+        //   console.error(err);
+        //   return Promise.reject('Post Failed');
+        // })
     };
     FormService = __decorate([
         core_1.Injectable(), 

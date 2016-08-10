@@ -10,7 +10,7 @@ import {
 import { ipPort, numReq } from './ipPort';
 import { FormService } from './formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 @Component({
   selector: 'my-form',
@@ -21,7 +21,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 export class FormComponent { 
  
-  constructor(private _FormService: FormService) { } // form builder simplify form initialization
+  constructor(private _FormService: FormService, private Router: Router) { } // form builder simplify form initialization
 
   types = ['web server', 'image processor', 'other'];
   application_type = 'other';
@@ -34,6 +34,7 @@ export class FormComponent {
   onSubmit() { 
     this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
     alert('test submitted!...retrieving test summary data');
+    this.Router.navigate(['/graphs']);
   }
 
   onChange(value){

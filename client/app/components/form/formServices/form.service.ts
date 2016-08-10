@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FormService {
-	
+  
   uriPath = '/api/nodeserver';
 
   constructor(private _http: Http) {}
@@ -16,12 +16,13 @@ export class FormService {
   }
 
   sendTest (object) {
-  	return this._http.post(this.uriPath, object)
-  	.toPromise()
-    .then(this.extractData)
-    .catch(err => {
-      console.error(err);
-      return Promise.reject('Post Failed');
-    })
+    console.log(object);
+    // return this._http.post(this.uriPath, object)
+    // .toPromise()
+    // .then(this.extractData)
+    // .catch(err => {
+    //   console.error(err);
+    //   return Promise.reject('Post Failed');
+    // })
   }
 }
