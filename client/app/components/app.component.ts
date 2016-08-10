@@ -10,6 +10,7 @@ import { appRoutes } from './app.routing';
 @Component({
   selector: 'my-app',
   template: `<h1 [style.color]="'orange'">UnLoadX</h1>
+              <a routerLink="/">Home</a>
               <router-outlet></router-outlet>`,
   directives: [ROUTER_DIRECTIVES]
 })

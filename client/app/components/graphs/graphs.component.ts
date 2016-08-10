@@ -5,12 +5,13 @@ import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
 import { GraphsService } from './graphsService/graphs.service';
 import { HTTP_PROVIDERS } from '@angular/http';
+
+
  
 @Component({
   selector: 'graphs',
   template: `
     <div>
-      
       <networkGraph></networkGraph>
       <descriptiveInfo></descriptiveInfo>
       <successBarChart></successBarChart>
