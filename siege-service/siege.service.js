@@ -14,12 +14,14 @@ const LB_URL = 'http://52.8.16.173:9090';
 SiegeService.runSiege = (data) => {
   // Assumes that data coming from siegeController is:  {Volume: 100, testId: 2}
   const volume = data.Volume;
-  const testId = data.testId;
-  const filename = `${__dirname}/logs/siegelog${testId}.txt`;
+  const testId = data.TestId;
+  const filename = `${__dirname}/siege-logs/siegelog${testId}.txt`;
 
   // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
 
-  exec(`siege ${LB_URL} -c${volume} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
+  console.log(`Running siege using command: siege ${LB_URL} -t${volume}S > ${filename}`);
+
+  exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
     if (err) {
       console.error(`exec error: ${err}`);
       console.log(`stdout: ${stdout}`);

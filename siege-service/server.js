@@ -1,5 +1,6 @@
 import express from 'express';
 import SiegeController from './siege.controller';
+import SiegeService from './siege.service';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.post('/siege', SiegeController.startSiege);
 // start siege service on PORT 4000
 app.listen(4000, () => {
   console.log('Siege Service listening on port 4000');
+  SiegeService.runSiege({'Volume': 100, 'TestId': 5});
 });
 
 export default app;
