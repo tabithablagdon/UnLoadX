@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-const db = new Sequelize('postgres://postgres@52.9.136.53/unloadx',{dialect: 'postgres'});
+const db = new Sequelize('postgres://postgres@localhost/unloadx',{dialect: 'postgres'});
 
 
 /**
