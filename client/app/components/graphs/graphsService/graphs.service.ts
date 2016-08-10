@@ -15,7 +15,7 @@ export class GraphsService {
     return body.data || {};
   }
 
-  getSummaryTestInfo () {
+  getTestSummaryInfo () {
     return this._http.get(this.uriPath)
     .toPromise()
     .then(this.extractData)

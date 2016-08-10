@@ -20,7 +20,7 @@ var GraphsService = (function () {
         var body = res.json();
         return body.data || {};
     };
-    GraphsService.prototype.getSummaryTestInfo = function () {
+    GraphsService.prototype.getTestSummaryInfo = function () {
         return this._http.get(this.uriPath)
             .toPromise()
             .then(this.extractData)

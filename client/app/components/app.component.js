@@ -9,17 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var form_component_1 = require('./form/form.component');
-var graphs_component_1 = require('./graphs/graphs.component');
+var router_1 = require('@angular/router');
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
-        //
         core_1.Component({
             selector: 'my-app',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX</h1>\n              <my-form></my-form>\n              <graphs></graphs>",
-            directives: [form_component_1.FormComponent, graphs_component_1.Graphs]
+            template: "<h1 [style.color]=\"'orange'\">UnLoadX</h1>\n              <router-outlet></router-outlet>",
+            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

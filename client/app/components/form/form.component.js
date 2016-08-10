@@ -13,6 +13,7 @@ var forms_1 = require('@angular/forms');
 var ipPort_1 = require('./ipPort');
 var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
+var router_1 = require('@angular/router');
 var FormComponent = (function () {
     function FormComponent(_FormService) {
         this._FormService = _FormService;
@@ -25,7 +26,7 @@ var FormComponent = (function () {
     } // form builder simplify form initialization
     FormComponent.prototype.onSubmit = function () {
         this._FormService.sendTest({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
-        alert('submitted!');
+        alert('test submitted!...retrieving test summary data');
     };
     FormComponent.prototype.onChange = function (value) {
         this.application_type = value;
@@ -39,7 +40,7 @@ var FormComponent = (function () {
         core_1.Component({
             selector: 'my-form',
             templateUrl: "./client/app/components/form/form.component.html",
-            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES],
+            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES],
             providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [form_service_1.FormService])

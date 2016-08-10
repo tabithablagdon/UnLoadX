@@ -13,16 +13,23 @@ var successBarChart_graph_1 = require('./successBarChart/successBarChart.graph')
 var latencyLineGraph_graph_1 = require('./latencyLineGraph/latencyLineGraph.graph');
 var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
 var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
+var graphs_service_1 = require('./graphsService/graphs.service');
+var http_1 = require('@angular/http');
 var Graphs = (function () {
-    function Graphs() {
+    function Graphs(_GraphsService) {
+        this._GraphsService = _GraphsService;
     }
+    Graphs.prototype.getTestSummaryData = function () {
+        this._GraphsService.getTestSummaryInfo();
+    };
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
+            template: "\n    <div>\n      \n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  ",
             directives: [successBarChart_graph_1.successBarChart, latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph],
-            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  "
+            providers: [graphs_service_1.GraphsService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
     ], Graphs);
     return Graphs;
 }());

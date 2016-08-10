@@ -3,21 +3,32 @@ import { successBarChart} from './successBarChart/successBarChart.graph';
 import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
 import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
+import { GraphsService } from './graphsService/graphs.service';
+import { HTTP_PROVIDERS } from '@angular/http';
  
 @Component({
   selector: 'graphs',
-  directives: [successBarChart, latencyLineGraph, descriptiveInfo, networkGraph],
   template: `
     <div>
+      
       <networkGraph></networkGraph>
       <descriptiveInfo></descriptiveInfo>
       <successBarChart></successBarChart>
       <latencyLineGraph></latencyLineGraph>
     </div>
-  `
+  `,
+  directives: [successBarChart, latencyLineGraph, descriptiveInfo, networkGraph],
+  providers: [GraphsService, HTTP_PROVIDERS]
 })
  
 export class Graphs {
+
+  constructor(private _GraphsService: GraphsService) { }
+
+  getTestSummaryData() { 
+    this._GraphsService.getTestSummaryInfo();
+   
+  }
   
 }
 
