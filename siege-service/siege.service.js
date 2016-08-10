@@ -1,12 +1,10 @@
 import fs from 'fs';
 import SiegeController from './siege.controller';
-import siege from 'siege';
 
 const exec = require('child_process').exec;
 const SiegeService = {};
 
-// const LB_URL = 'http://52.8.16.173:9090';
-const LB_URL = 'http://localhost:4000';
+const LB_URL = 'http://52.8.16.173:9090';
 
 /**
  * function runSiege - runs siege test and logs response time for each request in siegelog.txt
