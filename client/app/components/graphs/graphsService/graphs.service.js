@@ -11,30 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-var FormService = (function () {
-    function FormService(_http) {
+var GraphsService = (function () {
+    function GraphsService(_http) {
         this._http = _http;
-        this.uriPath = '/api/nodeserver';
+        this.uriPath = '/api/requests'; //will also need testID
     }
-    FormService.prototype.extractData = function (res) {
+    GraphsService.prototype.extractData = function (res) {
         var body = res.json();
         return body.data || {};
     };
-    FormService.prototype.sendTest = function (object) {
-        console.log(object);
-        // return this._http.post(this.uriPath, object)
-        // .toPromise()
-        // .then(this.extractData)
-        // .catch(err => {
-        //   console.error(err);
-        //   return Promise.reject('Post Failed');
-        // })
+    GraphsService.prototype.getTestSummaryInfo = function () {
+        return this._http.get(this.uriPath)
+            .toPromise()
+            .then(this.extractData)
+            .catch(function (err) {
+            console.error(err);
+            return Promise.reject('Post Failed');
+        });
     };
-    FormService = __decorate([
+    GraphsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], FormService);
-    return FormService;
+    ], GraphsService);
+    return GraphsService;
 }());
-exports.FormService = FormService;
-//# sourceMappingURL=form.service.js.map
+exports.GraphsService = GraphsService;
+//# sourceMappingURL=graphs.service.js.map

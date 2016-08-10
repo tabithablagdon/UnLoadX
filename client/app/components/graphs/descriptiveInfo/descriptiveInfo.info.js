@@ -9,19 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var AppComponent = (function () {
-    function AppComponent() {
+var descriptiveInfo = (function () {
+    function descriptiveInfo() {
     }
-    AppComponent = __decorate([
+    descriptiveInfo = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "<h1 [style.color]=\"'orange'\">UnLoadX</h1>\n              <a routerLink=\"/\">Home</a>\n              <router-outlet></router-outlet>",
-            directives: [router_1.ROUTER_DIRECTIVES]
+            selector: 'descriptiveInfo',
+            directives: [],
+            template: "\n    <h3 [style.color]=\"'blue'\"> Descriptive Statistics </h3>\n    <h4> Total Requests: 100 </h4>\n    <h5> <span> Server 1: 50, </span> <span> Server 2: 50 </span> </h5> \n    <h5> Request Success Rate: 85% </h5>\n    <h5> <span> Latency </span> <span> Avg: 2 ms, </span> <span> Min: 0 ms, </span> <span> Max: 3 ms, </span> \n    <span> Std Dev: .2 ms </span> </h5>\n  "
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], descriptiveInfo);
+    return descriptiveInfo;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.descriptiveInfo = descriptiveInfo;
+//# sourceMappingURL=descriptiveInfo.info.js.map
