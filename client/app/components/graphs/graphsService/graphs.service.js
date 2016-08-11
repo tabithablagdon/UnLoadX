@@ -14,7 +14,7 @@ require('rxjs/add/operator/toPromise');
 var GraphsService = (function () {
     function GraphsService(_http) {
         this._http = _http;
-        this.uriPath = '/api/requests'; //will also need testID
+        this.uriPath = '/api/request/1'; //will also need testID
     }
     GraphsService.prototype.extractData = function (res) {
         var body = res.json();

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var successBarChart_graph_1 = require('./successBarChart/successBarChart.graph');
+var statusCodeBar_graph_1 = require('./statusCodeBar/statusCodeBar.graph');
 var latencyLineGraph_graph_1 = require('./latencyLineGraph/latencyLineGraph.graph');
 var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
 var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
@@ -25,8 +25,8 @@ var Graphs = (function () {
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <successBarChart></successBarChart>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  ",
-            directives: [successBarChart_graph_1.successBarChart, latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph],
+            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar></statusCodeBar>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  ",
+            directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
             providers: [graphs_service_1.GraphsService, http_1.HTTP_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [graphs_service_1.GraphsService])

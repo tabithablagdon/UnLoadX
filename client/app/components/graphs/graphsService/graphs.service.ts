@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class GraphsService {
   
-  uriPath = '/api/requests'; //will also need testID
+  uriPath = '/api/request/1'; //will also need testID
 
   constructor(private _http: Http) {}
 

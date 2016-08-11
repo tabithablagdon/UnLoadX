@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { successBarChart} from './successBarChart/successBarChart.graph';
+import { statusCodeBar} from './statusCodeBar/statusCodeBar.graph';
 import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
 import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
@@ -14,11 +14,11 @@ import { HTTP_PROVIDERS } from '@angular/http';
     <div>
       <networkGraph></networkGraph>
       <descriptiveInfo></descriptiveInfo>
-      <successBarChart></successBarChart>
+      <statusCodeBar></statusCodeBar>
       <latencyLineGraph></latencyLineGraph>
     </div>
   `,
-  directives: [successBarChart, latencyLineGraph, descriptiveInfo, networkGraph],
+  directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
   providers: [GraphsService, HTTP_PROVIDERS]
 })
  
@@ -27,8 +27,7 @@ export class Graphs {
   constructor(private _GraphsService: GraphsService) { }
 
   getTestSummaryData() { 
-    this._GraphsService.getTestSummaryInfo();
-   
+    this._GraphsService.getTestSummaryInfo(); 
   }
   
 }
