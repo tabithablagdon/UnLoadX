@@ -20,12 +20,13 @@ var Graphs = (function () {
         this._GraphsService = _GraphsService;
     }
     Graphs.prototype.getTestSummaryData = function () {
+        console.log('yo');
         this._GraphsService.getTestSummaryInfo();
     };
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar></statusCodeBar>\n      <latencyLineGraph></latencyLineGraph>\n    </div>\n  ",
+            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar></statusCodeBar>\n      <latencyLineGraph></latencyLineGraph>\n      <button (click)=\"getTestSummaryData()\"> Press </button>\n    </div>\n  ",
             directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
             providers: [graphs_service_1.GraphsService, http_1.HTTP_PROVIDERS]
         }), 

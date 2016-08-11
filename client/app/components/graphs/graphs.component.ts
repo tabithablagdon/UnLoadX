@@ -16,6 +16,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
       <descriptiveInfo></descriptiveInfo>
       <statusCodeBar></statusCodeBar>
       <latencyLineGraph></latencyLineGraph>
+      <button (click)="getTestSummaryData()"> Press </button>
     </div>
   `,
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
@@ -27,6 +28,7 @@ export class Graphs {
   constructor(private _GraphsService: GraphsService) { }
 
   getTestSummaryData() { 
+    console.log('yo');
     this._GraphsService.getTestSummaryInfo(); 
   }
   
