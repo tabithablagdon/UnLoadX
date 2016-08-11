@@ -13,18 +13,24 @@ var forms_1 = require('@angular/forms');
 var ipPort_1 = require('../../types/ipPort');
 var form_service_1 = require('../formServices/form.service');
 var http_1 = require('@angular/http');
-var router_1 = require('@angular/router');
 var FormItemComponent = (function () {
     function FormItemComponent(_FormService) {
+        this._FormService = _FormService;
         this.model = new ipPort_1.ipPort('', '', '');
-        this._FormService = form_service_1.FormService;
+        this.formAdded = false;
     }
+    // Created a new form the first time the function is called
+    FormItemComponent.prototype.onChange = function () {
+        if (!(this.formAdded)) {
+            this._FormService.addFormItem();
+            this.formAdded = true;
+        }
+    };
     FormItemComponent = __decorate([
         core_1.Component({
             selector: 'form-item',
             templateUrl: './client/app/components/form/formItem/formItem.component.html',
-            // styleUrls: ['./client/assets/styles/materialize.css'],
-            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES],
+            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES],
             providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS],
         }), 
         __metadata('design:paramtypes', [form_service_1.FormService])

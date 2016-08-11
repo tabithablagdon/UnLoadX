@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators, NgForm } from '@angular/common';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -10,20 +10,24 @@ import {
 import { ipPort } from '../../types/ipPort';
 import { FormService } from '../formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 @Component({
   selector: 'form-item',
   templateUrl: './client/app/components/form/formItem/formItem.component.html',
-  // styleUrls: ['./client/assets/styles/materialize.css'],
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES],
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
   providers: [FormService, HTTP_PROVIDERS],
 })
 
 export class FormItemComponent {
-  _FormService: any;
-  constructor(_FormService: FormService) {
-    this._FormService = FormService;
-  }
+  constructor(private _FormService: FormService) { }
   model = new ipPort('', '', '');
+  formAdded = false;
+
+  // Created a new form the first time the function is called
+  onChange() {
+    if (!(this.formAdded)) {
+      this._FormService.addFormItem()
+      this.formAdded = true;
+    }
+  }
 }

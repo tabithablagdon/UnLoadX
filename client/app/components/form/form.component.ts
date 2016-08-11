@@ -18,7 +18,6 @@ import { FormItemComponent } from './formItem/formItem.component';
 @Component({
   selector: 'my-form',
   templateUrl: "./client/app/components/form/form.component.html",
-  // template: '<form-item></form-item>',
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
   providers: [FormService, HTTP_PROVIDERS]
 })
@@ -26,28 +25,16 @@ import { FormItemComponent } from './formItem/formItem.component';
 export class FormComponent {
 
   constructor(private _FormService: FormService, private Router: Router) { } // form builder simplify form initialization
-
-  types = ['web server', 'image processor', 'other'];
-  application_type = 'other';
-  application_type2 = 'other';
-
-  model = new ipPort('123.456.789', '8080', 'web processor');
-  model2 = new ipPort('123.456.789', '8080', 'web processor');
+  servers = this._FormService.servers;
   numReqModel = new numReq(0);
 
+
+  // {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq}
   onSubmit() {
-    this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
-    alert('test submitted!...retrieving test summary data');
+    this._FormService.sendTest();
+    // console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
     this.Router.navigate(['/graphs']);
   }
 
-  onChange(value){
-    this.application_type = value;
-    this.model.application_type = value;
-  }
-
-  onChange2(value){
-    this.application_type2 = value;
-    this.model2.application_type =value;
-  }
+  onChange(value){}
 }
