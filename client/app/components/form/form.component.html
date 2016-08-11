@@ -1,7 +1,8 @@
 <form (ngSubmit)="onSubmit()">
   <h4>Enter Server IP Address, Port Number, & Type:</h4>
-
- <div class = "form-group">
+  <FormItemComponent></FormItemComponent>
+  <form-item></form-item>
+ <!-- <div class = "form-group">
     <label for= "ip"> IP Address</label>
     <input type = "text" [(ngModel)]="model.ip" name="ip" class = "form-control" required placeholder="IP Address">
   </div>
@@ -29,7 +30,7 @@
     <select class="form-control" (ngModelChange)="onChange2($event)" [ngModel]="model2.application_type" name="application_type" required>
         <option  *ngFor="let type of types" [value]="type">{{type}}</option>
     </select>
-  </div>
+  </div> -->
 
   <div class= "form-group">
     <label for= "NumReqs"> Number of Requests</label>
