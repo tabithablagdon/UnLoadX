@@ -34,6 +34,10 @@ function parseRequests(data) {
   const latencyAvg = latencyArray.reduce((sum, next) => sum + next)/len;
   const latencyMax = Math.max(...latencyArray);
   const latencyMin = Math.min(...latencyArray);
+  const latencyStdDevSum = latencyArray.map(latency => {
+    return Math.pow(latency - latencyAvg, 2);
+  });
+  const latencyStdDev = Math.sqrt(latencyStdDevSum.reduce((a, b) => a + b)/len);
   const statusCodesCache = {};
   const status = [];
 
@@ -64,7 +68,8 @@ function parseRequests(data) {
     latencySet: latencySet,
     avg: latencyAvg,
     max: latencyMax,
-    min: latencyMin
+    min: latencyMin,
+    stdDev: latencyStdDev
   };
   stats.status = status;
 
