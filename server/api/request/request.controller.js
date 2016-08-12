@@ -23,6 +23,18 @@ requestController.getTestRequests = (req, res) => {
     .catch(handleError(res));
 };
 
+requestController.getTestRequestsSocket = (id) => {
+  const testId = id;
+
+  Request.findAll({where: {testId: testId}})
+    .then(requests => {
+      let parsedRequests = parseRequests(requests);
+
+      socket.emit('receive-requests', parsedRequests);
+    })
+    .catch(handleError(res));
+};
+
 
 function parseRequests(data) {
   const stats = {};

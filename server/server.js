@@ -13,7 +13,6 @@ const io = require('socket.io')(http);
 configExpress(app);
 configRoutes(app);
 
-
 io.on('connection', (socket) => {
   console.log('A socket has been connected!!!!');
 
@@ -23,7 +22,6 @@ io.on('connection', (socket) => {
     // io.emit('request', requests)
     console.log('Recieve POST from client socket!', requests);
     nodeController.createServerNodeSocket(requests);
-
   });
 
 });
@@ -31,9 +29,7 @@ io.on('connection', (socket) => {
 
 db.sync()
   .then(() => {
-
     http.listen(3000, () => console.log('Listening on *:3000 with socket.io'));
-
   })
   .catch(err => console.log(`Error loading server ${err}`));
 

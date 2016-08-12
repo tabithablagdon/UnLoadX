@@ -1,6 +1,7 @@
 import { Request } from '../server/db/db';
 import { handleError } from '../server/config/utils';
 import SiegeService from './siege.service';
+import requestController from '../server/request.controller';
 
 const SiegeController = {};
 
@@ -43,7 +44,8 @@ SiegeController.createRequest = (data) => {
     .catch(err => console.log(err));
 
   });
-
+  //
+  requestController.getTestRequestsSocket(testId);
 };
 
 export default SiegeController;
