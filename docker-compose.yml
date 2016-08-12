@@ -10,9 +10,9 @@ services:
      - .:/code
     depends_on:
       - db
-    command: npm start
+    command: pg_ctl -D /var/lib/postgresql/data -l logfile start && npm start
   db:
-    image: orchardup/postgresql
+    image: postgres
     volumes:
       - ./docker:/docker-entrypoint-initdb.d
     command: /docker-entrypoint.sh postgres
