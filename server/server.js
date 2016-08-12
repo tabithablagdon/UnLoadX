@@ -31,10 +31,6 @@ io.on('connection', (socket) => {
 
 db.sync()
   .then(() => {
-    // app.listen(3000, () => {
-    //   console.log('Listening on port 3000');
-    // });
-    //
 
     http.listen(3000, () => console.log('Listening on *:3000 with socket.io'));
 
