@@ -18,14 +18,19 @@ var FormItemComponent = (function () {
         this._FormService = _FormService;
         this.model = new ipPort_1.ipPort('', '', '');
         this.formAdded = false;
+        this.formUpdate = new core_1.EventEmitter();
     }
     // Created a new form the first time the function is called
     FormItemComponent.prototype.onChange = function () {
         if (!(this.formAdded)) {
-            this._FormService.addFormItem();
+            this.formUpdate.emit(true);
             this.formAdded = true;
         }
     };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], FormItemComponent.prototype, "formUpdate", void 0);
     FormItemComponent = __decorate([
         core_1.Component({
             selector: 'form-item',

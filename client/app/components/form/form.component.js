@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var ipPort_1 = require('../types/ipPort');
 var numReq_1 = require('../types/numReq');
 var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
@@ -19,22 +20,23 @@ var FormComponent = (function () {
     function FormComponent(_FormService, Router) {
         this._FormService = _FormService;
         this.Router = Router;
-        this.servers = this._FormService.servers;
+        this.servers = [new ipPort_1.ipPort(null, null, null)];
         this.numReqModel = new numReq_1.numReq(0);
-    } // form builder simplify form initialization
-    // {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq}
+    }
     FormComponent.prototype.onSubmit = function () {
-        this._FormService.sendTest();
+        this._FormService.sendTest(this.servers);
         // console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
         this.Router.navigate(['/graphs']);
     };
-    FormComponent.prototype.onChange = function (value) { };
+    FormComponent.prototype.addFormItem = function (event) {
+        this.servers.push(event);
+    };
     FormComponent = __decorate([
         core_1.Component({
             selector: 'my-form',
             templateUrl: "./client/app/components/form/form.component.html",
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
-            providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS]
+            providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS],
         }), 
         __metadata('design:paramtypes', [form_service_1.FormService, router_1.Router])
     ], FormComponent);

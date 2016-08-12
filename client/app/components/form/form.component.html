@@ -1,8 +1,7 @@
 <form (ngSubmit)="onSubmit()">
   <h4>Enter Server IP Address, Port Number, & Type:</h4>
-  <!-- <form-item></form-item> -->
-  <li *ngFor="let server of servers">
-    <form-item></form-item>
+  <li *ngFor="let server of servers" >
+    <form-item (formUpdate)="addFormItem($event.ip)"></form-item>
   </li>
   <div class= "form-group">
     <label for= "NumReqs"> Number of Requests</label>

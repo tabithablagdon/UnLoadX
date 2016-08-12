@@ -2,15 +2,28 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { ipPort } from '../../types/ipPort';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/share';
 
 
 @Injectable()
 export class FormService {
+  // code for observable:
+  // observable$: Observable<any>;
+  // private _observer: Observer<any>;
+  // addFormItem() {
+  //   this.observable$ = new Observable(observer => observer.next());
+  //   console.log('emit!');
+  // }
 
+
+
+  constructor(private _http: Http) {
+  }
   uriPath = '/api/nodeserver';
 
-  constructor(private _http: Http) {}
-  servers = [new ipPort(null, null, null)];
   private extractData(res: Response) {
     let body = res.json();
     return body.data || {};
@@ -28,7 +41,6 @@ export class FormService {
   }
 
   addFormItem() {
-    this.servers.push(new ipPort(null, null, null));
-    console.log(this.servers);
+
   }
 }

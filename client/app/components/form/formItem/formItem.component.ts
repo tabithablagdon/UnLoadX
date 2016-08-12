@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Validators, NgForm } from '@angular/common';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -19,15 +19,19 @@ import { HTTP_PROVIDERS } from '@angular/http';
 })
 
 export class FormItemComponent {
-  constructor(private _FormService: FormService) { }
+  @Output() formUpdate: EventEmitter<boolean>;
+  constructor(private _FormService: FormService) {
+    this.formUpdate = new EventEmitter<boolean>();
+  }
   model = new ipPort('', '', '');
   formAdded = false;
 
   // Created a new form the first time the function is called
   onChange() {
     if (!(this.formAdded)) {
-      this._FormService.addFormItem()
+      this.formUpdate.emit(true);
       this.formAdded = true;
     }
   }
+
 }

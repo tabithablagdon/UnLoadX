@@ -11,12 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-var ipPort_1 = require('../../types/ipPort');
+require('rxjs/add/operator/share');
 var FormService = (function () {
+    // code for observable:
+    // observable$: Observable<any>;
+    // private _observer: Observer<any>;
+    // addFormItem() {
+    //   this.observable$ = new Observable(observer => observer.next());
+    //   console.log('emit!');
+    // }
     function FormService(_http) {
         this._http = _http;
         this.uriPath = '/api/nodeserver';
-        this.servers = [new ipPort_1.ipPort(null, null, null)];
     }
     FormService.prototype.extractData = function (res) {
         var body = res.json();
@@ -33,8 +39,6 @@ var FormService = (function () {
         });
     };
     FormService.prototype.addFormItem = function () {
-        this.servers.push(new ipPort_1.ipPort(null, null, null));
-        console.log(this.servers);
     };
     FormService = __decorate([
         core_1.Injectable(), 

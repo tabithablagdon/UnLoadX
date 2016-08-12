@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Validators, NgForm } from '@angular/common';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -19,22 +19,22 @@ import { FormItemComponent } from './formItem/formItem.component';
   selector: 'my-form',
   templateUrl: "./client/app/components/form/form.component.html",
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
-  providers: [FormService, HTTP_PROVIDERS]
+  providers: [FormService, HTTP_PROVIDERS],
 })
 
 export class FormComponent {
+  servers = [new ipPort(null, null, null)];
+  constructor(private _FormService: FormService, private Router: Router) {}
 
-  constructor(private _FormService: FormService, private Router: Router) { } // form builder simplify form initialization
-  servers = this._FormService.servers;
   numReqModel = new numReq(0);
 
-
-  // {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq}
   onSubmit() {
-    this._FormService.sendTest();
+    this._FormService.sendTest(this.servers);
     // console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
     this.Router.navigate(['/graphs']);
   }
 
-  onChange(value){}
+  addFormItem(event: ipPort) {
+    this.servers.push(event);
+  }
 }
