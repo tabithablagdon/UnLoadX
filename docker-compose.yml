@@ -10,7 +10,7 @@ services:
      - .:/code
     depends_on:
       - db
-    command: pg_ctl -D /var/lib/postgresql/data -l logfile start && npm start
+    command: && npm start
   db:
     image: postgres
     volumes:
