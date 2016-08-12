@@ -19,20 +19,19 @@ import { HTTP_PROVIDERS } from '@angular/http';
 })
 
 export class FormItemComponent {
-  @Output() formUpdate: EventEmitter<boolean>;
+  @Output() formUpdate: EventEmitter<ipPort>;
   constructor(private _FormService: FormService) {
-    this.formUpdate = new EventEmitter<boolean>();
+    this.formUpdate = new EventEmitter<ipPort>();
   }
-  model = new ipPort('', '', '');
+  model = new ipPort(null, null, null);
   formAdded = false;
 
   // Created a new form the first time the function is called
   onChange() {
     if (!(this.formAdded)) {
-      this.formUpdate.emit(true);
+      this.formUpdate.emit(this.model);
       this.formAdded = true;
     }
-    console.log(this.model);
   }
 
 }

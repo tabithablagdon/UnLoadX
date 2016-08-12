@@ -16,17 +16,16 @@ var http_1 = require('@angular/http');
 var FormItemComponent = (function () {
     function FormItemComponent(_FormService) {
         this._FormService = _FormService;
-        this.model = new ipPort_1.ipPort('', '', '');
+        this.model = new ipPort_1.ipPort(null, null, null);
         this.formAdded = false;
         this.formUpdate = new core_1.EventEmitter();
     }
     // Created a new form the first time the function is called
     FormItemComponent.prototype.onChange = function () {
         if (!(this.formAdded)) {
-            this.formUpdate.emit(true);
+            this.formUpdate.emit(this.model);
             this.formAdded = true;
         }
-        console.log(this.model);
     };
     __decorate([
         core_1.Output(), 

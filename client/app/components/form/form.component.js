@@ -16,7 +16,7 @@ var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
-// import * as io from 'socket.io-client';
+var io = require('socket.io-client');
 var FormComponent = (function () {
     function FormComponent(_FormService, Router) {
         this._FormService = _FormService;
@@ -27,14 +27,24 @@ var FormComponent = (function () {
         this.socket = io();
     }
     FormComponent.prototype.onSubmit = function () {
-        this._FormService.sendTest(this.servers);
+        var models = this.formItemComponents._results.map(function (item) { return item.model; });
+        models = models.slice(0, models.length - 1);
+        var formData = {
+            servers: models,
+            volume: this.numReqModel.numReq
+        };
+        // this._FormService.sendTest();
         // have to figure out this bit with the models:
-        // this.socket.emit('receive-post', {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+        this.socket.emit('receive-post', formData);
         this.Router.navigate(['/graphs']);
     };
-    FormComponent.prototype.addFormItem = function (event) {
-        this.servers.push(event);
+    FormComponent.prototype.addFormItem = function (model) {
+        this.servers.push(model);
     };
+    __decorate([
+        core_1.ViewChildren(formItem_component_1.FormItemComponent), 
+        __metadata('design:type', Object)
+    ], FormComponent.prototype, "formItemComponents", void 0);
     FormComponent = __decorate([
         core_1.Component({
             selector: 'my-form',

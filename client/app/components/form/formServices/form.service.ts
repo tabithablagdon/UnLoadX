@@ -21,7 +21,6 @@ export class FormService {
   }
 
   sendTest(object) {
-    console.log(object);
     return this._http.post(this.uriPath, object)
     .toPromise()
     .then(this.extractData)

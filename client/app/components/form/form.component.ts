@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { Validators, NgForm } from '@angular/common';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -13,8 +13,7 @@ import { FormService } from './formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { FormItemComponent } from './formItem/formItem.component';
-// import * as io from 'socket.io-client';
-
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'my-form',
@@ -24,24 +23,30 @@ import { FormItemComponent } from './formItem/formItem.component';
 })
 
 export class FormComponent {
+  @ViewChildren(FormItemComponent) formItemComponents;
   servers = [new ipPort(null, null, null)];
   constructor(private _FormService: FormService, private Router: Router) {
     this.socket = io();
   }
   socket = null;
-
-
   numReqModel = new numReq(0);
 
   onSubmit() {
-    this._FormService.sendTest(this.servers);
-    // have to figure out this bit with the models:
-    // this.socket.emit('receive-post', {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+    let models = this.formItemComponents._results.map((item) => { return item.model });
+    models = models.slice(0, models.length - 1);
+    let formData = {
+      servers: models,
+      volume: this.numReqModel.numReq
+    }
 
+    // this._FormService.sendTest();
+
+    // have to figure out this bit with the models:
+    this.socket.emit('receive-post', formData);
     this.Router.navigate(['/graphs']);
   }
 
-  addFormItem(event: ipPort) {
-    this.servers.push(event);
+  addFormItem(model: ipPort) {
+    this.servers.push(model);
   }
 }
