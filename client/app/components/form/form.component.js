@@ -14,20 +14,24 @@ var ipPort_1 = require('./ipPort');
 var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
+var io = require('socket.io-client');
 var FormComponent = (function () {
     function FormComponent(_FormService, Router) {
         this._FormService = _FormService;
         this.Router = Router;
+        this.socket = null;
         this.types = ['web server', 'image processor', 'other'];
         this.application_type = 'other';
         this.application_type2 = 'other';
         this.model = new ipPort_1.ipPort('123.456.789', '8080', 'web processor');
         this.model2 = new ipPort_1.ipPort('123.456.789', '8080', 'web processor');
         this.numReqModel = new ipPort_1.numReq(0);
+        this.socket = io();
     } // form builder simplify form initialization
     FormComponent.prototype.onSubmit = function () {
-        this._FormService.sendTest({ 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
+        // this._FormService.sendTest({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
         alert('test submitted!...retrieving test summary data');
+        this.socket.emit('receive-post', { 'servers': [this.model, this.model2], 'volume': this.numReqModel.numReq });
         this.Router.navigate(['/graphs']);
     };
     FormComponent.prototype.onChange = function (value) {
