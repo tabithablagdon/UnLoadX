@@ -1,10 +1,11 @@
 <html>
   <head>
     <base href="/">
-    <title>Angular 2 QuickStart</title>
+    <title>UnLoadX</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="client/assets/styles/style.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="client/assets/styles/materialize.css"  media="screen,projection"/>
     <!-- 1. Load libraries -->
      <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -15,7 +16,7 @@
     <script src="systemjs.config.js"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script>
-      System.import('app').catch(function(err){ console.error(err); });
+      System.import('app').catch(function(err){ console.error(`SystemJS error importing app: ${err}`); });
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css"/>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
@@ -23,7 +24,9 @@
   </head>
   <!-- 3. Display the application -->
   <body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="client/assets/styles/materialize.js"></script>
 
-    <my-app>Loading...my app!</my-app>
+    <my-app>...loading</my-app>
   </body>
 </html>
