@@ -10,15 +10,6 @@ import 'rxjs/add/operator/share';
 
 @Injectable()
 export class FormService {
-  // code for observable:
-  // observable$: Observable<any>;
-  // private _observer: Observer<any>;
-  // addFormItem() {
-  //   this.observable$ = new Observable(observer => observer.next());
-  //   console.log('emit!');
-  // }
-
-
 
   constructor(private _http: Http) {
   }
@@ -38,9 +29,5 @@ export class FormService {
       console.error(err);
       return Promise.reject('Post Failed');
     })
-  }
-
-  addFormItem() {
-
   }
 }

@@ -32,6 +32,7 @@ export class FormItemComponent {
       this.formUpdate.emit(true);
       this.formAdded = true;
     }
+    console.log(this.model);
   }
 
 }

@@ -13,13 +13,6 @@ var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/share');
 var FormService = (function () {
-    // code for observable:
-    // observable$: Observable<any>;
-    // private _observer: Observer<any>;
-    // addFormItem() {
-    //   this.observable$ = new Observable(observer => observer.next());
-    //   console.log('emit!');
-    // }
     function FormService(_http) {
         this._http = _http;
         this.uriPath = '/api/nodeserver';
@@ -37,8 +30,6 @@ var FormService = (function () {
             console.error(err);
             return Promise.reject('Post Failed');
         });
-    };
-    FormService.prototype.addFormItem = function () {
     };
     FormService = __decorate([
         core_1.Injectable(), 

@@ -16,16 +16,20 @@ var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
+// import * as io from 'socket.io-client';
 var FormComponent = (function () {
     function FormComponent(_FormService, Router) {
         this._FormService = _FormService;
         this.Router = Router;
         this.servers = [new ipPort_1.ipPort(null, null, null)];
+        this.socket = null;
         this.numReqModel = new numReq_1.numReq(0);
+        this.socket = io();
     }
     FormComponent.prototype.onSubmit = function () {
         this._FormService.sendTest(this.servers);
-        // console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+        // have to figure out this bit with the models:
+        // this.socket.emit('receive-post', {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
         this.Router.navigate(['/graphs']);
     };
     FormComponent.prototype.addFormItem = function (event) {

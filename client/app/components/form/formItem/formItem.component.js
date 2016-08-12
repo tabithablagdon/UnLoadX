@@ -26,6 +26,7 @@ var FormItemComponent = (function () {
             this.formUpdate.emit(true);
             this.formAdded = true;
         }
+        console.log(this.model);
     };
     __decorate([
         core_1.Output(), 

@@ -13,6 +13,7 @@ import { FormService } from './formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { FormItemComponent } from './formItem/formItem.component';
+// import * as io from 'socket.io-client';
 
 
 @Component({
@@ -24,13 +25,19 @@ import { FormItemComponent } from './formItem/formItem.component';
 
 export class FormComponent {
   servers = [new ipPort(null, null, null)];
-  constructor(private _FormService: FormService, private Router: Router) {}
+  constructor(private _FormService: FormService, private Router: Router) {
+    this.socket = io();
+  }
+  socket = null;
+
 
   numReqModel = new numReq(0);
 
   onSubmit() {
     this._FormService.sendTest(this.servers);
-    // console.log({'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+    // have to figure out this bit with the models:
+    // this.socket.emit('receive-post', {'servers':[this.model, this.model2], 'volume': this.numReqModel.numReq});
+
     this.Router.navigate(['/graphs']);
   }
 

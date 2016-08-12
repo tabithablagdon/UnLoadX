@@ -5,7 +5,7 @@ const exec = require('child_process').exec;
 const SiegeService = {};
 
 const LB_URL = 'http://52.8.16.173:9090';
-
+// const LB_URL = 'http://www.google.com';
 /**
  * function runSiege - runs siege test and logs response time for each request in siegelog.txt
  *

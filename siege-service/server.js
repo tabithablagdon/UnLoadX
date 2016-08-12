@@ -14,6 +14,8 @@ app.post('/siege', SiegeController.startSiege);
 // start siege service on PORT 4000
 app.listen(4000, () => {
   console.log('Siege Service listening on port 4000');
+
+  //SiegeService.runSiege({'Volume': 5, 'TestId': 2});
 });
 
 export default app;
