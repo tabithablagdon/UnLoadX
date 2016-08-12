@@ -12,14 +12,12 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var ipPort_1 = require('../types/ipPort');
 var numReq_1 = require('../types/numReq');
-var form_service_1 = require('./formServices/form.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
 var io = require('socket.io-client');
 var FormComponent = (function () {
-    function FormComponent(_FormService, Router) {
-        this._FormService = _FormService;
+    function FormComponent(Router) {
         this.Router = Router;
         this.servers = [new ipPort_1.ipPort(null, null, null)];
         this.socket = null;
@@ -33,8 +31,6 @@ var FormComponent = (function () {
             servers: models,
             volume: this.numReqModel.numReq
         };
-        // this._FormService.sendTest();
-        // have to figure out this bit with the models:
         this.socket.emit('receive-post', formData);
         this.Router.navigate(['/graphs']);
     };
@@ -50,9 +46,9 @@ var FormComponent = (function () {
             selector: 'my-form',
             templateUrl: "./client/app/components/form/form.component.html",
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
-            providers: [form_service_1.FormService, http_1.HTTP_PROVIDERS],
+            providers: [http_1.HTTP_PROVIDERS],
         }), 
-        __metadata('design:paramtypes', [form_service_1.FormService, router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router])
     ], FormComponent);
     return FormComponent;
 }());

@@ -9,30 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
-require('rxjs/add/operator/share');
+// import { Http, Response } from '@angular/http';
+// import 'rxjs/add/operator/toPromise';
+// import { ipPort } from '../../types/ipPort';
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+// import { Observable } from 'rxjs/Observable';
+// import { Observer } from 'rxjs/Observer';
+// import 'rxjs/add/operator/share';
 var FormService = (function () {
-    function FormService(_http) {
-        this._http = _http;
-        this.uriPath = '/api/nodeserver';
+    function FormService() {
     }
-    FormService.prototype.extractData = function (res) {
-        var body = res.json();
-        return body.data || {};
-    };
-    FormService.prototype.sendTest = function (object) {
-        return this._http.post(this.uriPath, object)
-            .toPromise()
-            .then(this.extractData)
-            .catch(function (err) {
-            console.error(err);
-            return Promise.reject('Post Failed');
-        });
-    };
     FormService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [])
     ], FormService);
     return FormService;
 }());

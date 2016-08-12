@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { ipPort } from '../types/ipPort';
 import { numReq } from '../types/numReq';
-import { FormService } from './formServices/form.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { FormItemComponent } from './formItem/formItem.component';
@@ -19,17 +18,18 @@ import * as io from 'socket.io-client';
   selector: 'my-form',
   templateUrl: "./client/app/components/form/form.component.html",
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
-  providers: [FormService, HTTP_PROVIDERS],
+  providers: [HTTP_PROVIDERS],
 })
 
 export class FormComponent {
   @ViewChildren(FormItemComponent) formItemComponents;
   servers = [new ipPort(null, null, null)];
-  constructor(private _FormService: FormService, private Router: Router) {
-    this.socket = io();
-  }
   socket = null;
   numReqModel = new numReq(0);
+
+  constructor(private Router: Router) {
+    this.socket = io();
+  }
 
   onSubmit() {
     let models = this.formItemComponents._results.map((item) => { return item.model });
@@ -38,10 +38,6 @@ export class FormComponent {
       servers: models,
       volume: this.numReqModel.numReq
     }
-
-    // this._FormService.sendTest();
-
-    // have to figure out this bit with the models:
     this.socket.emit('receive-post', formData);
     this.Router.navigate(['/graphs']);
   }
