@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormComponent } from './form/form.component';
-import { ipPort } from './form/ipPort';
+import { FormItemComponent } from './form/formItem/formItem.component';
+import { ipPort } from './types/ipPort';
 import { Graphs } from './graphs/graphs.component';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { appRoutes } from './app.routing';
@@ -15,5 +16,5 @@ import { appRoutes } from './app.routing';
   directives: [ROUTER_DIRECTIVES]
 })
 
-export class AppComponent { 
+export class AppComponent {
 }
