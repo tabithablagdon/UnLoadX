@@ -8,9 +8,9 @@ services:
     # mount project directory to code directory on container
     volumes:
      - .:/code
-    depends_on:
-      - db
-    command: && npm start
+    links:
+      - db:pgcontainer
+    command: npm start
   db:
     image: postgres
     volumes:

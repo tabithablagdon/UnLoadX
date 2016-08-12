@@ -4,8 +4,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 ADD . .
 RUN npm install
-ENV PATH $PATH:/usr/lib/postgresql/9.5/bin
+ENV NODE_ENV production
 
 EXPOSE 3000
 EXPOSE 4000
-EXPOSE 5432
