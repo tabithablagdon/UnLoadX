@@ -22,6 +22,41 @@ const nodeController = {};
  * }
  */
 
+ nodeController.createServerNodeSocket = (post) => {
+   const servers = post.servers;
+
+   //TO ADD: Query for UserId, when authentication is added
+
+   servers.forEach(server => {
+     NodeServer.create({
+       ip: server.ip,
+       port: server.port,
+       application_type: server.application_type || 'web server'
+     })
+     .catch(err => console.error(`Error createServerNodeSocket ${err}`));
+   });
+
+   // Create record in Test Table
+   Test.create({
+     volume: post.volume
+   })
+   .then(data => {
+     // Create data structure to send to Load Balancer Service
+     const dataForLB = {
+       servers: servers,
+       volume: data.dataValues.volume || post.volume,
+       testId: data.dataValues.id
+     };
+
+     // Send /POST request to Load Balancer
+     nodeController.sendTestToLB(dataForLB);
+   })
+   .catch(err => console.error(err));
+
+ };
+
+
+
 nodeController.createServerNode = (req, res) => {
   const servers = req.body.servers;
 
