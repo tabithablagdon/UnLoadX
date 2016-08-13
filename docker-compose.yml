@@ -8,8 +8,7 @@ services:
     # mount project directory to code directory on container
     volumes:
      - .:/code
-    depends_on:
-     - siege
+     - /home/ec2-user/siege-4.0.2:/code
     links:
       - db:pgcontainer
     command: npm start
@@ -18,5 +17,3 @@ services:
     volumes:
       - ./docker:/docker-entrypoint-initdb.d
     command: /docker-entrypoint.sh postgres
-  siege:
-    image: centminmod/docker-centos6-siege
