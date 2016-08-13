@@ -7,12 +7,11 @@ const SiegeController = {};
 
 SiegeController.startSiegeSocket = (req, res) => {
   // Assumes that req.body coming from Load Balancer is: [ {Volume: 100, testId: 2}
-   console.log(`Step 4: Handling /POST request to /siege - in startSiegeSocket with req as ${req} - running SiegeService.runSiege...`);
-
+   console.log(`[STEP 4]: Handling /POST request to /siege - in startSiegeSocket with req as ${req} - running SiegeService.runSiege...`);
 
    return SiegeService.runSiege(req.body)
      .then(data => {
-       console.log(`Step 6.7 - received requests data back from SiegeService!  ${JSON.stringify(data)}`);
+       console.log(`[Step 6.7]: Received requests data back from SiegeService!  ${JSON.stringify(data)}`);
        res.status(201).json(data);
      })
      .catch(err => console.log(`Error sending requests data from SiegeController.startSiege ${err.message}`));
@@ -43,22 +42,5 @@ SiegeController.createRequest = (data) => {
   //
   requestController.getTestRequestsSocket(testId);
 };
-
-// SiegeController.startSiege = (req, res) => {
-//   // Assumes that req.body coming from Load Balancer is: [ {Volume: 100, testId: 2}
-//   let body = '';
-//
-//    req.on('data', function(chunk) {
-//      body += chunk;
-//    });
-//
-//    req.on('end', function() {
-//      var msg = JSON.parse(body);
-//      console.log('chunked parsed msg from buffer data: ', msg);
-//      SiegeService.runSiege(msg);
-//      res.writeHead(201)
-//      res.end();
-//    });
-// };
 
 export default SiegeController;

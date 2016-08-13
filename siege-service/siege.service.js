@@ -84,7 +84,6 @@ SiegeService.parseSiegeLog = (filename, testId) => {
     });
   });
 
-
 }
 
 export default SiegeService;

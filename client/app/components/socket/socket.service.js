@@ -18,7 +18,6 @@ var SocketService = (function () {
         this._socket.on('receive-requests', function (requests) {
             _this.requestData = requests;
             console.log('Received requests data from server', _this.requestData);
-            alert('Received our mothaFing request Data from the server!!');
         });
     }
     SocketService.prototype.sendServers = function (serverPost) {

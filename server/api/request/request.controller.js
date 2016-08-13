@@ -22,13 +22,9 @@ requestController.createRequest = (data) => {
       })
     ))
     .then((requestData) => {
-      // FIX - this is not coming back properly - see what this is
       console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData');
 
-      // return requestController.getTestRequestsSocket(requestData, testId);
       let parsedData = requestController.getTestRequestsSocket(requestData, testId);
-
-      console.log('Step 7.6 - data from getTestRequests', parsedData);
 
       return parsedData;
     })
@@ -116,17 +112,5 @@ requestController.getAllRequests = (req, res) => {
     .then(requests => res.json(requests))
     .catch(handleError(res));
 };
-
-// requestController.getTestRequests = (req, res) => {
-//   const testId = req.params.id || 1;
-//
-//   Request.findAll({where: {testId: testId}})
-//     .then(requests => {
-//       let parsedRequests = parseRequests(requests);
-//       res.json(parsedRequests);
-//     })
-//     .catch(handleError(res));
-// };
-
 
 export default requestController;
