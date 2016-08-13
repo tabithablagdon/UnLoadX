@@ -32,11 +32,13 @@ export class FormComponent {
   onSubmit() {
     let models = this.formItemComponents._results.map((item) => { return item.model });
     models = models.slice(0, models.length - 1);
+
     let formData = {
       servers: models,
       volume: this.numReqModel.numReq
     }
     this.SocketService.sendServers(formData);
+
     this.Router.navigate(['/graphs']);
   }
 

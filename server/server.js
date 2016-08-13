@@ -21,18 +21,18 @@ io.on('connection', (socket) => {
 
   socket.on('receive-post', (requests) => {
     console.log('Received POST from client socket!', requests);
-    // var stats = {"testId":1,"totalReqs":460,"latency":{"latencySet":[{"x":0,"y":1},{"x":1,"y":2}], "avg":0.001500000000000001,"max":0.01,"min":0,"stdDev":0.0035707142142714166}, "status":[{"key":"200","values":[{"label":"Status Code","value":460}]}]};
+    var stats = {"testId":1,"totalReqs":460,"latency":{"latencySet":[{"x":0,"y":1},{"x":1,"y":2}], "avg":0.001500000000000001,"max":0.01,"min":0,"stdDev":0.0035707142142714166}, "status":[{"key":"200","values":[{"label":"Status Code","value":460}]}]};
      
-    //  socket.emit('receive-requests', JSON.parse(stats));
-    nodeController.createServerNodeSocket(requests) // returns dataFromLB = {'Volume': 10, 'TestId': 2}
-      .then(dataFromLB => nodeController.startSiege(dataFromLB)) // returns requestBody = {requests: parsedDataArray, testId: testId}
-      .then(requestBody => requestController.createRequest(requestBody)) // returns statsData  = {testId: 1, totalReqs: 400, latency: {latencySet, avg, max, min, stdDev}, status }-=
-      .then(statsData => {
-        console.log('[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ', statsData);
+    socket.emit('receive-requests', stats);
+    // nodeController.createServerNodeSocket(requests) // returns dataFromLB = {'Volume': 10, 'TestId': 2}
+    //   .then(dataFromLB => nodeController.startSiege(dataFromLB)) // returns requestBody = {requests: parsedDataArray, testId: testId}
+    //   .then(requestBody => requestController.createRequest(requestBody)) // returns statsData  = {testId: 1, totalReqs: 400, latency: {latencySet, avg, max, min, stdDev}, status }-=
+    //   .then(statsData => {
+    //     console.log('[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ', statsData);
 
-        socket.emit('receive-requests', statsData);
-      })
-      .catch(err => console.log(`Error in socket chain ${err.message}`));
+    //     socket.emit('receive-requests', statsData);
+    //   })
+    //   .catch(err => console.log(`Error in socket chain ${err.message}`));
   });
 
 });

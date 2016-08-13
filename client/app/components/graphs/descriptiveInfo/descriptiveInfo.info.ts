@@ -1,5 +1,4 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {GraphsService} from '.././graphsService/graphs.service';
 import {NgStyle} from '@angular/common';
  
 @Component({
@@ -14,7 +13,7 @@ import {NgStyle} from '@angular/common';
     Max: {{latencyMax | number : '1.2-5'}}, Std. Dev: {{latencyStdDev | number : '1.2-5'}} </h4>
   `,
    directives: [NgStyle],
-   providers: [GraphsService]
+   providers: []
 })
  
 export class descriptiveInfo implements OnInit {
@@ -29,7 +28,7 @@ export class descriptiveInfo implements OnInit {
 
   @Input () requestData: any;
   @Output () dataReceived = new EventEmitter();
-  constructor (private GraphsService: GraphsService) {}
+  constructor () {}
  
   ngOnInit() {
    this.parsedData = JSON.parse(this.requestData);

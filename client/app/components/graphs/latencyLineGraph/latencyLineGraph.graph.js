@@ -10,10 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_nvd3_1 = require('.././ng2-nvd3/lib/ng2-nvd3');
-var graphs_service_1 = require('.././graphsService/graphs.service');
 var latencyLineGraph = (function () {
-    function latencyLineGraph(GraphsService) {
-        this.GraphsService = GraphsService;
+    function latencyLineGraph() {
         this.dataReceived = new core_1.EventEmitter();
     }
     latencyLineGraph.prototype.ngOnInit = function () {
@@ -79,9 +77,9 @@ var latencyLineGraph = (function () {
             selector: 'latencyLineGraph',
             template: "\n    <h3 [style.color]=\"'blue'\"> Latency Per Request </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
             directives: [ng2_nvd3_1.nvD3],
-            providers: [graphs_service_1.GraphsService]
+            providers: []
         }), 
-        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
+        __metadata('design:paramtypes', [])
     ], latencyLineGraph);
     return latencyLineGraph;
 }());

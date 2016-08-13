@@ -1,6 +1,5 @@
 import {Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
-import {GraphsService} from '.././graphsService/graphs.service';
 declare let d3: any;
  
 @Component({
@@ -12,7 +11,7 @@ declare let d3: any;
     </div>
   `,
   directives: [nvD3],
-  providers: [GraphsService]
+  providers: []
 })
  
 
@@ -22,7 +21,7 @@ export class latencyLineGraph implements OnInit{
   parsedData;
   @Input () requestData: any;
   @Output () dataReceived = new EventEmitter();
-  constructor (private GraphsService: GraphsService) {}
+  constructor () {}
   @ViewChild(nvD3)
   nvD3: nvD3;
   ngOnInit(){

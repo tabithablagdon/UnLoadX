@@ -18,7 +18,7 @@ export default class SocketService { //removed default
 
   sendServers(serverPost) {
     this._socket.emit('receive-post', serverPost);
-    console.log(JSON.parse(serverPost));
+    
     console.log(`Emitted ${serverPost} to server socket`);
   }
 

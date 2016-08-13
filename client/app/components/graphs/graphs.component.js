@@ -28,6 +28,7 @@ var Graphs = (function () {
     }
     Graphs.prototype.getTestSummaryData = function () {
         this.clicked = true;
+        console.log('Request Data AHAHAHA', this._SocketService.requestData);
         // return this._http.get('/api/request/1')
         //       .map(res => res)
         //       .subscribe(requests => {

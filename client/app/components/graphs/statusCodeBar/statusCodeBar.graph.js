@@ -10,10 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_nvd3_1 = require('.././ng2-nvd3/lib/ng2-nvd3');
-var graphs_service_1 = require('.././graphsService/graphs.service');
 var statusCodeBar = (function () {
-    function statusCodeBar(GraphsService) {
-        this.GraphsService = GraphsService;
+    function statusCodeBar() {
         this.dataReceived = new core_1.EventEmitter();
     }
     statusCodeBar.prototype.ngOnInit = function () {
@@ -87,7 +85,7 @@ var statusCodeBar = (function () {
             directives: [ng2_nvd3_1.nvD3],
             template: "\n    <h3 [style.color]=\"'blue'\"> Status Code Breakout </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
-        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
+        __metadata('design:paramtypes', [])
     ], statusCodeBar);
     return statusCodeBar;
 }());

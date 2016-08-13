@@ -9,11 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var graphs_service_1 = require('.././graphsService/graphs.service');
 var common_1 = require('@angular/common');
 var descriptiveInfo = (function () {
-    function descriptiveInfo(GraphsService) {
-        this.GraphsService = GraphsService;
+    function descriptiveInfo() {
         this.dataReceived = new core_1.EventEmitter();
     }
     descriptiveInfo.prototype.ngOnInit = function () {
@@ -51,9 +49,9 @@ var descriptiveInfo = (function () {
             selector: 'descriptiveInfo',
             template: "\n    <h3 [style.color]=\"'blue'\"> Descriptive Statistics </h3>\n    <h4> Total Requests: {{totalReqs}} </h4>\n    <h4> Request Success Rate: {{successRate | percent: '3.2-2'}}  </h4>\n    <h4> Status Code Count: </h4>\n    <span [ngStyle]=\"{'font-size':20}\" *ngFor=\"let key of keys();\"> Status Code {{key}}: {{statusCodeCounts[key]}} </span>\n    <h4> Latency per request (in ms)- Avg: {{latencyAvg | number : '1.2-5'}}, Min: {{latencyMin | number : '1.2-5'}}, \n    Max: {{latencyMax | number : '1.2-5'}}, Std. Dev: {{latencyStdDev | number : '1.2-5'}} </h4>\n  ",
             directives: [common_1.NgStyle],
-            providers: [graphs_service_1.GraphsService]
+            providers: []
         }), 
-        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
+        __metadata('design:paramtypes', [])
     ], descriptiveInfo);
     return descriptiveInfo;
 }());
