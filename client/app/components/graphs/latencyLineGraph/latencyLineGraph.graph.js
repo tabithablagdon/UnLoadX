@@ -43,7 +43,7 @@ var latencyLineGraph = (function () {
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Requests (across time)'
+                    axisLabel: 'Request # (across time)'
                 },
                 yAxis: {
                     axisLabel: 'Time Latency (ms)',
@@ -77,7 +77,7 @@ var latencyLineGraph = (function () {
     latencyLineGraph = __decorate([
         core_1.Component({
             selector: 'latencyLineGraph',
-            template: "\n    <h3 [style.color]=\"'blue'\"> Latency over Time </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
+            template: "\n    <h3 [style.color]=\"'blue'\"> Latency Per Request </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
             directives: [ng2_nvd3_1.nvD3],
             providers: [graphs_service_1.GraphsService]
         }), 

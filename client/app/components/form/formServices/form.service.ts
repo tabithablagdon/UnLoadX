@@ -18,17 +18,17 @@ export class FormService {
     return body.data || {};
   }
 
-  sendTest (object) {
-    console.log(object);
-    return this._http.post(this.uriPath, object)
-    .toPromise()
-    .then(this.extractData)
-    .catch(err => {
-      console.error(err);
-      return Promise.reject('Post Failed');
-    })
+  // sendTest (object) {
+  //   console.log(object);
+  //   return this._http.post('/api/nodeserver', object)
+  //   .toPromise()
+  //   .then(this.extractData)
+  //   .catch(err => {
+  //     console.error(err);
+  //     return Promise.reject('Post Failed');
+  //   })
 
-  }
+  
   // uriPath = '/api/nodeserver';
   //
   // private extractData(res: Response) {
