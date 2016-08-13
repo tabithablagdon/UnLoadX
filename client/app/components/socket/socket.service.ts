@@ -12,7 +12,6 @@ export default class SocketService {
     this._socket.on('receive-requests', (requests) => {
       this.requestData = requests;
       console.log('Received requests data from server', this.requestData);
-
     });
   }
 
