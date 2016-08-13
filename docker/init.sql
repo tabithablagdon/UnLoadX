@@ -1,0 +1,3 @@
+CREATE USER unloadx;
+CREATE DATABASE unloadx;
+GRANT ALL PRIVILEGES ON DATABASE unloadx TO unloadx;
