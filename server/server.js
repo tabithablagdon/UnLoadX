@@ -23,13 +23,10 @@ io.on('connection', (socket) => {
     console.log('Received POST from client socket!', requests);
 
     nodeController.createServerNodeSocket(requests) // returns dataFromLB = {'Volume': 10, 'TestId': 2}
-      .then(dataFromLB => nodeController.startSiege({'Volume': '10', 'TestId': 2})) // returns requestBody = {requests: parsedDataArray, testId: testId}
-      .then(requestBody => {
-        console.log('In requestBody', requestBody);
-        requestController.createRequest(requestBody);
-      }) // returns statsData  = {testId: 1, totalReqs: 400, latency: {latencySet, avg, max, min, stdDev}, status }-=
+      .then(dataFromLB => nodeController.startSiege(dataFromLB)) // returns requestBody = {requests: parsedDataArray, testId: testId}
+      .then(requestBody => requestController.createRequest(requestBody)) // returns statsData  = {testId: 1, totalReqs: 400, latency: {latencySet, avg, max, min, stdDev}, status }-=
       .then(statsData => {
-        console.log(`[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ${statsData}`);
+        console.log('[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ', statsData);
 
         socket.emit('receive-requests', statsData);
       })

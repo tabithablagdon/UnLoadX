@@ -8,7 +8,7 @@ requestController.createRequest = (data) => {
   const testId = data.testId;
   const requests = data.requests;
 
-  console.log(`[STEP 7]: In requestController.createRequest - posting records to DB - Requests table using data - requests ${requests} and testId ${testId}`);
+  console.log(`[STEP 7]: In requestController.createRequest - posting records to DB - Requests table using data - requests of length ${requests.length} and testId ${testId}`);
 
   return Promise.all(
     requests.map(request => Request.create({
@@ -23,14 +23,19 @@ requestController.createRequest = (data) => {
     ))
     .then((requestData) => {
       // FIX - this is not coming back properly - see what this is
-      console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData', requestData);
+      console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData');
 
       // return requestController.getTestRequestsSocket(requestData, testId);
+      let parsedData = requestController.getTestRequestsSocket(requestData, testId);
 
-      return parseRequests(requestsData);
+      console.log('Step 7.6 - data from getTestRequests', parsedData);
 
+      return parsedData;
     })
-    .catch(err => console.log(`Error creating requests ${err.message}`));
+    .catch(err => {
+       console.log(`Error creating requests ${err.message}`);
+       reject(err);
+     });
 };
 
 requestController.getTestRequestsSocket = (requestData, id) => {
@@ -42,12 +47,12 @@ requestController.getTestRequestsSocket = (requestData, id) => {
   //   .then(requests => {
   //     return parseRequests(requests);
   //   })
-  //   .catch(handleError(res));
+  //   .catch(err => console.error(err.message));
 };
 
 function parseRequests(data) {
 
-  console.log(`[STEP 8]: In parseRequests parsing data ${data}`);
+  console.log(`[STEP 8]: In parseRequests parsing data`);
 
   const stats = {};
   const len = data.length;
@@ -97,7 +102,7 @@ function parseRequests(data) {
   };
   stats.status = status;
 
-  console.log(`[STEP 8.5]: Finished parsing requests - sending back ${stats}`);
+  console.log('[STEP 8.5]: Finished parsing requests - sending back stats ', stats);
 
   return stats;
 

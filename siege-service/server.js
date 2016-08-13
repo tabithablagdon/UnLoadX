@@ -7,22 +7,15 @@ import SiegeRouter from './router';
 
 const app = express();
 
+// Insert Express middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Set routes
 app.use('/siege', SiegeRouter);
-
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('BOOM!  The Siege Service is running...');
 });
-
-// handles /POST request from Load Balancer
-// app.post('/siege', (req, res) => {
-//   console.log('req.body', req.body);
-//
-//   SiegeController.startSiegeSocket(req.body);
-// });
-
-
 
 // start siege service on PORT 4000
 app.listen(4000, () => {

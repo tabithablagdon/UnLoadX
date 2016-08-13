@@ -24,8 +24,7 @@ const nodeController = {};
 
  nodeController.createServerNodeSocket = (post) => {
    const servers = post.servers;
-
-   // Create NodeServer REACTIVE_FORM_DIRECTIVES
+   // Create records in NodeServer table for each server submitted
    createServers(servers);
 
    // Create record in Test Table
@@ -39,7 +38,7 @@ const nodeController = {};
        volume: data.dataValues.volume || post.volume,
        testId: data.dataValues.id
      };
-     console.log(`Step 1: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
+     console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
 
      // Send /POST request to Load Balancer
      return nodeController.sendTestToLB(dataForLB);
@@ -54,7 +53,7 @@ const nodeController = {};
  */
 
 nodeController.sendTestToLB = (res) => {
-  console.log(`Step 2: In sendTestToLB and sending ${JSON.stringify(res)}`);
+  console.log(`[STEP 2]: In sendTestToLB and sending ${JSON.stringify(res)}`);
 
   return new Promise((resolve, reject) => {
     request({
@@ -66,32 +65,15 @@ nodeController.sendTestToLB = (res) => {
         console.log(`Error in sendTestToLB ${err.message}`);
         reject(err);
       } else {
-        console.log(`Step 2.5: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-        resolve(body);
+        console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
+        resolve(JSON.parse(body));
       }
     });
   });
 };
 
 nodeController.startSiege = (data) => {
-  console.log(`Step 3: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
-
-  // request({
-  //   url: 'http://localhost:4000/siege',
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({Volume: '10', TestId: 2})
-  // }, (err, res, body) => {
-  //   if (err) {
-  //     console.log(`Error posting to /siege ${err.message}`);
-  //     //reject(err);
-  //   } else {
-  //     console.log(`Step 3.5 - startSiege /POST to /siege was successful with statusCode ${res.statusCode} posting body ${body}`);
-  //     //resolve(body);
-  //   }
-  // });
+  console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
 
   return new Promise((resolve, reject) => {
     request({
@@ -106,48 +88,12 @@ nodeController.startSiege = (data) => {
         console.log(`Error posting to /siege ${err.message}`);
         reject(err);
       } else {
-        console.log(`Step 3.5 - startSiege /POST to /siege was successful with statusCode ${res.statusCode} posting body ${body}`);
+        console.log(`[STEP 3.5]: startSiege /POST to /siege was successful with statusCode ${res.statusCode} posting body ${body}`);
         resolve(body);
       }
     });
   });
 };
-
-//
-// nodeController.createServerNode = (req, res) => {
-//   const servers = req.body.servers;
-//
-//   //TO ADD: Query for UserId, when authentication is added
-//
-//   servers.forEach(server => {
-//     NodeServer.create({
-//       ip: server.ip,
-//       port: server.port,
-//       application_type: server.application_type || 'web server'
-//     })
-//     .catch(handleError(res));
-//   });
-//
-//   // Create record in Test Table
-//   Test.create({
-//     volume: req.body.volume
-//   })
-//   .then(data => {
-//     // Create data structure to send to Load Balancer Service
-//     const dataForLB = {
-//       servers: servers,
-//       volume: data.dataValues.volume || req.body.volume,
-//       testId: data.dataValues.id
-//     };
-//
-//     // Send /POST request to Load Balancer
-//     console.log('form for LB : ', dataForLB);
-//     nodeController.sendTestToLB(dataForLB);
-//   })
-//   .catch(handleError(res));
-//
-//   res.send('Test and Servers posted to databases');
-// };
 
 /**
  * function getServers
@@ -161,6 +107,5 @@ nodeController.getServers = (req, res) => {
     .catch(handleError(res));
 
 };
-
 
 export default nodeController;
