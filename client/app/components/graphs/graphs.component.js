@@ -15,38 +15,39 @@ var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
 var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
 var graphs_service_1 = require('./graphsService/graphs.service');
 var http_1 = require('@angular/http');
+var http_2 = require('@angular/http');
+require('rxjs/add/operator/map');
 var Graphs = (function () {
-    function Graphs(_GraphsService) {
+    function Graphs(_GraphsService, _http) {
         this._GraphsService = _GraphsService;
+        this._http = _http;
+        this.isDataAvailable = false;
     }
     Graphs.prototype.getTestSummaryData = function () {
+        var _this = this;
         console.log('yo');
-        this._GraphsService.getTestSummaryInfo();
+        var that = this;
+        return this._http.get('/api/request/1')
+            .map(function (res) { return res; })
+            .subscribe(function (requests) {
+            _this.requestData = requests._body;
+            _this.isDataAvailable = true;
+        });
     };
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar></statusCodeBar>\n      <latencyLineGraph></latencyLineGraph>\n      <button (click)=\"getTestSummaryData()\"> Press </button>\n    </div>\n  ",
+            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph>\n      <button (click)=\"getTestSummaryData()\"> Press </button>\n    </div>\n  ",
             directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
             providers: [graphs_service_1.GraphsService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
+        __metadata('design:paramtypes', [graphs_service_1.GraphsService, http_2.Http])
     ], Graphs);
     return Graphs;
 }());
 exports.Graphs = Graphs;
-// var summaryData = {
-//     latency: [0, 1, 2, 4, 1], 
-//     averageLat: 2, 
-//     minLat: 0, 
-//     maxLat: 2, 
-//     latStdDev: .2,
-//     numSuccess: 100, 
-//     numFailures: 0, 
-//     totalReqs: 100
-// };
-//graph to visualize load balancer to server interactions somehow..
-//bar chart for success//failures
-//summary latency stats at top.
-//line chart to view all latencies
+// Data Structure
+// {"testId":1,"totalReqs":460,"latency":{"latencySet":[{"x":0,"y":0},{"x":1,"y":0}],
+// "avg":0.001500000000000001,"max":0.01,"min":0,"stdDev":0.0035707142142714166},
+// "status":[{"key":"200","values":[{"label":"Status Code","value":460}]}]} 
 //# sourceMappingURL=graphs.component.js.map

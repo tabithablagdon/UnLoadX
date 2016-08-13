@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
+require('rxjs/add/operator/map');
 var GraphsService = (function () {
     function GraphsService(_http) {
         this._http = _http;
@@ -20,14 +20,21 @@ var GraphsService = (function () {
         var body = res.json();
         return body.data || {};
     };
-    GraphsService.prototype.getTestSummaryInfo = function () {
-        return this._http.get(this.uriPath)
-            .toPromise()
-            .then(this.extractData)
-            .catch(function (err) {
-            console.error(err);
-            return Promise.reject('Post Failed');
-        });
+    GraphsService.prototype.getRequests = function () {
+        console.log('yo2');
+        // return this._http.get(this.uriPath)
+        // .toPromise()
+        // .then(this.extractData)
+        // .catch(err => {
+        //   console.error(err);
+        //   return Promise.reject('Post Failed');
+        // })
+        // return this._http.get('/api/request/1')
+        //       .map(res => res)
+        //       .subscribe(requests => {
+        //         this.requestData = requests._body;
+        //         console.log('req', requests);
+        //       });
     };
     GraphsService = __decorate([
         core_1.Injectable(), 

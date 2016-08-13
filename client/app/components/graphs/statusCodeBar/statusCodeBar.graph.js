@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_nvd3_1 = require('.././ng2-nvd3/lib/ng2-nvd3');
+var graphs_service_1 = require('.././graphsService/graphs.service');
 var statusCodeBar = (function () {
-    function statusCodeBar() {
+    function statusCodeBar(GraphsService) {
+        this.GraphsService = GraphsService;
+        this.dataReceived = new core_1.EventEmitter();
     }
     statusCodeBar.prototype.ngOnInit = function () {
+        this.parsedData = JSON.parse(this.requestData);
         this.options = {
             chart: {
                 type: 'multiBarChart',
@@ -40,30 +44,39 @@ var statusCodeBar = (function () {
                 }
             }
         };
-        this.data = [
-            {
-                key: "200",
-                values: [
-                    {
-                        "label": "Status Code",
-                        "value": 80
-                    }
-                ]
-            },
-            {
-                key: "400",
-                values: [
-                    {
-                        "label": "Status Code",
-                        "value": 50
-                    }
-                ]
-            }
-        ];
+        this.data = this.parsedData.status;
+        // this.data = [
+        //   {
+        //     key: "200",
+        //     values: [
+        //       {
+        //         "label" : "Status Code" ,
+        //         "value" : 80
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     key: "400",
+        //     values: [
+        //       {
+        //         "label" : "Status Code" ,
+        //         "value" : 50
+        //       }
+        //     ]
+        //   }
+        // ];
     };
     statusCodeBar.prototype.ngAfterViewInit = function () {
         this.nvD3.chart.update();
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], statusCodeBar.prototype, "requestData", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], statusCodeBar.prototype, "dataReceived", void 0);
     __decorate([
         core_1.ViewChild(ng2_nvd3_1.nvD3), 
         __metadata('design:type', ng2_nvd3_1.nvD3)
@@ -74,7 +87,7 @@ var statusCodeBar = (function () {
             directives: [ng2_nvd3_1.nvD3],
             template: "\n    <h3 [style.color]=\"'blue'\"> Status Code Breakout </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [graphs_service_1.GraphsService])
     ], statusCodeBar);
     return statusCodeBar;
 }());

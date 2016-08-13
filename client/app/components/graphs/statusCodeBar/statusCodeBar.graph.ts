@@ -1,5 +1,6 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
+import {GraphsService} from '.././graphsService/graphs.service';
 declare let d3: any;
  
 @Component({
@@ -16,9 +17,14 @@ declare let d3: any;
 export class statusCodeBar implements OnInit{
   options;
   data;
+  parsedData;
+  @Input () requestData: any;
+  @Output () dataReceived = new EventEmitter();
+  constructor (private GraphsService: GraphsService) {}
   @ViewChild(nvD3)
   nvD3: nvD3;
   ngOnInit(){
+    this.parsedData = JSON.parse(this.requestData);
     this.options = {
       chart: {
         type: 'multiBarChart',
@@ -45,26 +51,27 @@ export class statusCodeBar implements OnInit{
         }
       }
     }
-    this.data = [
-      {
-        key: "200",
-        values: [
-          {
-            "label" : "Status Code" ,
-            "value" : 80
-          }
-        ]
-      },
-      {
-        key: "400",
-        values: [
-          {
-            "label" : "Status Code" ,
-            "value" : 50
-          }
-        ]
-      }
-    ];
+    this.data = this.parsedData.status;
+    // this.data = [
+    //   {
+    //     key: "200",
+    //     values: [
+    //       {
+    //         "label" : "Status Code" ,
+    //         "value" : 80
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     key: "400",
+    //     values: [
+    //       {
+    //         "label" : "Status Code" ,
+    //         "value" : 50
+    //       }
+    //     ]
+    //   }
+    // ];
   }
 
   ngAfterViewInit() {

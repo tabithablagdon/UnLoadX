@@ -3,6 +3,6 @@ import testController from './test.controller';
 
 const testRouter = express.Router();
 
-testRouter.get('/', testController.getTests);
+testRouter.get('/:id', testController.getTests);
 
 export default testRouter;
