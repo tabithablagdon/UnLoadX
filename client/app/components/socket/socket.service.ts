@@ -8,17 +8,17 @@ export default class SocketService {
   private _socket = io.connect(this._url);
   public requestData;
 
+  constructor() {
+    this._socket.on('receive-requests', (requests) => {
+      this.requestData = requests;
+      console.log('Received requests data from server', this.requestData);
+      alert('Received our mothaFing request Data from the server!!');
+    });
+  }
+
   sendServers(serverPost) {
     this._socket.emit('receive-post', serverPost);
     console.log(`Emitted ${serverPost} to server socket`);
-  }
-
-  getRequests() {
-    // this._socket = io.connect(this._url);
-    this._socket.on('receive-requests', (requests) => {
-      this.requestData = requests;
-      console.log(`Received requests data from server ${this.requestData}`);
-    });
   }
 
 }

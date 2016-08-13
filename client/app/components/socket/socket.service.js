@@ -12,20 +12,18 @@ var io = require('socket.io-client');
 var core_1 = require('@angular/core');
 var SocketService = (function () {
     function SocketService() {
+        var _this = this;
         this._url = 'http://localhost:3000';
         this._socket = io.connect(this._url);
+        this._socket.on('receive-requests', function (requests) {
+            _this.requestData = requests;
+            console.log('Received requests data from server', _this.requestData);
+            alert('Received our mothaFing request Data from the server!!');
+        });
     }
     SocketService.prototype.sendServers = function (serverPost) {
         this._socket.emit('receive-post', serverPost);
         console.log("Emitted " + serverPost + " to server socket");
-    };
-    SocketService.prototype.getRequests = function () {
-        var _this = this;
-        // this._socket = io.connect(this._url);
-        this._socket.on('receive-requests', function (requests) {
-            _this.requestData = requests;
-            console.log("Received requests data from server " + _this.requestData);
-        });
     };
     SocketService = __decorate([
         core_1.Injectable(), 
