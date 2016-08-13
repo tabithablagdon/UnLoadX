@@ -19,20 +19,23 @@ SiegeService.runSiege = (data) => {
 
   // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
 
-  console.log(`Running siege using command: siege ${LB_URL} -t${volume}S > ${filename}`);
+  console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
 
-  exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
-    if (err) {
-      console.error(`exec error: ${err}`);
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
+  return new Promise((resolve, reject) => {
+    exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
+      if (err) {
+        console.error(`exec error: ${err}`);
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        reject(err);
+      }
 
-    SiegeService.parseSiegeLog(filename, testId);
-
+      return SiegeService.parseSiegeLog(filename, testId)
+        .then(parsedLogs => {
+          console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
+          resolve(parsedLogs);
+        });
+    });
   });
 }
 
@@ -43,39 +46,44 @@ SiegeService.runSiege = (data) => {
  *
  */
 SiegeService.parseSiegeLog = (filename, testId) => {
-  console.log('filename in parseSiegeLog', filename);
-  fs.readFile(filename, 'utf8', (err, data) => {
-    if (err) {
-      console.log(`Error reading file ${err}`);
-    } else {
-      let dataArray = data.toString().split('\n');
-      let parsedDataArray = [];
 
-      dataArray.forEach(request => {
-        let splittedRequest = request.replace(/\s\s+/g, ' ').split(' ');
-        // if request object isn't empty, parse and add to parsedDataArray
-        if (request.length > 1) {
-          parsedDataArray.push({
-            'statusCode': splittedRequest[1],
-            'latency': splittedRequest[2],
-            'size': splittedRequest[4],
-            'method': splittedRequest[7]
-          });
-        }
-      });
-      console.log(parsedDataArray);
-      //return parsedDataArray;
+  console.log(`[STEP 6]: Siege complete.  In SiegeService.parseSiegeLog parsing ${filename}`);
 
-      const requestBody = {
-        requests: parsedDataArray,
-        testId: testId
-      };
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, 'utf8', (err, data) => {
+      if (err) {
+        console.log(`Error reading file ${err.message}`);
+        reject(err);
+      } else {
+        let dataArray = data.toString().split('\n');
+        let parsedDataArray = [];
 
-      // sent array back to siegeController to create
-      // entry in Requests Table
-      SiegeController.createRequest(requestBody);
-    }
+        dataArray.forEach(request => {
+          let splittedRequest = request.replace(/\s\s+/g, ' ').split(' ');
+          // if request object isn't empty, parse and add to parsedDataArray
+          if (request.length > 1) {
+            parsedDataArray.push({
+              'statusCode': splittedRequest[1],
+              'latency': splittedRequest[2],
+              'size': splittedRequest[4],
+              'method': splittedRequest[7]
+            });
+          }
+        });
+
+        const requestBody = {
+          requests: parsedDataArray,
+          testId: testId
+        };
+
+        console.log(`[STEP 6.5] ${filename} has been read and parsed!  Sending back to SiegeService.runSiege requestBody ${requestBody}...`);
+        console.log(requestBody);
+
+        resolve(requestBody);
+      }
+    });
   });
+
 }
 
 export default SiegeService;

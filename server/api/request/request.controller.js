@@ -3,28 +3,53 @@ import { handleError } from '../../config/utils';
 
 const requestController = {};
 
-requestController.getAllRequests = (req, res) => {
-  // TO DO: Get the testId somehow
-  const testId = 1; // should populate from params for req.body
+requestController.createRequest = (data) => {
+  data = JSON.parse(data);
+  const testId = data.testId;
+  const requests = data.requests;
 
-  Request.findAll()
-    .then(requests => res.json(requests))
-    .catch(handleError(res));
-};
+  console.log(`[STEP 7]: In requestController.createRequest - posting records to DB - Requests table using data - requests of length ${requests.length} and testId ${testId}`);
 
-requestController.getTestRequests = (req, res) => {
-  const testId = req.params.id || 1;
+  return Promise.all(
+    requests.map(request => Request.create({
+        statusCode: request.statusCode,
+        latency: request.latency,
+        method: request.method,
+        CPU: null,
+        GPU: null,
+        memory: null,
+        testId: testId
+      })
+    ))
+    .then((requestData) => {
+      console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData');
 
-  Request.findAll({where: {testId: testId}})
-    .then(requests => {
-      let parsedRequests = parseRequests(requests);
-      res.json(parsedRequests);
+      let parsedData = requestController.getTestRequestsSocket(requestData, testId);
+
+      return parsedData;
     })
-    .catch(handleError(res));
+    .catch(err => {
+       console.log(`Error creating requests ${err.message}`);
+       reject(err);
+     });
 };
 
+requestController.getTestRequestsSocket = (requestData, id) => {
+  const testId = id;
+
+  return parseRequests(requestData);
+
+  // return Request.findAll({where: {testId: testId}})
+  //   .then(requests => {
+  //     return parseRequests(requests);
+  //   })
+  //   .catch(err => console.error(err.message));
+};
 
 function parseRequests(data) {
+
+  console.log(`[STEP 8]: In parseRequests parsing data`);
+
   const stats = {};
   const len = data.length;
   const latencyArray = data.map(request => Number(request.latency));
@@ -73,8 +98,19 @@ function parseRequests(data) {
   };
   stats.status = status;
 
+  console.log('[STEP 8.5]: Finished parsing requests - sending back stats ', stats);
+
   return stats;
 
 }
+
+requestController.getAllRequests = (req, res) => {
+  // TO DO: Get the testId somehow
+  const testId = 1; // should populate from params for req.body
+
+  Request.findAll()
+    .then(requests => res.json(requests))
+    .catch(handleError(res));
+};
 
 export default requestController;
