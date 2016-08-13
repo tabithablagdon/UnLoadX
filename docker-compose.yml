@@ -8,7 +8,6 @@ services:
     # mount project directory to code directory on container
     volumes:
      - .:/code
-     - /home/ec2-user/siege-4.0.2:/code
     links:
       - db:pgcontainer
     command: npm start
