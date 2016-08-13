@@ -6,7 +6,7 @@ declare let d3: any;
 @Component({
   selector: 'latencyLineGraph',
   template: `
-    <h3 [style.color]="'blue'"> Latency over Time </h3>
+    <h3 [style.color]="'blue'"> Latency Per Request </h3>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
@@ -52,7 +52,7 @@ export class latencyLineGraph implements OnInit{
         },
         duration: 500,
         xAxis: {
-          axisLabel: 'Requests (across time)'
+          axisLabel: 'Request # (across time)'
         },
         yAxis: {
           axisLabel: 'Time Latency (ms)',
