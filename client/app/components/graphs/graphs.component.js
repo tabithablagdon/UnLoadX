@@ -40,9 +40,9 @@ var Graphs = (function () {
             selector: 'graphs',
             template: "\n    <div>\n      <h3> Test Summary Page </h3>\n      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>\n      <button (click)=\"getTestSummaryData()\"> Retrieve Test Summary </button>\n      <div>\n      <img src={{loadingURL}} *ngIf=\"clicked && !isDataAvailable\"/>\n      </div>\n      <div>\n      <img src={{checkURL}} *ngIf=\"clicked && isDataAvailable\"/>\n      <span *ngIf=\"isDataAvailable\"> Results ready below. Thanks for waiting! </span>\n      </div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph>\n    </div>\n  ",
             directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
-            providers: [socket_service_1.SocketService, http_1.HTTP_PROVIDERS]
+            providers: [socket_service_1.default, http_1.HTTP_PROVIDERS] //commented out SocketService
         }), 
-        __metadata('design:paramtypes', [socket_service_1.SocketService, http_2.Http])
+        __metadata('design:paramtypes', [socket_service_1.default, http_2.Http])
     ], Graphs);
     return Graphs;
 }());

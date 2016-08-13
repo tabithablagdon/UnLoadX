@@ -3,7 +3,7 @@ import { statusCodeBar} from './statusCodeBar/statusCodeBar.graph';
 import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
 import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
-import { SocketService } from '../socket/socket.service';
+import SocketService  from '../socket/socket.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -29,7 +29,7 @@ import 'rxjs/add/operator/map';
     </div>
   `,
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
-  providers: [SocketService, HTTP_PROVIDERS]
+  providers: [SocketService, HTTP_PROVIDERS] //commented out SocketService
 })
  
 export class Graphs {
