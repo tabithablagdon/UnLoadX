@@ -25,8 +25,6 @@ var Graphs = (function () {
     }
     Graphs.prototype.getTestSummaryData = function () {
         var _this = this;
-        console.log('yo');
-        var that = this;
         return this._http.get('/api/request/1')
             .map(function (res) { return res; })
             .subscribe(function (requests) {
@@ -37,7 +35,7 @@ var Graphs = (function () {
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            template: "\n    <div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph>\n      <button (click)=\"getTestSummaryData()\"> Press </button>\n    </div>\n  ",
+            template: "\n    <div>\n      <h3> Test Summary Page </h3>\n      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>\n      <button (click)=\"getTestSummaryData()\"> Retrieve Test Summary </button>\n      <networkGraph></networkGraph>\n      <descriptiveInfo *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph>\n    </div>\n  ",
             directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
             providers: [graphs_service_1.GraphsService, http_1.HTTP_PROVIDERS]
         }), 

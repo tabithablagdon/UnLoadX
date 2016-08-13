@@ -1,21 +1,66 @@
-import {Component} from '@angular/core';
-
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {GraphsService} from '.././graphsService/graphs.service';
+import {NgStyle} from '@angular/common';
  
 @Component({
   selector: 'descriptiveInfo',
-  directives: [],
   template: `
     <h3 [style.color]="'blue'"> Descriptive Statistics </h3>
-    <h4> Total Requests: 100 </h4>
-    <h5> <span> Server 1: 50, </span> <span> Server 2: 50 </span> </h5> 
-    <h5> Request Success Rate: 85% </h5>
-    <h5> <span> Latency </span> <span> Avg: 2 ms, </span> <span> Min: 0 ms, </span> <span> Max: 3 ms, </span> 
-    <span> Std Dev: .2 ms </span> </h5>
-  `
+    <h4> Total Requests: {{totalReqs}} </h4>
+    <h4> Request Success Rate: {{successRate | percent: '3.2-2'}}  </h4>
+    <h4> Status Code Count: </h4>
+    <span [ngStyle]="{'font-size':20}" *ngFor="let key of keys();"> Status Code {{key}}: {{statusCodeCounts[key]}} </span>
+    <h4> Latency per request (in ms)- Avg: {{latencyAvg | number : '1.2-5'}}, Min: {{latencyMin | number : '1.2-5'}}, 
+    Max: {{latencyMax | number : '1.2-5'}}, Std. Dev: {{latencyStdDev | number : '1.2-5'}} </h4>
+  `,
+   directives: [NgStyle],
+   providers: [GraphsService]
 })
  
-export class descriptiveInfo {
-  
+export class descriptiveInfo implements OnInit {
+  parsedData;
+  totalReqs;
+  latencyAvg;
+  latencyMax;
+  latencyMin;
+  latencyStdDev;
+  statusCodeCounts;
+  successRate;
 
+  @Input () requestData: any;
+  @Output () dataReceived = new EventEmitter();
+  constructor (private GraphsService: GraphsService) {}
  
+  ngOnInit() {
+   this.parsedData = JSON.parse(this.requestData);
+   this.totalReqs = this.parsedData.totalReqs
+   this.latencyAvg = this.parsedData.latency.avg;
+   this.latencyMin = this.parsedData.latency.min;
+   this.latencyMax = this.parsedData.latency.max;
+   this.latencyStdDev = this.parsedData.latency.stdDev;
+   this.summarizeStatusCodes(this.parsedData.status);
+  } 
+
+  summarizeStatusCodes(statusCodeArray) {
+
+   this.statusCodeCounts = {};
+
+   for (let i=0; i < statusCodeArray.length; i++) {
+     this.statusCodeCounts[statusCodeArray[i].key] = statusCodeArray[i].values[0].value;
+   }
+
+   this.calculateSuccessRate(this.statusCodeCounts[200]);
+  }
+
+  calculateSuccessRate (successes) {
+   this.successRate = successes / this.totalReqs;
+  }
+
+  keys() : Array<string> {
+    return Object.keys(this.statusCodeCounts);
+  }
+
+// [{"key":"200","values":[{"label":"Status Code","value":460}]},...]
+
+
 }

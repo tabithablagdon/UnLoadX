@@ -12,11 +12,13 @@ import 'rxjs/add/operator/map';
   selector: 'graphs',
   template: `
     <div>
+      <h3> Test Summary Page </h3>
+      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>
+      <button (click)="getTestSummaryData()"> Retrieve Test Summary </button>
       <networkGraph></networkGraph>
-      <descriptiveInfo></descriptiveInfo>
+      <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
       <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
       <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
-      <button (click)="getTestSummaryData()"> Press </button>
     </div>
   `,
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
@@ -30,8 +32,6 @@ export class Graphs {
   constructor(private _GraphsService: GraphsService, private _http: Http) {}
 
   getTestSummaryData() { 
-    console.log('yo');
-    var that = this;
     return this._http.get('/api/request/1')
           .map(res => res)
           .subscribe(requests => {

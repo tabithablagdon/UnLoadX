@@ -6,7 +6,7 @@ declare let d3: any;
 @Component({
   selector: 'latencyLineGraph',
   template: `
-    <h3 [style.color]="'blue'"> Latency over Time (by Server) </h3>
+    <h3 [style.color]="'blue'"> Latency over Time </h3>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
@@ -27,10 +27,6 @@ export class latencyLineGraph implements OnInit{
   nvD3: nvD3;
   ngOnInit(){
     this.parsedData = JSON.parse(this.requestData);
-    console.log('1', this.requestData);
-    console.log('1P', JSON.parse(this.requestData));
-    console.log('1Lat', this.parsedData.latency);
-    console.log('1Lat', this.parsedData.latency.latencySet);
     this.options = {
       chart: {
         type: 'lineChart',

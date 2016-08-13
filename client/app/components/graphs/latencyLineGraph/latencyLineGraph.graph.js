@@ -18,10 +18,6 @@ var latencyLineGraph = (function () {
     }
     latencyLineGraph.prototype.ngOnInit = function () {
         this.parsedData = JSON.parse(this.requestData);
-        console.log('1', this.requestData);
-        console.log('1P', JSON.parse(this.requestData));
-        console.log('1Lat', this.parsedData.latency);
-        console.log('1Lat', this.parsedData.latency.latencySet);
         this.options = {
             chart: {
                 type: 'lineChart',
@@ -81,7 +77,7 @@ var latencyLineGraph = (function () {
     latencyLineGraph = __decorate([
         core_1.Component({
             selector: 'latencyLineGraph',
-            template: "\n    <h3 [style.color]=\"'blue'\"> Latency over Time (by Server) </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n    {{requestData}}\n  ",
+            template: "\n    <h3 [style.color]=\"'blue'\"> Latency over Time </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
             directives: [ng2_nvd3_1.nvD3],
             providers: [graphs_service_1.GraphsService]
         }), 
