@@ -3,40 +3,52 @@ import { handleError } from '../../config/utils';
 
 const requestController = {};
 
-requestController.getAllRequests = (req, res) => {
-  // TO DO: Get the testId somehow
-  const testId = 1; // should populate from params for req.body
+requestController.createRequest = (data) => {
+  data = JSON.parse(data);
+  const testId = data.testId;
+  const requests = data.requests;
 
-  Request.findAll()
-    .then(requests => res.json(requests))
-    .catch(handleError(res));
-};
+  console.log(`[STEP 7]: In requestController.createRequest - posting records to DB - Requests table using data - requests ${requests} and testId ${testId}`);
 
-requestController.getTestRequests = (req, res) => {
-  const testId = req.params.id || 1;
+  return Promise.all(
+    requests.map(request => Request.create({
+        statusCode: request.statusCode,
+        latency: request.latency,
+        method: request.method,
+        CPU: null,
+        GPU: null,
+        memory: null,
+        testId: testId
+      })
+    ))
+    .then((requestData) => {
+      // FIX - this is not coming back properly - see what this is
+      console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData', requestData);
 
-  Request.findAll({where: {testId: testId}})
-    .then(requests => {
-      let parsedRequests = parseRequests(requests);
-      res.json(parsedRequests);
+      // return requestController.getTestRequestsSocket(requestData, testId);
+
+      return parseRequests(requestsData);
+
     })
-    .catch(handleError(res));
+    .catch(err => console.log(`Error creating requests ${err.message}`));
 };
 
-requestController.getTestRequestsSocket = (id) => {
+requestController.getTestRequestsSocket = (requestData, id) => {
   const testId = id;
 
-  Request.findAll({where: {testId: testId}})
-    .then(requests => {
-      let parsedRequests = parseRequests(requests);
+  return parseRequests(requestData);
 
-      socket.emit('receive-requests', parsedRequests);
-    })
-    .catch(handleError(res));
+  // return Request.findAll({where: {testId: testId}})
+  //   .then(requests => {
+  //     return parseRequests(requests);
+  //   })
+  //   .catch(handleError(res));
 };
 
-
 function parseRequests(data) {
+
+  console.log(`[STEP 8]: In parseRequests parsing data ${data}`);
+
   const stats = {};
   const len = data.length;
   const latencyArray = data.map(request => Number(request.latency));
@@ -85,8 +97,31 @@ function parseRequests(data) {
   };
   stats.status = status;
 
+  console.log(`[STEP 8.5]: Finished parsing requests - sending back ${stats}`);
+
   return stats;
 
 }
+
+requestController.getAllRequests = (req, res) => {
+  // TO DO: Get the testId somehow
+  const testId = 1; // should populate from params for req.body
+
+  Request.findAll()
+    .then(requests => res.json(requests))
+    .catch(handleError(res));
+};
+
+// requestController.getTestRequests = (req, res) => {
+//   const testId = req.params.id || 1;
+//
+//   Request.findAll({where: {testId: testId}})
+//     .then(requests => {
+//       let parsedRequests = parseRequests(requests);
+//       res.json(parsedRequests);
+//     })
+//     .catch(handleError(res));
+// };
+
 
 export default requestController;
