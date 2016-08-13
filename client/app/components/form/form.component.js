@@ -15,14 +15,13 @@ var numReq_1 = require('../types/numReq');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
-var io = require('socket.io-client');
+var socket_service_1 = require('../socket/socket.service');
 var FormComponent = (function () {
-    function FormComponent(Router) {
+    function FormComponent(Router, SocketService) {
         this.Router = Router;
+        this.SocketService = SocketService;
         this.servers = [new ipPort_1.ipPort(null, null, null)];
-        this.socket = null;
         this.numReqModel = new numReq_1.numReq(0);
-        this.socket = io();
     }
     FormComponent.prototype.onSubmit = function () {
         var models = this.formItemComponents._results.map(function (item) { return item.model; });
@@ -31,7 +30,7 @@ var FormComponent = (function () {
             servers: models,
             volume: this.numReqModel.numReq
         };
-        this.socket.emit('receive-post', formData);
+        this.SocketService.sendServers(formData);
         this.Router.navigate(['/graphs']);
     };
     FormComponent.prototype.addFormItem = function (model) {
@@ -46,9 +45,9 @@ var FormComponent = (function () {
             selector: 'my-form',
             templateUrl: "./client/app/components/form/form.component.html",
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
-            providers: [http_1.HTTP_PROVIDERS],
+            providers: [http_1.HTTP_PROVIDERS, socket_service_1.default],
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, socket_service_1.default])
     ], FormComponent);
     return FormComponent;
 }());

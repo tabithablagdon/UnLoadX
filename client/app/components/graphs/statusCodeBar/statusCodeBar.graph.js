@@ -10,15 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_nvd3_1 = require('.././ng2-nvd3/lib/ng2-nvd3');
-var latencyLineGraph = (function () {
-    function latencyLineGraph() {
+var statusCodeBar = (function () {
+    function statusCodeBar() {
         this.dataReceived = new core_1.EventEmitter();
     }
-    latencyLineGraph.prototype.ngOnInit = function () {
+    statusCodeBar.prototype.ngOnInit = function () {
         this.parsedData = JSON.parse(this.requestData);
         this.options = {
             chart: {
-                type: 'lineChart',
+                type: 'multiBarChart',
                 height: 450,
                 margin: {
                     top: 20,
@@ -26,62 +26,68 @@ var latencyLineGraph = (function () {
                     bottom: 50,
                     left: 55
                 },
-                x: function (d) { return d.x; },
-                y: function (d) { return d.y; },
-                useInteractiveGuideline: true,
-                dispatch: {
-                    stateChange: function (e) { console.log("stateChange"); },
-                    changeState: function (e) { console.log("changeState"); },
-                    tooltipShow: function (e) { console.log("tooltipShow"); },
-                    tooltipHide: function (e) { console.log("tooltipHide"); }
-                },
+                x: function (d) { return d.label; },
+                y: function (d) { return d.value; },
                 showValues: true,
                 valueFormat: function (d) {
-                    return d3.format(',.4f')(d);
+                    return d3.format(',0%')(d);
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Request # (across time)'
+                    axisLabel: ''
                 },
                 yAxis: {
-                    axisLabel: 'Time Latency (ms)',
+                    axisLabel: '# of Status Codes',
                     axisLabelDistance: -10
                 }
             }
         };
-        this.data = [
-            {
-                values: this.parsedData.latency.latencySet,
-                key: 'Latency Per Request',
-                color: '#ff7f0e' //color - optional: choose your own line color.
-            }
-        ];
+        this.data = this.parsedData.status;
+        // this.data = [
+        //   {
+        //     key: "200",
+        //     values: [
+        //       {
+        //         "label" : "Status Code" ,
+        //         "value" : 80
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     key: "400",
+        //     values: [
+        //       {
+        //         "label" : "Status Code" ,
+        //         "value" : 50
+        //       }
+        //     ]
+        //   }
+        // ];
     };
-    latencyLineGraph.prototype.ngAfterViewInit = function () {
+    statusCodeBar.prototype.ngAfterViewInit = function () {
         this.nvD3.chart.update();
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], latencyLineGraph.prototype, "requestData", void 0);
+    ], statusCodeBar.prototype, "requestData", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], latencyLineGraph.prototype, "dataReceived", void 0);
+    ], statusCodeBar.prototype, "dataReceived", void 0);
     __decorate([
         core_1.ViewChild(ng2_nvd3_1.nvD3), 
         __metadata('design:type', ng2_nvd3_1.nvD3)
-    ], latencyLineGraph.prototype, "nvD3", void 0);
-    latencyLineGraph = __decorate([
+    ], statusCodeBar.prototype, "nvD3", void 0);
+    statusCodeBar = __decorate([
         core_1.Component({
-            selector: 'latencyLineGraph',
-            template: "\n    <h3 [style.color]=\"'blue'\"> Latency Per Request </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
+            selector: 'statusCodeBar',
             directives: [ng2_nvd3_1.nvD3],
-            providers: []
+            template: "\n    <h3 [style.color]=\"'blue'\"> Status Code Breakout </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
-    ], latencyLineGraph);
-    return latencyLineGraph;
+    ], statusCodeBar);
+    return statusCodeBar;
 }());
-exports.latencyLineGraph = latencyLineGraph;
-//# sourceMappingURL=latencyLineGraph.graph.js.map
+exports.statusCodeBar = statusCodeBar;
+//# sourceMappingURL=statusCodeBar.graph.js.map

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 
-export default class SocketService {
+export default class SocketService { //removed default
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
   public requestData;
@@ -12,12 +12,14 @@ export default class SocketService {
     this._socket.on('receive-requests', (requests) => {
       this.requestData = requests;
       console.log('Received requests data from server', this.requestData);
+      
 
     });
   }
 
   sendServers(serverPost) {
     this._socket.emit('receive-post', serverPost);
+    
     console.log(`Emitted ${serverPost} to server socket`);
   }
 
