@@ -17,9 +17,9 @@ var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
 var socket_service_1 = require('../socket/socket.service');
 var FormComponent = (function () {
-    function FormComponent(Router, _SocketService) {
+    function FormComponent(Router, SocketService) {
         this.Router = Router;
-        this._SocketService = _SocketService;
+        this.SocketService = SocketService;
         this.servers = [new ipPort_1.ipPort(null, null, null)];
         this.numReqModel = new numReq_1.numReq(0);
     }
@@ -30,7 +30,7 @@ var FormComponent = (function () {
             servers: models,
             volume: this.numReqModel.numReq
         };
-        this._SocketService.sendServers(formData);
+        this.SocketService.sendServers(formData);
         this.Router.navigate(['/graphs']);
     };
     FormComponent.prototype.addFormItem = function (model) {

@@ -35,7 +35,7 @@ const nodeController = {};
      // Create data structure to send to Load Balancer Service
      const dataForLB = {
        servers: servers,
-       volume: data.dataValues.volume || post.volume,
+       volume: data.dataValues.volume,
        testId: data.dataValues.id
      };
      console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);

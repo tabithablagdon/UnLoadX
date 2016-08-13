@@ -27,19 +27,20 @@ export class FormComponent {
   servers = [new ipPort(null, null, null)];
   numReqModel = new numReq(0);
 
-  constructor(private Router: Router, private _SocketService: SocketService) {
+  constructor(private Router: Router, private SocketService: SocketService) {}
 
-  }
 
   onSubmit() {
     let models = this.formItemComponents._results.map((item) => { return item.model });
     models = models.slice(0, models.length - 1);
+
     let formData = {
       servers: models,
       volume: this.numReqModel.numReq
     }
-    this._SocketService.sendServers(formData);
 
+    this.SocketService.sendServers(formData);
+  
     this.Router.navigate(['/graphs']);
   }
 
