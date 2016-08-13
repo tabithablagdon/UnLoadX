@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    image: apiserver
+    ports:
+     - "3000:3000"
+     - "4000:4000"
+    # mount project directory to code directory on container
+    volumes:
+     - .:/code
+    links:
+      - db:pgcontainer
+    command: npm start
+  db:
+    image: postgres
+    volumes:
+      - ./docker:/docker-entrypoint-initdb.d
+    command: /docker-entrypoint.sh postgres
