@@ -12,9 +12,9 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var GraphsService = (function () {
+    // uriPath = '/api/request/1'; //will also need testID
     function GraphsService(_http) {
         this._http = _http;
-        this.uriPath = '/api/request/1'; //will also need testID
     }
     GraphsService.prototype.extractData = function (res) {
         var body = res.json();

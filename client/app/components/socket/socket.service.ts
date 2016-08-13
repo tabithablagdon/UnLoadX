@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 
-export default class SocketService {
+export class SocketService { //removed default
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
   public requestData;

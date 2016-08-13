@@ -30,6 +30,5 @@ var SocketService = (function () {
     ], SocketService);
     return SocketService;
 }());
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = SocketService;
+exports.SocketService = SocketService;
 //# sourceMappingURL=socket.service.js.map

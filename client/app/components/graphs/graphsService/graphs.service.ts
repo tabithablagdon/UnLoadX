@@ -8,7 +8,7 @@ export class GraphsService {
 
   requestData;
   
-  uriPath = '/api/request/1'; //will also need testID
+  // uriPath = '/api/request/1'; //will also need testID
 
   constructor(private _http: Http) {}
 
