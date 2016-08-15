@@ -12,8 +12,10 @@ var core_1 = require('@angular/core');
 var ng2_nvd3_1 = require('.././ng2-nvd3/lib/ng2-nvd3');
 var latencyLineGraph = (function () {
     function latencyLineGraph() {
+        this.dataReceived = new core_1.EventEmitter();
     }
     latencyLineGraph.prototype.ngOnInit = function () {
+        this.parsedData = JSON.parse(this.requestData);
         this.options = {
             chart: {
                 type: 'lineChart',
@@ -39,7 +41,7 @@ var latencyLineGraph = (function () {
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Requests (across time)'
+                    axisLabel: 'Request # (across time)'
                 },
                 yAxis: {
                     axisLabel: 'Time Latency (ms)',
@@ -49,14 +51,9 @@ var latencyLineGraph = (function () {
         };
         this.data = [
             {
-                values: [{ x: 1, y: 2 }, { x: 2, y: 2.5 }, { x: 3, y: 5 }],
-                key: 'Server 1',
+                values: this.parsedData.latency.latencySet,
+                key: 'Latency Per Request',
                 color: '#ff7f0e' //color - optional: choose your own line color.
-            },
-            {
-                values: [{ x: 1, y: 2.5 }, { x: 2, y: 3.5 }, { x: 3, y: 2 }],
-                key: 'Server 2',
-                color: '#2ca02c'
             }
         ];
     };
@@ -64,14 +61,23 @@ var latencyLineGraph = (function () {
         this.nvD3.chart.update();
     };
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], latencyLineGraph.prototype, "requestData", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], latencyLineGraph.prototype, "dataReceived", void 0);
+    __decorate([
         core_1.ViewChild(ng2_nvd3_1.nvD3), 
         __metadata('design:type', ng2_nvd3_1.nvD3)
     ], latencyLineGraph.prototype, "nvD3", void 0);
     latencyLineGraph = __decorate([
         core_1.Component({
             selector: 'latencyLineGraph',
+            template: "\n    <h3 [style.color]=\"'blue'\"> Latency Per Request </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <h3 [style.color]=\"'blue'\"> Latency over Time (by Server) </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            providers: []
         }), 
         __metadata('design:paramtypes', [])
     ], latencyLineGraph);

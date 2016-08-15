@@ -1,25 +1,31 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3: any;
 
 @Component({
   selector: 'latencyLineGraph',
-  directives: [nvD3],
   template: `
-    <h3 [style.color]="'blue'"> Latency over Time (by Server) </h3>
+    <h3 [style.color]="'blue'"> Latency Per Request </h3>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
-  `
+  `,
+  directives: [nvD3],
+  providers: []
 })
+
 
 export class latencyLineGraph implements OnInit{
   options;
   data;
+  parsedData;
+  @Input () requestData: any;
+  @Output () dataReceived = new EventEmitter();
+  constructor () {}
   @ViewChild(nvD3)
   nvD3: nvD3;
-
   ngOnInit(){
+    this.parsedData = JSON.parse(this.requestData);
     this.options = {
       chart: {
         type: 'lineChart',
@@ -45,7 +51,7 @@ export class latencyLineGraph implements OnInit{
         },
         duration: 500,
         xAxis: {
-          axisLabel: 'Requests (across time)'
+          axisLabel: 'Request # (across time)'
         },
         yAxis: {
           axisLabel: 'Time Latency (ms)',
@@ -55,14 +61,9 @@ export class latencyLineGraph implements OnInit{
     }
     this.data = [
       {
-        values: [{x:1,y:2}, {x:2,y:2.5}, {x:3, y:5}],      //values - represents the array of {x,y} data points
-        key: 'Server 1', //key  - the name of the series.
+        values: this.parsedData.latency.latencySet, //values - represents the array of {x,y} data points
+        key: 'Latency Per Request', //key  - the name of the series.
         color: '#ff7f0e'  //color - optional: choose your own line color.
-      },
-      {
-        values: [{x:1,y:2.5}, {x:2,y:3.5}, {x:3, y:2}],
-        key: 'Server 2',
-        color: '#2ca02c'
       }
     ];
   }

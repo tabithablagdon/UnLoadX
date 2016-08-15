@@ -25,7 +25,7 @@ import 'rxjs/add/operator/map';
       <networkGraph></networkGraph>
       <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
       <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
-      <!-- <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph> -->
+      <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
     </div>
   `,
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
