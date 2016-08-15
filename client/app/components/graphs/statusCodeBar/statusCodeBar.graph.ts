@@ -1,18 +1,18 @@
 import {Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3: any;
- 
+
 @Component({
   selector: 'statusCodeBar',
   directives: [nvD3],
   template: `
-    <h3 [style.color]="'blue'"> Status Code Breakout </h3>
+    <h5 [style.color]="'orange'"> Status Code Breakdown </h5>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
   `
 })
- 
+
 export class statusCodeBar implements OnInit{
   options;
   data;
@@ -75,6 +75,6 @@ export class statusCodeBar implements OnInit{
 
   ngAfterViewInit() {
       this.nvD3.chart.update()
-  } 
- 
+  }
+
 }

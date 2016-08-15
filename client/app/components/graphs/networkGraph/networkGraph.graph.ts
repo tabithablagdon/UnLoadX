@@ -1,18 +1,18 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3, nv: any;
- 
+
 @Component({
   selector: 'networkGraph',
   directives: [nvD3],
   template: `
-    <h3 [style.color]="'blue'"> Network Architecture </h3>
+    <h5 [style.color]="'orange'"> Network Architecture </h5>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
   `
 })
- 
+
 export class networkGraph implements OnInit{
   options;
   data;
@@ -51,7 +51,7 @@ export class networkGraph implements OnInit{
             {"name":"Server 1","group":6},
             {"name":"Server 2","group":6}
 
-          
+
           ],
           "links":[
             {"source":0,"target":2,"value":10}, //LB-API Server
@@ -60,14 +60,14 @@ export class networkGraph implements OnInit{
             {"source":4,"target":2,"value":2}, //PostGres-API Server
             {"source":5,"target":0,"value":5}, //Server1 to LB
             {"source":6,"target":0,"value":5}, //Server2 to LB
-            {"source":3,"target":0,"value":2}, //Siege to LB 
+            {"source":3,"target":0,"value":2}, //Siege to LB
             {"source":3,"target":4,"value":2}  //Siege to Postgres
-           
+
       ]
     };
   }
 
- 
+
 }
 
 
@@ -78,12 +78,12 @@ export class networkGraph implements OnInit{
 //             {"name":"Client","group":2},
 //             {"name":"Server 1","group":3},
 //             {"name":"Server 2","group":3}
-          
+
 //           ],
 //           "links":[
 //             {"source":1,"target":0,"value":10},
 //             {"source":2,"target":0,"value":2},
 //             {"source":3,"target":0,"value":2}
-           
+
 //       ]
 //     };

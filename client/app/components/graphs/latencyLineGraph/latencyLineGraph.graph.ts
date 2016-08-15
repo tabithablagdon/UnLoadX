@@ -5,7 +5,7 @@ declare let d3: any;
 @Component({
   selector: 'latencyLineGraph',
   template: `
-    <h3 [style.color]="'blue'"> Latency Per Request </h3>
+    <h5 [style.color]="'orange'"> Latency Per Request </h5>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>

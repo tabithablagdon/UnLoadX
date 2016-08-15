@@ -34,6 +34,7 @@ import SocketService from '../socket/socket.service';
       border: 1px solid #FFF;
       border-radius: 10px;
       padding: 2em;
+      margin-top: 2.5em;
     }
 
     .form-submit {
@@ -43,9 +44,9 @@ import SocketService from '../socket/socket.service';
     .main-text {
       color: #FFF;
       font-size: 1.4em;
-      padding: 1.5em;
+      padding-left: 1.5em;
     }
-    
+
     ul {
       list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');
     }

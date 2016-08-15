@@ -83,7 +83,7 @@ var statusCodeBar = (function () {
         core_1.Component({
             selector: 'statusCodeBar',
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <h3 [style.color]=\"'blue'\"> Status Code Breakout </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            template: "\n    <h5 [style.color]=\"'orange'\"> Status Code Breakdown </h5>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], statusCodeBar);
