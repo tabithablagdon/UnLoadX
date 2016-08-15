@@ -9,20 +9,15 @@ import { appRoutes } from './app.routing';
 @Component({
   selector: 'my-app',
   template: `
-    <main>
-      <header>
-        <div class="main-nav">
-          <a routerLink="/"><button class="btn waves-effect waves-light orange">Home</button></a>
-        </div>
-
-        <span class="main-logo">UnLoadX</span><img src="https://cdn4.iconfinder.com/data/icons/orb/128/7.png"/>
-
-      </header>
-
-      <div class="main-text">
-        <p>Test the performance of your server clusters by simulating traffic with one click.  Analyze cluster latency, health, and status with easy to read visualizations.</p>
+    <header>
+      <div class="main-nav">
+        <a routerLink="/"><button class="btn waves-effect waves-light orange">Home</button></a>
       </div>
 
+      <span class="main-logo">UnLoadX</span><img src="https://cdn4.iconfinder.com/data/icons/orb/128/7.png"/>
+
+    </header>
+    <main>
     </main>
     <router-outlet></router-outlet>
   `,
@@ -35,10 +30,6 @@ import { appRoutes } from './app.routing';
       color: orange;
       font-size: 4em;
       font-weight: 400;
-    }
-    .main-text {
-      color: #FFF;
-      font-size: 1.4em;
     }
     .main-nav {
       float: right;

@@ -16,8 +16,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <main>\n      <header>\n        <div class=\"main-nav\">\n          <a routerLink=\"/\"><button class=\"btn waves-effect waves-light orange\">Home</button></a>\n        </div>\n\n        <span class=\"main-logo\">UnLoadX</span><img src=\"https://cdn4.iconfinder.com/data/icons/orb/128/7.png\"/>\n\n      </header>\n\n      <div class=\"main-text\">\n        <p>Test the performance of your server clusters by simulating traffic with one click.  Analyze cluster latency, health, and status with easy to read visualizations.</p>\n      </div>\n\n    </main>\n    <router-outlet></router-outlet>\n  ",
-            styles: ["\n    img {\n      max-width: 60;\n      vertical-align: sub;\n    }\n    .main-logo {\n      color: orange;\n      font-size: 4em;\n      font-weight: 400;\n    }\n    .main-text {\n      color: #FFF;\n      font-size: 1.4em;\n    }\n    .main-nav {\n      float: right;\n    }\n  "],
+            template: "\n    <header>\n      <div class=\"main-nav\">\n        <a routerLink=\"/\"><button class=\"btn waves-effect waves-light orange\">Home</button></a>\n      </div>\n\n      <span class=\"main-logo\">UnLoadX</span><img src=\"https://cdn4.iconfinder.com/data/icons/orb/128/7.png\"/>\n\n    </header>\n    <main>\n    </main>\n    <router-outlet></router-outlet>\n  ",
+            styles: ["\n    img {\n      max-width: 60;\n      vertical-align: sub;\n    }\n    .main-logo {\n      color: orange;\n      font-size: 4em;\n      font-weight: 400;\n    }\n    .main-nav {\n      float: right;\n    }\n  "],
             directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

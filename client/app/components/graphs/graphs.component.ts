@@ -11,23 +11,28 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'graphs',
   template: `
-    <div>
-      <h3> Test Summary Page </h3>
-      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>
-      <button (click)="getTestSummaryData()"> Retrieve Test Summary </button>
+    <div class="test-stats">
+      <h3>Test Summary </h3>
+      <p> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </p>
+      <button (click)="getTestSummaryData()" class="btn waves-effect waves-light"> Retrieve Test Summary Statistics </button>
       <div>
-      <img src={{loadingURL}} *ngIf="clicked && !isDataAvailable"/>
+        <img src={{loadingURL}} *ngIf="clicked && !isDataAvailable"/>
       </div>
       <div>
-      <img src={{checkURL}} *ngIf="clicked && isDataAvailable"/>
-      <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
+        <img src={{checkURL}} *ngIf="clicked && isDataAvailable"/>
+        <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
       </div>
-      <networkGraph></networkGraph>
-      <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
-      <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
-      <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
+        <networkGraph></networkGraph>
+        <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
+        <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
+        <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
     </div>
   `,
+  styles: [`
+    .test-stats {
+      color: #FFF;
+    }
+  `],
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
   providers: [SocketService, HTTP_PROVIDERS] //commented out SocketService
 })

@@ -33,8 +33,9 @@ var FormItemComponent = (function () {
         core_1.Component({
             selector: 'form-item',
             templateUrl: './client/app/components/form/formItem/formItem.component.html',
+            styles: ["\n    input {\n      color: #FFF;\n    }\n  "],
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES],
-            providers: [http_1.HTTP_PROVIDERS],
+            providers: [http_1.HTTP_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [])
     ], FormItemComponent);
