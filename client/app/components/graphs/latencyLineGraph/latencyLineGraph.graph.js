@@ -75,7 +75,7 @@ var latencyLineGraph = (function () {
     latencyLineGraph = __decorate([
         core_1.Component({
             selector: 'latencyLineGraph',
-            template: "\n    <h3 [style.color]=\"'blue'\"> Latency Per Request </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
+            template: "\n    <h5 [style.color]=\"'orange'\"> Latency Per Request </h5>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
             directives: [ng2_nvd3_1.nvD3],
             providers: []
         }), 

@@ -12,14 +12,11 @@ export default class SocketService { //removed default
     this._socket.on('receive-requests', (requests) => {
       this.requestData = requests;
       console.log('Received requests data from server', this.requestData);
-      
-
     });
   }
 
   sendServers(serverPost) {
     this._socket.emit('receive-post', serverPost);
-    
     console.log(`Emitted ${serverPost} to server socket`);
   }
 

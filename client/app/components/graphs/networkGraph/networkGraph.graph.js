@@ -65,7 +65,7 @@ var networkGraph = (function () {
         core_1.Component({
             selector: 'networkGraph',
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <h3 [style.color]=\"'blue'\"> Network Architecture </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            template: "\n    <h5 [style.color]=\"'orange'\"> Network Architecture </h5>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], networkGraph);

@@ -1,11 +1,29 @@
-<form (ngSubmit)="onSubmit()">
-  <h4>Enter Server Information:</h4>
-  <li *ngFor="let server of servers" >
-    <form-item (formUpdate)="addFormItem($event.ip)"></form-item>
-  </li>
-  <div class= "form-group">
-    <label for= "NumReqs"> Number of Requests</label>
-    <input type = "text" [(ngModel)]="numReqModel.numReq" name="numReq" class = "form-control" required placeholder="Number of Requests">
-  </div>
-  <button type= "submit" class="btn btn-default"> Submit </button>
-</form>
+<div class="row form-box">
+  <form (ngSubmit)="onSubmit()" class="col s12">
+    <h4>Enter Server Cluster Information</h4>
+    <p *ngFor="let server of servers" >
+      <form-item (formUpdate)="addFormItem($event.ip)"></form-item>
+    </p>
+    <div class="row">
+      <div class="input-field col s10">
+        <input
+          name="numReq"
+          type="text"
+          [(ngModel)]="numReqModel.numReq"
+        >
+        <label for="NumReqs">Traffic Volume to Test</label>
+      </div>
+    </div>
+    <div class="row form-submit">
+      <button type= "submit" class="btn waves-effect waves-light orange">Run Tests</button>
+    </div>
+  </form>
+</div>
+<h4>Let's Get Started</h4>
+<div class="main-text">
+  <ul>
+    <li>Test the performance of your server cluster using UnloadX load balancer</li>
+    <li>Simulate volumes of traffic with one click</li>
+    <li>Analyze cluster latency, health, and status with easy to read visualizations</li>
+  </ul>
+</div>

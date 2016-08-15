@@ -1,11 +1,11 @@
 import {Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3: any;
- 
+
 @Component({
   selector: 'latencyLineGraph',
   template: `
-    <h3 [style.color]="'blue'"> Latency Per Request </h3>
+    <h5 [style.color]="'orange'"> Latency Per Request </h5>
     <div>
       <nvd3 [options]="options" [data]="data"></nvd3>
     </div>
@@ -13,7 +13,7 @@ declare let d3: any;
   directives: [nvD3],
   providers: []
 })
- 
+
 
 export class latencyLineGraph implements OnInit{
   options;
@@ -60,7 +60,7 @@ export class latencyLineGraph implements OnInit{
       }
     }
     this.data = [
-      { 
+      {
         values: this.parsedData.latency.latencySet, //values - represents the array of {x,y} data points
         key: 'Latency Per Request', //key  - the name of the series.
         color: '#ff7f0e'  //color - optional: choose your own line color.
@@ -70,7 +70,6 @@ export class latencyLineGraph implements OnInit{
 
   ngAfterViewInit() {
       this.nvD3.chart.update()
-  } 
- 
-}
+  }
 
+}

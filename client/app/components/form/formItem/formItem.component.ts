@@ -13,8 +13,13 @@ import { ipPort } from '../../types/ipPort';
 @Component({
   selector: 'form-item',
   templateUrl: './client/app/components/form/formItem/formItem.component.html',
+  styles: [`
+    input {
+      color: #FFF;
+    }
+  `],
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
-  providers: [HTTP_PROVIDERS],
+  providers: [HTTP_PROVIDERS]
 })
 
 export class FormItemComponent {

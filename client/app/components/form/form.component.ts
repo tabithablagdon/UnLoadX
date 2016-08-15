@@ -20,6 +20,37 @@ import SocketService from '../socket/socket.service';
   templateUrl: "./client/app/components/form/form.component.html",
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
   providers: [HTTP_PROVIDERS, SocketService],
+  styles: [`
+    h4 {
+      color: orange
+    }
+
+    input {
+      color: #FFF;
+    }
+
+    .form-box {
+      background-color: rgba(255, 255, 255, .05);
+      border: 1px solid #FFF;
+      border-radius: 10px;
+      padding: 2em;
+      margin-top: 2.5em;
+    }
+
+    .form-submit {
+      margin: 0 auto;
+    }
+
+    .main-text {
+      color: #FFF;
+      font-size: 1.4em;
+      padding-left: 1.5em;
+    }
+
+    ul {
+      list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');
+    }
+  `]
 })
 
 export class FormComponent {
@@ -29,6 +60,7 @@ export class FormComponent {
 
   constructor(private Router: Router, private SocketService: SocketService) {}
 
+
   onSubmit() {
     let models = this.formItemComponents._results.map((item) => { return item.model });
     models = models.slice(0, models.length - 1);
@@ -37,6 +69,7 @@ export class FormComponent {
       servers: models,
       volume: this.numReqModel.numReq
     }
+
     this.SocketService.sendServers(formData);
 
     this.Router.navigate(['/graphs']);
