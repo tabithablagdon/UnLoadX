@@ -30,7 +30,6 @@ requestController.createRequest = (data) => {
     })
     .catch(err => {
        console.log(`Error creating requests ${err.message}`);
-       reject(err);
      });
 };
 
@@ -105,11 +104,20 @@ function parseRequests(data) {
 }
 
 requestController.getAllRequests = (req, res) => {
-  // TO DO: Get the testId somehow
-  const testId = 1; // should populate from params for req.body
 
   Request.findAll()
     .then(requests => res.json(requests))
+    .catch(handleError(res));
+};
+
+requestController.getTestRequests = (req, res) => {
+  const testId = req.params.id || 1;
+
+  Request.findAll({where: {testId: testId}})
+    .then(requests => {
+      let parsedRequests = parseRequests(requests);
+      res.json(parsedRequests);
+    })
     .catch(handleError(res));
 };
 
