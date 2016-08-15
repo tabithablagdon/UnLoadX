@@ -25,13 +25,13 @@ import 'rxjs/add/operator/map';
       <networkGraph></networkGraph>
       <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
       <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
-      <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
+      <!-- <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph> -->
     </div>
   `,
   directives: [latencyLineGraph, descriptiveInfo, networkGraph, statusCodeBar],
   providers: [SocketService, HTTP_PROVIDERS] //commented out SocketService
 })
- 
+
 export class Graphs {
   public requestData: {};
   isDataAvailable:boolean = false;
@@ -41,7 +41,7 @@ export class Graphs {
 
   constructor(private _SocketService: SocketService, private _http: Http) {}
 
-  getTestSummaryData() { 
+  getTestSummaryData() {
     this.clicked = true;
      console.log('Request Data AHAHAHA', this._SocketService.requestData);
     // return this._http.get('/api/request/1')

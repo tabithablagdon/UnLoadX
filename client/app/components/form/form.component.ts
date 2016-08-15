@@ -20,6 +20,11 @@ import SocketService from '../socket/socket.service';
   templateUrl: "./client/app/components/form/form.component.html",
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
   providers: [HTTP_PROVIDERS, SocketService],
+  styles: [`
+    h4 {
+      color: orange
+    }
+  `]
 })
 
 export class FormComponent {
@@ -40,7 +45,7 @@ export class FormComponent {
     }
 
     this.SocketService.sendServers(formData);
-  
+
     this.Router.navigate(['/graphs']);
   }
 

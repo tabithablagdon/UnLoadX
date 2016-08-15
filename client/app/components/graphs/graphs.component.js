@@ -39,7 +39,7 @@ var Graphs = (function () {
     Graphs = __decorate([
         core_1.Component({
             selector: 'graphs',
-            template: "\n    <div>\n      <h3> Test Summary Page </h3>\n      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>\n      <button (click)=\"getTestSummaryData()\"> Retrieve Test Summary </button>\n      <div>\n      <img src={{loadingURL}} *ngIf=\"clicked && !isDataAvailable\"/>\n      </div>\n      <div>\n      <img src={{checkURL}} *ngIf=\"clicked && isDataAvailable\"/>\n      <span *ngIf=\"isDataAvailable\"> Results ready below. Thanks for waiting! </span>\n      </div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph>\n    </div>\n  ",
+            template: "\n    <div>\n      <h3> Test Summary Page </h3>\n      <h6> Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting. </h6>\n      <button (click)=\"getTestSummaryData()\"> Retrieve Test Summary </button>\n      <div>\n      <img src={{loadingURL}} *ngIf=\"clicked && !isDataAvailable\"/>\n      </div>\n      <div>\n      <img src={{checkURL}} *ngIf=\"clicked && isDataAvailable\"/>\n      <span *ngIf=\"isDataAvailable\"> Results ready below. Thanks for waiting! </span>\n      </div>\n      <networkGraph></networkGraph>\n      <descriptiveInfo *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></descriptiveInfo>\n      <statusCodeBar *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></statusCodeBar>\n      <!-- <latencyLineGraph *ngIf=\"isDataAvailable\" [requestData]=\"requestData\"></latencyLineGraph> -->\n    </div>\n  ",
             directives: [latencyLineGraph_graph_1.latencyLineGraph, descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar],
             providers: [socket_service_1.default, http_1.HTTP_PROVIDERS] //commented out SocketService
         }), 
@@ -51,5 +51,5 @@ exports.Graphs = Graphs;
 // Data Structure
 // {"testId":1,"totalReqs":460,"latency":{"latencySet":[{"x":0,"y":0},{"x":1,"y":0}],
 // "avg":0.001500000000000001,"max":0.01,"min":0,"stdDev":0.0035707142142714166},
-// "status":[{"key":"200","values":[{"label":"Status Code","value":460}]}]} 
+// "status":[{"key":"200","values":[{"label":"Status Code","value":460}]}]}
 //# sourceMappingURL=graphs.component.js.map

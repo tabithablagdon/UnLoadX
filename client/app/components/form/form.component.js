@@ -46,6 +46,7 @@ var FormComponent = (function () {
             templateUrl: "./client/app/components/form/form.component.html",
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
             providers: [http_1.HTTP_PROVIDERS, socket_service_1.default],
+            styles: ["\n    h4 {\n      color: orange\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [router_1.Router, socket_service_1.default])
     ], FormComponent);
