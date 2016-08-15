@@ -5,6 +5,6 @@ const requestRouter = express.Router();
 
 requestRouter.get('/', requestController.getAllRequests);
 
-// requestRouter.get('/:id', requestController.getTestRequests);
+requestRouter.get('/:id', requestController.getTestRequests);
 
 export default requestRouter;
