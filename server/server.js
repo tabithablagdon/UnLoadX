@@ -5,6 +5,44 @@ import db from './db/db';
 
 import nodeController from './api/node-server/node-server.controller';
 import requestController from './api/request/request.controller';
+//
+import LB_Ready from './config/LB_Ready.js';
+import async from 'async';
+
+const filename = __dirname + '/config/dummyArraydata.txt';
+const TBDRestEndPoint = '/';
+
+LB_Ready.parseLBPublicIPAddress(filename)
+.then(LB_IP => {
+  console.log('LB_IP', LB_IP);
+  SetInterval()
+
+  async.retry({times : 30, interval : 1000}, () => {
+    console.log('hi');
+    LB_Ready.get200fromLB(LB_IP, TBDRestEndPoint);
+  }, function(err, results) {
+
+      if (err) {
+        console.log('error', err);
+      }
+      if (results) {
+        console.log('results', results);
+        console.log("===================================")
+        console.log("Async function finished processing")
+        LB_Ready.sendIPToAPIServer(results);
+      }
+  });
+})
+.catch(err => {
+  console.log('handled the error', err);
+});
+
+
+
+
+//
+
+
 
 const app = express();
 

@@ -68,6 +68,7 @@ export class Graphs implements OnInit {
       },
       error: err => console.log(`Error subscribing to subject ${err.message}`),
       complete: () => console.log('Done subscribing')
+
     });
   }
 
