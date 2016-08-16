@@ -2,6 +2,8 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt/angular2-jwt';
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -13,7 +15,7 @@ export class Auth {
     additionalSignUpFields: [{
           name: "address",                              // required
           placeholder: "enter your address",            // required
-          icon: "https://example.com/address_icon.png", // optional
+          // icon: "http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg", // optional
           validator: function(value) {                  // optional
             // only accept addresses with more than 10 characters
             return value.length > 10;
@@ -30,12 +32,12 @@ export class Auth {
     });
 
   //Store profile object in auth class
-    userProfile: Object;
+  userProfile: any;
 
-  constructor() {
+  constructor(private authHttp: AuthHttp, private router: Router) {
 
     // Set userProfile attribute of already saved profile
-       this.userProfile = JSON.parse(localStorage.getItem('profile'));
+    this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
     // Add callback for lock `authenticated` event
     this.lock.on("authenticated", (authResult) => {
@@ -45,39 +47,93 @@ export class Auth {
         localStorage.setItem('id_token', authResult.idToken);
         this.fetchProfile(authResult.idToken);
       }
-
-      // Add callback for lockLink `authenticated` event
-      this.lockLink.on("authenticated", (authResult) => {
-        // Every lock instance listens to the same event, so you have to check if
-        // it's the linking login here.
-        if(authResult.state == "linking"){
-          // If it's the linking login, then create the link through the API.
-          this.doLinkAccounts(authResult.idToken);
-        }
-      });
-
-
-      // localStorage.setItem('id_token', authResult.idToken);
-      // // Fetch profile information
-      // this.lock.getProfile(authResult.idToken, (error, profile) => {
-      //   if (error) {
-      //     // Handle error
-      //     alert(error);
-      //     return;
-      //   }
-
-      //   profile.user_metadata = profile.user_metadata || {};
-      //   localStorage.setItem('profile', JSON.stringify(profile));
-      //   this.userProfile = profile;
-      // });
-
     });
+
+    // Add callback for lockLink `authenticated` event
+    this.lockLink.on("authenticated", (authResult) => {
+      // Every lock instance listens to the same event, so you have to check if
+      // it's the linking login here.
+      if(authResult.state == "linking"){
+        // If it's the linking login, then create the link through the API.
+        this.doLinkAccounts(authResult.idToken);
+      }
+    });
+
   }
+
 
   public login() {
     // Call the show method to display the widget.
     this.lock.show();
   };
+  
+  public linkAccount() {
+    this.lockLink.show();
+  }
+
+  public doLinkAccounts(accountToLinkJWT) {
+    var headers: any = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+  var data: any = JSON.stringify({
+       link_with: accountToLinkJWT
+     });
+
+  this.authHttp
+        .post('https://' + 'jamesramadan.auth0.com' + '/api/v2/users/' + this.userProfile.user_id + '/identities', data, {headers: headers})
+        .map(response => response.json())
+        .subscribe(
+          response => {
+            console.log("accounts linked");
+            this.fetchProfile(localStorage.getItem('id_token'));
+            this.router.navigate(['/profile']);
+          },
+          error => alert(error.json().message)
+        );
+  }
+
+  public unLinkAccount(identity) {
+    var headers: any = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    this.authHttp
+    .delete('https://' + 'jamesramadan.auth0.com' + '/api/v2/users/' + this.userProfile.user_id + '/identities/' + identity.provider + "/" + identity.user_id, {headers: headers})
+      .map(response => response.json())
+      .subscribe(
+        response => {
+          console.log("unlinked account");
+          this.fetchProfile(localStorage.getItem('id_token'));
+          this.router.navigate(['Profile']);
+        },
+        error => alert(error.json().message)
+      );
+  }
+
+  public linkedAccounts() {
+   return this.userProfile.identities.filter(identity => {
+      return this.userProfile.user_id != identity.provider + '|' + identity.user_id
+    })
+  }
+
+  public fetchProfile(token) {
+     this.userProfile = null;
+     // Fetch profile information
+     this.lock.getProfile(token, (error, profile) => {
+       if (error) {
+         // Handle error
+         alert(error);
+         return;
+       }
+
+       profile.user_metadata = profile.user_metadata || {};
+       localStorage.setItem('profile', JSON.stringify(profile));
+       this.userProfile = profile;
+     });
+   }
 
   public authenticated() {
     // Check if there's an unexpired JWT

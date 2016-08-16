@@ -1,5 +1,5 @@
-import { Auth } from './auth.service';
 import { Component } from '@angular/core';
+import { Auth } from './auth.service';
 
 @Component({
   selector: 'home',
@@ -20,7 +20,8 @@ import { Component } from '@angular/core';
   </div>
 </div>
 <h4 *ngIf="!auth.authenticated()">You are not logged in, please click 'Log in' button to login</h4>
-`
+`,
+providers: [Auth]
 })
 
 export class HomeComponent {

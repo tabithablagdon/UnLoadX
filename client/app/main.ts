@@ -10,7 +10,8 @@ bootstrap(AppComponent, [
   disableDeprecatedForms(), // disable deprecated forms
   provideForms(),
   provideRouter(appRoutes), // enable new forms module
-  AUTH_PROVIDERS
+  AUTH_PROVIDERS,
+  HTTP_PROVIDERS
 ])
 .catch(err => console.log(`Error bootstrapping App ${err}`));
 

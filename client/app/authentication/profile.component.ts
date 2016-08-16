@@ -1,6 +1,7 @@
 import { AuthHttp } from 'angular2-jwt';
 import { Component } from '@angular/core';
-
+import { Auth } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -19,7 +20,8 @@ import { Component } from '@angular/core';
               </form>
             </div>
           </div>
-          `
+          `,
+  providers: [Auth, Router, AuthHttp]
 })
 
 export class ProfileEdit {

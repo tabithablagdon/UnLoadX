@@ -7,6 +7,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { appRoutes } from './app.routing';
 import { Auth } from '../authentication/auth.service';
 
+
+
 @Component({
   selector: 'my-app',
   templateUrl: './client/app/components/app.component.html',
