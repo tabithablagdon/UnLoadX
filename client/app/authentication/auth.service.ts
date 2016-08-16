@@ -8,7 +8,17 @@ declare var Auth0Lock: any;
 @Injectable()
 export class Auth {
   // Configure Auth0
-  lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {});
+  lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
+    additionalSignUpFields: [{
+          name: "address",                              // required
+          placeholder: "enter your address",            // required
+          icon: "https://example.com/address_icon.png", // optional
+          validator: function(value) {                  // optional
+            // only accept addresses with more than 10 characters
+            return value.length > 10;
+          }
+        }]
+  });
 
   //Store profile object in auth class
     userProfile: Object;
@@ -29,6 +39,7 @@ export class Auth {
           return;
         }
 
+        profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
       });
