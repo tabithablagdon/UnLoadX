@@ -1,18 +1,13 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3: any;
- 
+
 @Component({
   selector: 'successBarChart',
   directives: [nvD3],
-  template: `
-    <h3 [style.color]="'blue'"> % of Successfully Handled Requests (by Server) </h3>
-    <div>
-      <nvd3 [options]="options" [data]="data"></nvd3>
-    </div>
-  `
+  templateUrl: './client/app/components/graphs/successBarChart/successBarChart.component.html'
 })
- 
+
 export class successBarChart implements OnInit{
   options;
   data;
@@ -56,7 +51,7 @@ export class successBarChart implements OnInit{
           {
             "label" : "Server2" ,
             "value" : 90
-          } 
+          }
         ]
       }
     ];
@@ -64,8 +59,8 @@ export class successBarChart implements OnInit{
 
   ngAfterViewInit() {
       this.nvD3.chart.update()
-  } 
- 
+  }
+
 }
 
 
@@ -77,7 +72,7 @@ export class successBarChart implements OnInit{
 
 
 
-  
+
 //   ngOnInit(){
 //     this.options = {
 //       multiBarChart: {
@@ -118,14 +113,10 @@ export class successBarChart implements OnInit{
 //       }
 //     ];
 //   }
- 
+
 
 //   ngAfterViewInit() {
 //       this.nvD3.chart.update()
-//   } 
- 
+//   }
+
 // }
-
-
-
-

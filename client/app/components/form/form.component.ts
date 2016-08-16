@@ -17,7 +17,7 @@ import SocketService from '../socket/socket.service';
 
 @Component({
   selector: 'my-form',
-  templateUrl: "./client/app/components/form/form.component.html",
+  templateUrl: './client/app/components/form/form.component.html',
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
   providers: [HTTP_PROVIDERS, SocketService],
   styles: [`

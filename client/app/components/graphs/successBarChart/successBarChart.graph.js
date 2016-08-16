@@ -67,7 +67,7 @@ var successBarChart = (function () {
         core_1.Component({
             selector: 'successBarChart',
             directives: [ng2_nvd3_1.nvD3],
-            template: "\n    <h3 [style.color]=\"'blue'\"> % of Successfully Handled Requests (by Server) </h3>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  "
+            templateUrl: './client/app/components/graphs/successBarChart/successBarChart.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], successBarChart);
@@ -116,6 +116,6 @@ exports.successBarChart = successBarChart;
 //   }
 //   ngAfterViewInit() {
 //       this.nvD3.chart.update()
-//   } 
+//   }
 // }
 //# sourceMappingURL=successBarChart.graph.js.map

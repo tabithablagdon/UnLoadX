@@ -8,19 +8,7 @@ import { appRoutes } from './app.routing';
 
 @Component({
   selector: 'my-app',
-  template: `
-    <header>
-      <div class="main-nav">
-        <a routerLink="/"><button class="btn waves-effect waves-light orange">Home</button></a>
-      </div>
-
-      <span class="main-logo">UnLoadX</span><img src="https://cdn4.iconfinder.com/data/icons/orb/128/7.png"/>
-
-    </header>
-    <main>
-    </main>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './client/app/components/app.component.html',
   styles: [`
     img {
       max-width: 60;

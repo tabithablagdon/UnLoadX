@@ -5,12 +5,7 @@ declare let d3, nv: any;
 @Component({
   selector: 'networkGraph',
   directives: [nvD3],
-  template: `
-    <h5 [style.color]="'orange'"> Network Architecture </h5>
-    <div>
-      <nvd3 [options]="options" [data]="data"></nvd3>
-    </div>
-  `
+  templateUrl: './client/app/components/graphs/networkGraph/networkGraph.component.html'
 })
 
 export class networkGraph implements OnInit{
