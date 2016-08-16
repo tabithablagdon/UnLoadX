@@ -38,6 +38,7 @@ var Graphs = (function () {
         //     this.requestData = requests._body;
         //     this.isDataAvailable = true;
         // });
+
     };
     Graphs = __decorate([
         core_1.Component({
