@@ -5,22 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
-  template: `
-
-<div class="row">
-            <div class="col-md-6">
-              <h3>Profile</h3>
-              <img [src]="auth.userProfile.picture" alt="" class="profile-img">
-              <form (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                  <label for="name">Address</label>
-                  <input type="text" class="form-control" [(ngModel)]="address" placeholder="Enter address">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>
-            </div>
-          </div>
-          `,
+  templateUrl: './client/app/authentication/profile.component.html',
   providers: [Auth, Router, AuthHttp]
 })
 

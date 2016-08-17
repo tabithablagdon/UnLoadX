@@ -5,6 +5,7 @@ import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
+
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 
