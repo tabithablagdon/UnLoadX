@@ -15,7 +15,7 @@ var descriptiveInfo = (function () {
         this.dataReceived = new core_1.EventEmitter();
     }
     descriptiveInfo.prototype.ngOnInit = function () {
-        this.parsedData = JSON.parse(this.requestData);
+        this.parsedData = this.requestData;
         this.totalReqs = this.parsedData.totalReqs;
         this.latencyAvg = this.parsedData.latency.avg;
         this.latencyMin = this.parsedData.latency.min;
@@ -47,10 +47,9 @@ var descriptiveInfo = (function () {
     descriptiveInfo = __decorate([
         core_1.Component({
             selector: 'descriptiveInfo',
-            template: "\n    <h5 [style.color]=\"'orange'\"> Summary Statistics </h5>\n    <!--<ul>\n      <li>Total Requests: {{totalReqs}}</li>\n      <li>Success Rate: {{successRate | percent: '3.2-2'}}</li>\n      <li>Latency per request (in ms)<br>\n        - Avg: {{latencyAvg | number : '1.2-5'}} <br>\n        - Min: {{latencyMin | number : '1.2-5'}} <br>\n        - Max: {{latencyMax | number : '1.2-5'}} <br>\n        - Std. Dev: {{latencyStdDev | number : '1.2-5'}}</li>\n      <li></li>\n    </ul> -->\n    <table class=\"highlight\">\n        <thead>\n          <tr>\n            <th data-field=\"stat\">STATISTIC</th>\n            <th data-field=\"result\">RESULT</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Total Requests</strong></td>\n            <td>{{totalReqs}}</td>\n          </tr>\n          <tr>\n            <td><strong>Request Success Rate</strong></td>\n            <td>{{successRate | percent: '3.2-2'}}</td>\n          </tr>\n          <tr>\n            <td colspan=\"2\"><strong>Latency/Request (ms)</strong></td>\n          </tr>\n          <tr>\n            <td>Average</td>\n            <td>{{latencyAvg | number : '1.2-5'}}</td>\n          </tr>\n          <tr>\n            <td>Min</td>\n            <td>{{latencyMin | number : '1.2-5'}}</td>\n          </tr>\n          <tr>\n            <td>Max</td>\n            <td>{{latencyMax | number : '1.2-5'}}</td>\n          </tr>\n          <tr>\n            <td>Std. Dev</td>\n            <td>{{latencyStdDev | number : '1.2-5'}}</td>\n          </tr>\n        </tbody>\n      </table>\n  ",
+            templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
             styles: ["\n     table {\n       color: #FFF;\n       font-size: 1.2em;\n       font-weight: 500;\n       border: 1px solid #FFF;\n       width: 70%;\n     }\n     th {\n       background-color: orange;\n     }\n     tr, td {\n       padding: 1em;\n     }\n   "],
-            directives: [common_1.NgStyle],
-            providers: []
+            directives: [common_1.NgStyle]
         }), 
         __metadata('design:paramtypes', [])
     ], descriptiveInfo);

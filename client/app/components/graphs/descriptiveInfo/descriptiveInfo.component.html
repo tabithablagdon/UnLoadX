@@ -1,0 +1,38 @@
+<h5 [style.color]="'orange'"> Summary Statistics </h5>
+<table class="highlight">
+  <thead>
+    <tr>
+      <th data-field="stat">STATISTIC</th>
+      <th data-field="result">RESULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Total Requests</strong></td>
+      <td>{{totalReqs}}</td>
+    </tr>
+    <tr>
+      <td><strong>Request Success Rate</strong></td>
+      <td>{{successRate | percent: '3.2-2'}}</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>Latency/Request (ms)</strong></td>
+    </tr>
+    <tr>
+      <td>Average</td>
+      <td>{{latencyAvg | number : '1.2-5'}}</td>
+    </tr>
+    <tr>
+      <td>Min</td>
+      <td>{{latencyMin | number : '1.2-5'}}</td>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>{{latencyMax | number : '1.2-5'}}</td>
+    </tr>
+    <tr>
+      <td>Std. Dev</td>
+      <td>{{latencyStdDev | number : '1.2-5'}}</td>
+    </tr>
+  </tbody>
+</table>

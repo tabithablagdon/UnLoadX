@@ -16,7 +16,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <header>\n      <div class=\"main-nav\">\n        <a routerLink=\"/\"><button class=\"btn waves-effect waves-light orange\">Home</button></a>\n      </div>\n\n      <span class=\"main-logo\">UnLoadX</span><img src=\"https://cdn4.iconfinder.com/data/icons/orb/128/7.png\"/>\n\n    </header>\n    <main>\n    </main>\n    <router-outlet></router-outlet>\n  ",
+            templateUrl: './client/app/components/app.component.html',
             styles: ["\n    img {\n      max-width: 60;\n      vertical-align: sub;\n    }\n    .main-logo {\n      color: orange;\n      font-size: 4em;\n      font-weight: 400;\n    }\n    .main-nav {\n      float: right;\n    }\n  "],
             directives: [router_1.ROUTER_DIRECTIVES]
         }), 

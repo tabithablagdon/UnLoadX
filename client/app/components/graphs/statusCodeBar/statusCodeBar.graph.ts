@@ -5,12 +5,7 @@ declare let d3: any;
 @Component({
   selector: 'statusCodeBar',
   directives: [nvD3],
-  template: `
-    <h5 [style.color]="'orange'"> Status Code Breakdown </h5>
-    <div>
-      <nvd3 [options]="options" [data]="data"></nvd3>
-    </div>
-  `
+  templateUrl: './client/app/components/graphs/statusCodeBar/statusCodeBar.component.html'
 })
 
 export class statusCodeBar implements OnInit{
@@ -23,7 +18,7 @@ export class statusCodeBar implements OnInit{
   @ViewChild(nvD3)
   nvD3: nvD3;
   ngOnInit(){
-    this.parsedData = JSON.parse(this.requestData);
+    this.parsedData = this.requestData;
     this.options = {
       chart: {
         type: 'multiBarChart',
@@ -74,7 +69,7 @@ export class statusCodeBar implements OnInit{
   }
 
   ngAfterViewInit() {
-      this.nvD3.chart.update()
+    this.nvD3.chart.update()
   }
 
 }

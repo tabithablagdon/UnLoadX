@@ -15,7 +15,7 @@ var latencyLineGraph = (function () {
         this.dataReceived = new core_1.EventEmitter();
     }
     latencyLineGraph.prototype.ngOnInit = function () {
-        this.parsedData = JSON.parse(this.requestData);
+        this.parsedData = this.requestData;
         this.options = {
             chart: {
                 type: 'lineChart',
@@ -75,7 +75,7 @@ var latencyLineGraph = (function () {
     latencyLineGraph = __decorate([
         core_1.Component({
             selector: 'latencyLineGraph',
-            template: "\n    <h5 [style.color]=\"'orange'\"> Latency Per Request </h5>\n    <div>\n      <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n    </div>\n  ",
+            templateUrl: './client/app/components/graphs/latencyLineGraph/latencyLineGraph.component.html',
             directives: [ng2_nvd3_1.nvD3],
             providers: []
         }), 
