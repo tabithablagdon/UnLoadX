@@ -14,6 +14,7 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { FormItemComponent } from './formItem/formItem.component';
 import * as io from 'socket.io-client';
 import SocketService from '../socket/socket.service';
+import { Auth } from '../../authentication/auth.service';
 
 @Component({
   selector: 'my-form',
@@ -50,6 +51,9 @@ import SocketService from '../socket/socket.service';
     ul {
       list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');
     }
+    .notifier {
+      color: red;
+    }
   `]
 })
 
@@ -57,22 +61,29 @@ export class FormComponent {
   @ViewChildren(FormItemComponent) formItemComponents;
   servers = [new ipPort(null, null, null)];
   numReqModel = new numReq(0);
+  signInNotifier = false;
 
-  constructor(private Router: Router, private SocketService: SocketService) {}
+  constructor(private Router: Router, private SocketService: SocketService, private Auth: Auth) {}
 
 
   onSubmit() {
-    let models = this.formItemComponents._results.map((item) => { return item.model });
-    models = models.slice(0, models.length - 1);
+    if (!!this.Auth.authenticated()) {
+     
+      let models = this.formItemComponents._results.map((item) => { return item.model });
+      models = models.slice(0, models.length - 1);
 
-    let formData = {
-      servers: models,
-      volume: this.numReqModel.numReq
+      let formData = {
+        servers: models,
+        volume: this.numReqModel.numReq
+      }
+
+      this.SocketService.sendServers(formData);
+
+      this.Router.navigate(['/graphs']);
+
+    } else {
+      this.signInNotifier = true;
     }
-
-    this.SocketService.sendServers(formData);
-
-    this.Router.navigate(['/graphs']);
   }
 
   addFormItem(model: ipPort) {

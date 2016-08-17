@@ -31,7 +31,7 @@ var Graphs = (function () {
         this.requestData = this._SocketService.getData();
         this.isDataAvailable = true;
         console.log('Set requestData from SocketService to ', this.requestData);
-        // http request for data
+        // http /GETrequest for data
         // return this._http.get('/api/request/1')
         //   .map(res => res)
         //   .subscribe(requests => {

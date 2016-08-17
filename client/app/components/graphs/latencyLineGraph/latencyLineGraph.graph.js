@@ -41,12 +41,14 @@ var latencyLineGraph = (function () {
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Request # (across time)'
+                    axisLabel: 'Request # (across time)',
+                    fill: 'white'
                 },
                 yAxis: {
                     axisLabel: 'Time Latency (ms)',
                     axisLabelDistance: -10
-                }
+                },
+                styles: {}
             }
         };
         this.data = [

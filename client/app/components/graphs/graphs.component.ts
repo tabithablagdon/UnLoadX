@@ -42,6 +42,7 @@ export class Graphs {
     this.isDataAvailable = true;
     console.log('Set requestData from SocketService to ', this.requestData);
 
+
     // http /GETrequest for data
 
     // return this._http.get('/api/request/1')
@@ -52,11 +53,4 @@ export class Graphs {
     // });
   }
 
-  // ngOnInit() {
-  //   this.connection = this._SocketService.getRequests()
-  //     .subscribe(request => {
-  //       this.requestData = request;
-  //       console.log('Graphs Component requestData', this.requestData);
-  //     });
-  // }
 }

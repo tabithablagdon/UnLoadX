@@ -1,7 +1,7 @@
 <div class="test-stats">
   <h4>Test Results Summary</h4>
   <p><small>Note: Test result wait-times depend on # of requests. Please enjoy network architecture diagram while waiting.</small>
-  {{ requestData }}
+
   </p>
   <div class="row">
     <div class="col s6">
@@ -18,3 +18,4 @@
     <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
     <networkGraph></networkGraph>
 </div>
+
