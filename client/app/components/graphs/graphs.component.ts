@@ -53,11 +53,4 @@ export class Graphs {
     // });
   }
 
-  // ngOnInit() {
-  //   this.connection = this._SocketService.getRequests()
-  //     .subscribe(request => {
-  //       this.requestData = request;
-  //       console.log('Graphs Component requestData', this.requestData);
-  //     });
-  // }
 }
