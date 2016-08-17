@@ -16,22 +16,30 @@ var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
 var socket_service_1 = require('../socket/socket.service');
+var auth_service_1 = require('../../authentication/auth.service');
 var FormComponent = (function () {
-    function FormComponent(Router, SocketService) {
+    function FormComponent(Router, SocketService, Auth) {
         this.Router = Router;
         this.SocketService = SocketService;
+        this.Auth = Auth;
         this.servers = [new ipPort_1.ipPort(null, null, null)];
         this.numReqModel = new numReq_1.numReq(0);
+        this.signInNotifier = false;
     }
     FormComponent.prototype.onSubmit = function () {
-        var models = this.formItemComponents._results.map(function (item) { return item.model; });
-        models = models.slice(0, models.length - 1);
-        var formData = {
-            servers: models,
-            volume: this.numReqModel.numReq
-        };
-        this.SocketService.sendServers(formData);
-        this.Router.navigate(['/graphs']);
+        if (!!this.Auth.authenticated()) {
+            var models = this.formItemComponents._results.map(function (item) { return item.model; });
+            models = models.slice(0, models.length - 1);
+            var formData = {
+                servers: models,
+                volume: this.numReqModel.numReq
+            };
+            this.SocketService.sendServers(formData);
+            this.Router.navigate(['/graphs']);
+        }
+        else {
+            this.signInNotifier = true;
+        }
     };
     FormComponent.prototype.addFormItem = function (model) {
         this.servers.push(model);
@@ -46,9 +54,9 @@ var FormComponent = (function () {
             templateUrl: './client/app/components/form/form.component.html',
             directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
             providers: [http_1.HTTP_PROVIDERS, socket_service_1.default],
-            styles: ["\n    h4 {\n      color: orange\n    }\n\n    input {\n      color: #FFF;\n    }\n\n    .form-box {\n      background-color: rgba(255, 255, 255, .05);\n      border: 1px solid #FFF;\n      border-radius: 10px;\n      padding: 2em;\n      margin-top: 2.5em;\n    }\n\n    .form-submit {\n      margin: 0 auto;\n    }\n\n    .main-text {\n      color: #FFF;\n      font-size: 1.4em;\n      padding-left: 1.5em;\n    }\n\n    ul {\n      list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');\n    }\n  "]
+            styles: ["\n    h4 {\n      color: orange\n    }\n\n    input {\n      color: #FFF;\n    }\n\n    .form-box {\n      background-color: rgba(255, 255, 255, .05);\n      border: 1px solid #FFF;\n      border-radius: 10px;\n      padding: 2em;\n      margin-top: 2.5em;\n    }\n\n    .form-submit {\n      margin: 0 auto;\n    }\n\n    .main-text {\n      color: #FFF;\n      font-size: 1.4em;\n      padding-left: 1.5em;\n    }\n\n    ul {\n      list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');\n    }\n    .notifier {\n      color: red;\n    }\n  "]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, socket_service_1.default])
+        __metadata('design:paramtypes', [router_1.Router, socket_service_1.default, auth_service_1.Auth])
     ], FormComponent);
     return FormComponent;
 }());

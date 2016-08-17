@@ -12,10 +12,15 @@ declare var Auth0Lock: any;
 export class Auth {
   // Configure Auth0
   lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
+    languageDictionary: { // allows to override dictionary entries
+        title: "UnLoadX"
+      },
+    theme: {
+        logo: "https://cdn4.iconfinder.com/data/icons/orb/128/7.png",
+    },
     additionalSignUpFields: [{
           name: "address",                              // required
           placeholder: "enter your address",            // required
-          // icon: "http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg", // optional
           validator: function(value) {                  // optional
             // only accept addresses with more than 10 characters
             return value.length > 10;
@@ -23,11 +28,16 @@ export class Auth {
         }]
   });
 
+
+
   lockLink = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
       auth: {params: {state: "linking"}},
       allowedConnections: ['Username-Password-Authentication', 'facebook', 'google-oauth2'],
       languageDictionary: { // allows to override dictionary entries
-        title: "Link with:"
+        title: "UnLoadX"
+      },
+      theme: {
+        logo: "https://cdn4.iconfinder.com/data/icons/orb/128/7.png",
       }
     });
 
@@ -57,10 +67,11 @@ export class Auth {
         // If it's the linking login, then create the link through the API.
         this.doLinkAccounts(authResult.idToken);
       }
+      
     });
 
   }
-
+// localStorage.setItem('another_token_name', authResult.idToken);
 
   public login() {
     // Call the show method to display the widget.
@@ -146,5 +157,6 @@ export class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     this.userProfile = undefined;
+    this.router.navigate(['']);
   };
 }

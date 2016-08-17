@@ -21,10 +21,15 @@ var Auth = (function () {
         this.router = router;
         // Configure Auth0
         this.lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
+            languageDictionary: {
+                title: "UnLoadX"
+            },
+            theme: {
+                logo: "https://cdn4.iconfinder.com/data/icons/orb/128/7.png",
+            },
             additionalSignUpFields: [{
                     name: "address",
                     placeholder: "enter your address",
-                    // icon: "http://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg", // optional
                     validator: function (value) {
                         // only accept addresses with more than 10 characters
                         return value.length > 10;
@@ -35,7 +40,10 @@ var Auth = (function () {
             auth: { params: { state: "linking" } },
             allowedConnections: ['Username-Password-Authentication', 'facebook', 'google-oauth2'],
             languageDictionary: {
-                title: "Link with:"
+                title: "UnLoadX"
+            },
+            theme: {
+                logo: "https://cdn4.iconfinder.com/data/icons/orb/128/7.png",
             }
         });
         // Set userProfile attribute of already saved profile
@@ -57,6 +65,7 @@ var Auth = (function () {
             }
         });
     }
+    // localStorage.setItem('another_token_name', authResult.idToken);
     Auth.prototype.login = function () {
         // Call the show method to display the widget.
         this.lock.show();
@@ -130,6 +139,7 @@ var Auth = (function () {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
         this.userProfile = undefined;
+        this.router.navigate(['']);
     };
     ;
     Auth = __decorate([

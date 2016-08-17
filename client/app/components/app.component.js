@@ -28,4 +28,5 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
+// <a class="navbar-brand" href="#">WHAZZUP</a>
 //# sourceMappingURL=app.component.js.map
