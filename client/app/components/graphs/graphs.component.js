@@ -30,25 +30,23 @@ var Graphs = (function () {
         this.requestData = this._SocketService.getData();
         this.isDataAvailable = true;
         console.log('Set requestData from SocketService to ', this.requestData);
-        // http /GETrequest for data
-        // return this._http.get('/api/request/1')
-        //   .map(res => res)
-        //   .subscribe(requests => {
-        //     this.requestData = requests._body;
-        //     this.isDataAvailable = true;
-        // });
     };
     Graphs.prototype.ngOnInit = function () {
+        // subscribes to replaySubject from SocketService listening to when requestData is available from the server
         var _this = this;
-        this._SocketService.getRequestDataAvailable().subscribe(function (requestDataAvailable) {
-            _this.isDataAvailable = Boolean(requestDataAvailable);
-            alert("Changed isDataAvailable to " + _this.isDataAvailable);
+        this.subscription = this._SocketService.requestDataAvailable$.subscribe({
+            next: function (requestDataAvailable) {
+                _this.requestData = _this._SocketService.getData();
+                _this.isDataAvailable = Boolean(requestDataAvailable);
+                console.log("GraphComponent - Changed isDataAvailable to " + _this.isDataAvailable);
+            },
+            error: function (err) { return console.log("Error subscribing to subject " + err.message); },
+            complete: function () { return console.log('Done subscribing'); }
         });
-        // this.connection = this._SocketService.getRequests()
-        //   .subscribe(request => {
-        //     this.requestData = request;
-        //     console.log('Graphs Component requestData', this.requestData);
-        //   });
+    };
+    Graphs.prototype.ngOnDestroy = function () {
+        // prevent memory leak when component is destroyed
+        this.subscription.unsubscribe();
     };
     Graphs = __decorate([
         core_1.Component({
@@ -56,7 +54,7 @@ var Graphs = (function () {
             templateUrl: './client/app/components/graphs/graphs.component.html',
             styles: ["\n    img {\n      width: 50px;\n    }\n    .test-stats {\n      color: #FFF;\n    }\n  "],
             directives: [descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar, latencyLineGraph_graph_1.latencyLineGraph],
-            providers: [socket_service_1.default, http_1.HTTP_PROVIDERS]
+            providers: [socket_service_1.default]
         }), 
         __metadata('design:paramtypes', [socket_service_1.default, http_1.Http])
     ], Graphs);

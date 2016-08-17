@@ -4,7 +4,7 @@
   </p>
   <div class="row">
     <div class="col s6">
-      <button (click)="getTestSummaryData()" class="btn waves-effect waves-light"> Retrieve Test Summary Statistics </button>
+      <button (click)="getTestSummaryData()" class="btn waves-effect waves-light" [disabled]="!isDataAvailable"> Retrieve Test Summary Statistics </button>
     </div>
     <div class="col s6">
       <img src={{loadingURL}} *ngIf="clicked && !isDataAvailable"/>
@@ -12,8 +12,10 @@
       <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
     </div>
   </div>
+  <div>
     <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
     <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
     <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
     <networkGraph></networkGraph>
+  </div>
 </div>
