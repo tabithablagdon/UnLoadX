@@ -8,9 +8,21 @@ let requestData;
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
+  private subject = new Subject();
+  private requestDataAvailable = false;
 
   constructor() {
     this.setRequestData();
+  }
+
+  setRequestDataAvailable() {
+    this.requestDataAvailable = true;
+    console.log('Set requestDataAvailable to ', this.requestDataAvailable);
+    this.subject.next(this.requestDataAvailable);
+  }
+
+  getRequestDataAvailable() {
+    return this.subject.asObservable();
   }
 
   setRequestData() {
@@ -18,6 +30,7 @@ export default class SocketService {
     this._socket.on('receive-requests', function(requests) {
       requestData = requests;
       console.log('Received requests data from server', requestData);
+      this.setRequestDataAvailable();
     }.bind(this));
   }
 

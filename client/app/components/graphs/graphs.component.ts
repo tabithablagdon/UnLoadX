@@ -24,16 +24,14 @@ import SocketService from '../socket/socket.service';
 })
 
 export class Graphs {
-  requestData = {};
+  requestData;
   connection;
   isDataAvailable:boolean = false;
   clicked:boolean = false;
   loadingURL = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
   checkURL = 'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-glossy-orange-orbs-icons-symbols-shapes/106567-3d-glossy-orange-orb-icon-symbols-shapes-check-mark5-ps.png';
 
-  constructor(private _SocketService: SocketService, private _http: Http) {
-
-  }
+  constructor(private _SocketService: SocketService, private _http: Http) {}
 
   getTestSummaryData() {
 
@@ -52,11 +50,16 @@ export class Graphs {
     // });
   }
 
-  // ngOnInit() {
-  //   this.connection = this._SocketService.getRequests()
-  //     .subscribe(request => {
-  //       this.requestData = request;
-  //       console.log('Graphs Component requestData', this.requestData);
-  //     });
-  // }
+  ngOnInit() {
+    this._SocketService.getRequestDataAvailable().subscribe((requestDataAvailable) => {
+      this.isDataAvailable = Boolean(requestDataAvailable);
+      alert(`Changed isDataAvailable to ${this.isDataAvailable}`);
+    });
+
+    // this.connection = this._SocketService.getRequests()
+    //   .subscribe(request => {
+    //     this.requestData = request;
+    //     console.log('Graphs Component requestData', this.requestData);
+    //   });
+  }
 }

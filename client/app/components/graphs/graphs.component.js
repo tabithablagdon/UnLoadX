@@ -20,7 +20,6 @@ var Graphs = (function () {
     function Graphs(_SocketService, _http) {
         this._SocketService = _SocketService;
         this._http = _http;
-        this.requestData = {};
         this.isDataAvailable = false;
         this.clicked = false;
         this.loadingURL = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
@@ -31,13 +30,25 @@ var Graphs = (function () {
         this.requestData = this._SocketService.getData();
         this.isDataAvailable = true;
         console.log('Set requestData from SocketService to ', this.requestData);
-        // http request for data
+        // http /GETrequest for data
         // return this._http.get('/api/request/1')
         //   .map(res => res)
         //   .subscribe(requests => {
         //     this.requestData = requests._body;
         //     this.isDataAvailable = true;
         // });
+    };
+    Graphs.prototype.ngOnInit = function () {
+        var _this = this;
+        this._SocketService.getRequestDataAvailable().subscribe(function (requestDataAvailable) {
+            _this.isDataAvailable = Boolean(requestDataAvailable);
+            alert("Changed isDataAvailable to " + _this.isDataAvailable);
+        });
+        // this.connection = this._SocketService.getRequests()
+        //   .subscribe(request => {
+        //     this.requestData = request;
+        //     console.log('Graphs Component requestData', this.requestData);
+        //   });
     };
     Graphs = __decorate([
         core_1.Component({
