@@ -5,6 +5,9 @@ import { ipPort } from './types/ipPort';
 import { Graphs } from './graphs/graphs.component';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { appRoutes } from './app.routing';
+import { Auth } from '../authentication/auth.service';
+
+
 
 @Component({
   selector: 'my-app',
@@ -23,8 +26,14 @@ import { appRoutes } from './app.routing';
       float: right;
     }
   `],
-  directives: [ROUTER_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [Auth]
 })
 
 export class AppComponent {
+
+  constructor(private auth: Auth) {}
 }
+
+
+
