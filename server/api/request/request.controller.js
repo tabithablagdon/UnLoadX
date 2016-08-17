@@ -15,9 +15,6 @@ requestController.createRequest = (data) => {
         statusCode: request.statusCode,
         latency: request.latency,
         method: request.method,
-        CPU: null,
-        GPU: null,
-        memory: null,
         testId: testId
       })
     ))
