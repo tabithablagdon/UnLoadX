@@ -9,24 +9,23 @@ let requestData;
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
-  private _requestDataSource = new ReplaySubject();
-  requestDataAvailable$ = this._requestDataSource.asObservable();
+  _requestDataSource = new ReplaySubject();
 
   constructor() {
     this.setRequestData();
   }
 
   // service command that emits that requestData is available
-  setRequestDataAvailable(dataAvailable) {
-    console.log('From SocketService - Setting requestDataAvailable to... ', dataAvailable);
-    this._requestDataSource.next(dataAvailable);
+  setRequestDataAvailable() {
+    console.log('From SocketService.setRequestDataAvailable - Setting requestDataAvailable to true');
+    this._requestDataSource.next(true);
   }
 
   setRequestData() {
     this._socket.on('receive-requests', function(requests) {
       requestData = requests;
       console.log('Received requests data from server', requestData);
-      this.setRequestDataAvailable(true);
+      this.setRequestDataAvailable();
     }.bind(this));
   }
 
@@ -39,4 +38,3 @@ export default class SocketService {
     return requestData;
   }
 }
-

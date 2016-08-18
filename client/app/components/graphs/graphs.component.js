@@ -34,7 +34,7 @@ var Graphs = (function () {
     Graphs.prototype.ngOnInit = function () {
         // subscribes to replaySubject from SocketService listening to when requestData is available from the server
         var _this = this;
-        this.subscription = this._SocketService.requestDataAvailable$.subscribe({
+        this.subscription = this._SocketService._requestDataSource.subscribe({
             next: function (requestDataAvailable) {
                 _this.requestData = _this._SocketService.getData();
                 _this.isDataAvailable = Boolean(requestDataAvailable);

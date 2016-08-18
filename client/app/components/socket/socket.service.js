@@ -7,19 +7,18 @@ var SocketService = (function () {
         this._url = 'http://localhost:3000';
         this._socket = io.connect(this._url);
         this._requestDataSource = new ReplaySubject_1.ReplaySubject();
-        this.requestDataAvailable$ = this._requestDataSource.asObservable();
         this.setRequestData();
     }
     // service command that emits that requestData is available
-    SocketService.prototype.setRequestDataAvailable = function (dataAvailable) {
-        console.log('From SocketService - Setting requestDataAvailable to... ', dataAvailable);
-        this._requestDataSource.next(dataAvailable);
+    SocketService.prototype.setRequestDataAvailable = function () {
+        console.log('From SocketService.setRequestDataAvailable - Setting requestDataAvailable to true');
+        this._requestDataSource.next(true);
     };
     SocketService.prototype.setRequestData = function () {
         this._socket.on('receive-requests', function (requests) {
             requestData = requests;
             console.log('Received requests data from server', requestData);
-            this.setRequestDataAvailable(true);
+            this.setRequestDataAvailable();
         }.bind(this));
     };
     SocketService.prototype.sendServers = function (serverPost) {
