@@ -17,8 +17,11 @@ var ProfileEdit = (function () {
         this.auth = auth;
         this.authHttp = authHttp;
         this.router = router;
+        console.log('here is auth userprofile user id:', auth.userProfile.user_id);
+        console.log('here is auth userprofile metadata:', auth.userProfile.user_metadata);
         if (auth.userProfile.user_metadata && auth.userProfile.user_metadata.address) {
             this.address = auth.userProfile.user_metadata.address;
+            console.log('in the conditional, here is this.address: ', this.address);
         }
     }
     ProfileEdit.prototype.onSubmit = function () {
@@ -37,6 +40,7 @@ var ProfileEdit = (function () {
             .map(function (response) { return response.json(); })
             .subscribe(function (response) {
             //Update profile
+            console.log('auth response: ', JSON.stringify(response));
             _this.auth.userProfile = response;
             localStorage.setItem('profile', JSON.stringify(response));
             _this.router.navigate(['/Profile']);

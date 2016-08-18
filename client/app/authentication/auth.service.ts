@@ -3,7 +3,9 @@ import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt/angular2-jwt';
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Router } from '@angular/router';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 
 // Avoid name not found warnings
@@ -45,14 +47,12 @@ export class Auth {
   //Store profile object in auth class
   userProfile: any;
 
-  constructor(private authHttp: AuthHttp, private router: Router) {
+  constructor(private authHttp: AuthHttp, private router: Router, private http: Http) {
 
     // Set userProfile attribute of already saved profile
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
-
     // Add callback for lock `authenticated` event
     this.lock.on("authenticated", (authResult) => {
-
 
       if(authResult.state != "linking"){
         localStorage.setItem('id_token', authResult.idToken);
@@ -68,7 +68,7 @@ export class Auth {
         // If it's the linking login, then create the link through the API.
         this.doLinkAccounts(authResult.idToken);
       }
-      
+
     });
 
   }
@@ -78,12 +78,13 @@ export class Auth {
     // Call the show method to display the widget.
     this.lock.show();
   };
-  
+
   public linkAccount() {
     this.lockLink.show();
   }
 
   public doLinkAccounts(accountToLinkJWT) {
+    console.log('dolinkacct called')
     var headers: any = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -144,7 +145,23 @@ export class Auth {
        profile.user_metadata = profile.user_metadata || {};
        localStorage.setItem('profile', JSON.stringify(profile));
        this.userProfile = profile;
+       let body = {
+         name: profile.name,
+         authUserId: profile.user_id,
+         email: profile.email,
+       }
+       // send user's name and id to server
+       this.postAuthUser(body)
      });
+   };
+
+   private postAuthUser(body) {
+     const headers = new Headers({ 'Content-Type': 'application/json' });
+     const options = new RequestOptions({ headers: headers })
+     return this.http.post('/api/user', JSON.stringify(body), options)
+      .toPromise()
+      .then(res => console.log('response from post'))
+      .catch(err => console.log(`err from psot: ${err}`))
    }
 
   public authenticated() {

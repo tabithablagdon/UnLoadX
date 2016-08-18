@@ -13,12 +13,14 @@ var core_1 = require('@angular/core');
 var angular2_jwt_1 = require('angular2-jwt/angular2-jwt');
 var angular2_jwt_2 = require('angular2-jwt/angular2-jwt');
 var router_1 = require('@angular/router');
+var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var Auth = (function () {
-    function Auth(authHttp, router) {
+    function Auth(authHttp, router, http) {
         var _this = this;
         this.authHttp = authHttp;
         this.router = router;
+        this.http = http;
         // Configure Auth0
         this.lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
             languageDictionary: {
@@ -76,6 +78,7 @@ var Auth = (function () {
     };
     Auth.prototype.doLinkAccounts = function (accountToLinkJWT) {
         var _this = this;
+        console.log('dolinkacct called');
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -126,7 +129,23 @@ var Auth = (function () {
             profile.user_metadata = profile.user_metadata || {};
             localStorage.setItem('profile', JSON.stringify(profile));
             _this.userProfile = profile;
+            var body = {
+                name: profile.name,
+                authUserId: profile.user_id,
+                email: profile.email,
+            };
+            // send user's name and id to server
+            _this.postAuthUser(body);
         });
+    };
+    ;
+    Auth.prototype.postAuthUser = function (body) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post('/api/test/usr', JSON.stringify(body), options)
+            .toPromise()
+            .then(function (res) { return console.log('response from post'); })
+            .catch(function (err) { return console.log("err from psot: " + err); });
     };
     Auth.prototype.authenticated = function () {
         // Check if there's an unexpired JWT
@@ -144,7 +163,7 @@ var Auth = (function () {
     ;
     Auth = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [angular2_jwt_2.AuthHttp, router_1.Router])
+        __metadata('design:paramtypes', [angular2_jwt_2.AuthHttp, router_1.Router, http_1.Http])
     ], Auth);
     return Auth;
 }());

@@ -9,5 +9,4 @@ testController.getTests = (req, res) => {
     .catch(handleError(res));
 
 };
-
 export default testController;

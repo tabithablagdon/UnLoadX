@@ -68,15 +68,15 @@ export class FormComponent {
 
   onSubmit() {
     if (!!this.Auth.authenticated()) {
-     
+
       let models = this.formItemComponents._results.map((item) => { return item.model });
       models = models.slice(0, models.length - 1);
 
       let formData = {
+        authUserId: JSON.parse(localStorage.getItem('profile')).user_id,
         servers: models,
         volume: this.numReqModel.numReq
       }
-
       this.SocketService.sendServers(formData);
 
       this.Router.navigate(['/graphs']);
