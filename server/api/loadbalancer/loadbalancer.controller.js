@@ -4,9 +4,14 @@ import request from 'request';
 import Promise from 'bluebird';
 
 const loadBalancerController = {
-  createLoadBalancer: (req, res) => {
-    LoadBalancer.create(req.body);
+
+  createLoadBalancer: (ip) => {
+    console.log(`Creating load balancer with ip ${ip}`);
+    return LoadBalancer.create({
+      ip: ip
+    });
   }
+
 };
 
 export default loadBalancerController;
