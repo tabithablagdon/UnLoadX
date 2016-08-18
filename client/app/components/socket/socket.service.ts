@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-@Injectable()
 let requestData;
+
+@Injectable()
+
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
