@@ -5,6 +5,7 @@ import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 
 // Avoid name not found warnings
@@ -157,7 +158,7 @@ export class Auth {
    private postAuthUser(body) {
      const headers = new Headers({ 'Content-Type': 'application/json' });
      const options = new RequestOptions({ headers: headers })
-     return this.http.post('/api/test/usr', JSON.stringify(body), options)
+     return this.http.post('/api/user', JSON.stringify(body), options)
       .toPromise()
       .then(res => console.log('response from post'))
       .catch(err => console.log(`err from psot: ${err}`))
