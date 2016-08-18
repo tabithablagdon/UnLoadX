@@ -44,7 +44,7 @@ export class Graphs implements OnInit {
   ngOnInit() {
     // subscribes to replaySubject from SocketService listening to when requestData is available from the server
 
-    this.subscription = this._SocketService._requestDataSource.subscribe({
+    this.subscription = this._SocketService.requestDataSource.subscribe({
       next: requestDataAvailable => {
         this.requestData = this._SocketService.getData();
         this.isDataAvailable = Boolean(requestDataAvailable);

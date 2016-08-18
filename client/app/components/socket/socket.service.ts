@@ -9,7 +9,7 @@ let requestData;
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
-  _requestDataSource = new ReplaySubject();
+  requestDataSource = new ReplaySubject();
 
   constructor() {
     this.setRequestData();
@@ -18,7 +18,7 @@ export default class SocketService {
   // service command that emits that requestData is available
   setRequestDataAvailable() {
     console.log('From SocketService.setRequestDataAvailable - Setting requestDataAvailable to true');
-    this._requestDataSource.next(true);
+    this.requestDataSource.next(true);
   }
 
   setRequestData() {

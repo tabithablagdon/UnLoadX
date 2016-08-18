@@ -6,13 +6,13 @@ var SocketService = (function () {
     function SocketService() {
         this._url = 'http://localhost:3000';
         this._socket = io.connect(this._url);
-        this._requestDataSource = new ReplaySubject_1.ReplaySubject();
+        this.requestDataSource = new ReplaySubject_1.ReplaySubject();
         this.setRequestData();
     }
     // service command that emits that requestData is available
     SocketService.prototype.setRequestDataAvailable = function () {
         console.log('From SocketService.setRequestDataAvailable - Setting requestDataAvailable to true');
-        this._requestDataSource.next(true);
+        this.requestDataSource.next(true);
     };
     SocketService.prototype.setRequestData = function () {
         this._socket.on('receive-requests', function (requests) {
