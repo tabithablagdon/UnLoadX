@@ -4,20 +4,20 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-let requestData;
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
+  private requestData;
 
   constructor() {
     this.setRequestData();
   }
 
   setRequestData() {
-    console.log('socketServiceRequestData', requestData);
+    console.log('socketServiceRequestData', this.requestData);
     this._socket.on('receive-requests', function(requests) {
-      requestData = requests;
-      console.log('Received requests data from server', requestData);
+      this.requestData = requests;
+      console.log('Received requests data from server', this.requestData);
     }.bind(this));
   }
 
@@ -26,7 +26,7 @@ export default class SocketService {
     console.log(`Emitted ${JSON.stringify(serverPost)} to server socket`);
   }
 
-  // getRequests() {
+  getRequests() {
   //   let observable = new Observable(observer => {
   //     this._socket.on('receive-requests', (request) => {
   //       this.requestData = request;
@@ -35,10 +35,9 @@ export default class SocketService {
   //     });
   //   });
   //   return observable;
-  // }
+  }
 
   getData() {
-    return requestData;
+    return this.requestData;
   }
 }
-

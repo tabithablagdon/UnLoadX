@@ -31,6 +31,7 @@ var FormComponent = (function () {
             var models = this.formItemComponents._results.map(function (item) { return item.model; });
             models = models.slice(0, models.length - 1);
             var formData = {
+                authUserId: JSON.parse(localStorage.getItem('profile')).user_id,
                 servers: models,
                 volume: this.numReqModel.numReq
             };

@@ -17,8 +17,11 @@ var ProfileEdit = (function () {
         this.auth = auth;
         this.authHttp = authHttp;
         this.router = router;
+        console.log('here is auth userprofile user id:', auth.userProfile.user_id);
+        console.log('here is auth userprofile metadata:', auth.userProfile.user_metadata);
         if (auth.userProfile.user_metadata && auth.userProfile.user_metadata.address) {
             this.address = auth.userProfile.user_metadata.address;
+            console.log('in the conditional, here is this.address: ', this.address);
         }
     }
     ProfileEdit.prototype.onSubmit = function () {
@@ -37,6 +40,7 @@ var ProfileEdit = (function () {
             .map(function (response) { return response.json(); })
             .subscribe(function (response) {
             //Update profile
+            console.log('auth response: ', JSON.stringify(response));
             _this.auth.userProfile = response;
             localStorage.setItem('profile', JSON.stringify(response));
             _this.router.navigate(['/Profile']);
@@ -45,7 +49,7 @@ var ProfileEdit = (function () {
     ProfileEdit = __decorate([
         core_1.Component({
             selector: 'profile',
-            template: "\n\n<div class=\"row\">\n            <div class=\"col-md-6\">\n              <h3>Profile</h3>\n              <img [src]=\"auth.userProfile.picture\" alt=\"\" class=\"profile-img\">\n              <form (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                  <label for=\"name\">Address</label>\n                  <input type=\"text\" class=\"form-control\" [(ngModel)]=\"address\" placeholder=\"Enter address\">\n                </div>\n                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n              </form>\n            </div>\n          </div>\n          ",
+            templateUrl: './client/app/authentication/profile.component.html',
             providers: [auth_service_1.Auth, router_1.Router, angular2_jwt_1.AuthHttp]
         }), 
         __metadata('design:paramtypes', [auth_service_1.Auth, angular2_jwt_1.AuthHttp, router_1.Router])
