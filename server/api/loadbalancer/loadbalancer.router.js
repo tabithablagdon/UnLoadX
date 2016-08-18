@@ -3,6 +3,6 @@ import loadBalancerController from './loadbalancer.controller';
 
 const loadBalancerRouter = express.Router();
 
-loadBalancerRouter.post('/', loadBalancerController.createLoadBalancer);
+// loadBalancerRouter.post('/', loadBalancerController.createLoadBalancer);
 
 export default loadBalancerRouter;

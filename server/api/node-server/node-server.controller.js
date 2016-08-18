@@ -5,47 +5,60 @@ import Promise from 'bluebird';
 
 const nodeController = {};
 
-/**
- * function createServerNode
- * Creates a new entry into the NodeServer table for each IP/Port entered
- * Creates an entry into Test table
- */
 
-  function createServers(servers) {
+  // Create records in NodeServer table for each server submitted
+  function createServers(servers, userId) {
+    // TO FIX: use bulkCreate
     servers.forEach(server => {
       NodeServer.create({
         ip: server.ip,
         port: server.port,
-        application_type: server.application_type || 'web server'
+        application_type: server.application_type,
+        userId: userId
       })
       .catch(err => console.error(`Error createServerNodeSocket ${err}`));
     });
   }
 
+  /**
+   * function createServerNodeSocket
+   * Creates a new entry into the NodeServer table for each IP/Port entered
+   * Creates an entry into Test table
+   */
  nodeController.createServerNodeSocket = (post) => {
+
    const servers = post.servers;
-   // Create records in NodeServer table for each server submitted
-   createServers(servers);
+   const authUserId = post.authUserId;
+   let userId;
 
-   // Create record in Test Table
-   return Test.create({
-     volume: post.volume,
-     userId: null
-   })
-   .then(data => {
-     // Create data structure to send to Load Balancer Service
-     const dataForLB = {
-       servers: servers,
-       volume: data.dataValues.volume,
-       testId: data.dataValues.id
-     };
-     console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
+   // Retrieve UserId from User table
 
-     // Send /POST request to Load Balancer
-     return nodeController.sendTestToLB(dataForLB);
-   })
-   .catch(err => console.error(err));
+   return User.findOne({where: {authUserId: authUserId}})
+     .then(user => {
+       userId = user.get(id);
+       // Create records in NodeServer table for each server submitted
+       createServers(servers, userId);
+     })
+     .then(() => {
+       // Create record in Test Table
+       return Test.create({
+         volume: post.volume,
+         userId: userId
+       })
+       .then(data => {
+         // Create data structure to send to Load Balancer Service
+         const dataForLB = {
+           servers: servers,
+           volume: data.dataValues.volume,
+           testId: data.dataValues.id
+         };
+         console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
 
+         // Send /POST request to Load Balancer
+         return nodeController.sendTestToLB(dataForLB);
+       })
+       .catch(err => console.error(err));
+     });
  };
 
 /**
