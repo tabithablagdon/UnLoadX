@@ -29,7 +29,8 @@ const nodeController = {};
 
    // Create record in Test Table
    return Test.create({
-     volume: post.volume
+     volume: post.volume,
+     userId: null
    })
    .then(data => {
      // Create data structure to send to Load Balancer Service

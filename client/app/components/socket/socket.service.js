@@ -10,35 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var io = require('socket.io-client');
 var core_1 = require('@angular/core');
+var ReplaySubject_1 = require('rxjs/ReplaySubject');
 var SocketService = (function () {
     function SocketService() {
         this._url = 'http://localhost:3000';
         this._socket = io.connect(this._url);
+        this.requestDataSource = new ReplaySubject_1.ReplaySubject();
         this.setRequestData();
     }
+    // service command that emits that requestData is available
+    SocketService.prototype.setRequestDataAvailable = function () {
+        console.log('From SocketService.setRequestDataAvailable - Setting requestDataAvailable to true');
+        this.requestDataSource.next(true);
+    };
     SocketService.prototype.setRequestData = function () {
-        console.log('socketServiceRequestData', this.requestData);
         this._socket.on('receive-requests', function (requests) {
-            this.requestData = requests;
-            console.log('Received requests data from server', this.requestData);
+            requestData = requests;
+            console.log('Received requests data from server', requestData);
+            this.setRequestDataAvailable();
         }.bind(this));
     };
     SocketService.prototype.sendServers = function (serverPost) {
         this._socket.emit('receive-post', serverPost);
         console.log("Emitted " + JSON.stringify(serverPost) + " to server socket");
     };
-    SocketService.prototype.getRequests = function () {
-        //   let observable = new Observable(observer => {
-        //     this._socket.on('receive-requests', (request) => {
-        //       this.requestData = request;
-        //       console.log('Received requests data from server', this.requestData);
-        //       observer.next(request);
-        //     });
-        //   });
-        //   return observable;
-    };
     SocketService.prototype.getData = function () {
-        return this.requestData;
+        return requestData;
     };
     SocketService = __decorate([
         core_1.Injectable(), 

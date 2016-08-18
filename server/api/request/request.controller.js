@@ -15,13 +15,10 @@ requestController.createRequest = (data) => {
         statusCode: request.statusCode,
         latency: request.latency,
         method: request.method,
-        CPU: null,
-        GPU: null,
-        memory: null,
         testId: testId
       })
     ))
-    .then((requestData) => {
+    .then(requestData => {
       console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData');
 
       let parsedData = requestController.getTestRequestsSocket(requestData, testId);
@@ -35,14 +32,8 @@ requestController.createRequest = (data) => {
 
 requestController.getTestRequestsSocket = (requestData, id) => {
   const testId = id;
-
   return parseRequests(requestData);
 
-  // return Request.findAll({where: {testId: testId}})
-  //   .then(requests => {
-  //     return parseRequests(requests);
-  //   })
-  //   .catch(err => console.error(err.message));
 };
 
 function parseRequests(data) {
