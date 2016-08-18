@@ -12,8 +12,11 @@ import { Router } from '@angular/router';
 export class ProfileEdit {
   address: String
   constructor(private auth: Auth, private authHttp: AuthHttp, private router: Router) {
+    console.log('here is auth userprofile user id:', auth.userProfile.user_id);
+    console.log('here is auth userprofile metadata:', auth.userProfile.user_metadata);
     if(auth.userProfile.user_metadata && auth.userProfile.user_metadata.address){
       this.address = auth.userProfile.user_metadata.address;
+      console.log('in the conditional, here is this.address: ', this.address);
     }
   }
 
@@ -35,6 +38,7 @@ export class ProfileEdit {
       .subscribe(
         response => {
           //Update profile
+          console.log('auth response: ', JSON.stringify(response));
           this.auth.userProfile = response;
           localStorage.setItem('profile', JSON.stringify(response));
           this.router.navigate(['/Profile']);
