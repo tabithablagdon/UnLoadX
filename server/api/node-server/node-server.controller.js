@@ -32,10 +32,10 @@ const nodeController = {};
    let userId;
 
    // Retrieve UserId from User table
-
    return User.findOne({where: {authUserId: authUserId}})
      .then(user => {
-       userId = user.get(id);
+       console.log('Found user in createServerNode', user);
+       userId = user.dataValues.id;
        // Create records in NodeServer table for each server submitted
        createServers(servers, userId);
      })

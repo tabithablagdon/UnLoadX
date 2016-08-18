@@ -6,6 +6,7 @@ import Promise from 'bluebird';
 const loadBalancerController = {
 
   createLoadBalancer: (ip) => {
+    console.log(`Creating load balancer with ip ${ip}`);
     return LoadBalancer.create({
       ip: ip
     });
