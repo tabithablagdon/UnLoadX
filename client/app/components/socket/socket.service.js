@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var io = require('socket.io-client');
 var core_1 = require('@angular/core');
 var ReplaySubject_1 = require('rxjs/ReplaySubject');
+var requestData;
 var SocketService = (function () {
     function SocketService() {
         this._url = 'http://localhost:3000';
