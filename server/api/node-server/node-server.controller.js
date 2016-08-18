@@ -5,19 +5,21 @@ import Promise from 'bluebird';
 
 const nodeController = {};
 
-
   // Create records in NodeServer table for each server submitted
   function createServers(servers, userId) {
-    // TO FIX: use bulkCreate
-    servers.forEach(server => {
-      NodeServer.create({
+
+    let serversArray = servers.map(server => {
+      return {
         ip: server.ip,
         port: server.port,
         application_type: server.application_type,
         userId: userId
-      })
-      .catch(err => console.error(`Error createServerNodeSocket ${err}`));
+      };
     });
+
+    NodeServer.bulkCreate(serversArray)
+    .catch(err => console.error(`Error createServerNodeSocket ${err}`));
+
   }
 
   /**
@@ -34,7 +36,6 @@ const nodeController = {};
    // Retrieve UserId from User table
    return User.findOne({where: {authUserId: authUserId}})
      .then(user => {
-       console.log('Found user in createServerNode', user);
        userId = user.dataValues.id;
        // Create records in NodeServer table for each server submitted
        createServers(servers, userId);
@@ -86,6 +87,7 @@ nodeController.sendTestToLB = (res) => {
   });
 };
 
+// Starts siege by sending a /POST request to Siege Service
 nodeController.startSiege = (data) => {
   console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
 
