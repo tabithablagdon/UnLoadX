@@ -45,7 +45,7 @@ var ProfileEdit = (function () {
     ProfileEdit = __decorate([
         core_1.Component({
             selector: 'profile',
-            template: "\n\n<div class=\"row\">\n            <div class=\"col-md-6\">\n              <h3>Profile</h3>\n              <img [src]=\"auth.userProfile.picture\" alt=\"\" class=\"profile-img\">\n              <form (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                  <label for=\"name\">Address</label>\n                  <input type=\"text\" class=\"form-control\" [(ngModel)]=\"address\" placeholder=\"Enter address\">\n                </div>\n                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n              </form>\n            </div>\n          </div>\n          ",
+            templateUrl: './client/app/authentication/profile.component.html',
             providers: [auth_service_1.Auth, router_1.Router, angular2_jwt_1.AuthHttp]
         }), 
         __metadata('design:paramtypes', [auth_service_1.Auth, angular2_jwt_1.AuthHttp, router_1.Router])
