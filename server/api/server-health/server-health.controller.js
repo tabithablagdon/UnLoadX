@@ -3,7 +3,6 @@ import { handleError } from '../../config/utils';
 import request from 'request';
 
 const serverHealthController = {
-
   // Create entries recording server health for each server - accepts /POST request from loadBalancer
   createServerHealth: (req, res) => {
     // assumes req.body is {testId: 2, serverHealths: [{ip: '1.23.23', memory: 34, CPU: 423, available: true}, {etc}]}
