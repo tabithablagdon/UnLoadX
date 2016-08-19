@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {NgStyle} from '@angular/common';
 
+
 @Component({
   selector: 'descriptiveInfo',
   templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',

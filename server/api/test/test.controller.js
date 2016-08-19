@@ -3,6 +3,7 @@ import { handleError } from '../../config/utils';
 
 const testController = {};
 
+
 testController.getTests = (req, res) => {
   Test.findAll()
     .then(tests => res.json(tests))

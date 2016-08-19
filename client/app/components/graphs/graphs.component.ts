@@ -9,6 +9,7 @@ import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
 import SocketService from '../socket/socket.service';
 
+
 @Component({
   selector: 'graphs',
   templateUrl: './client/app/components/graphs/graphs.component.html',

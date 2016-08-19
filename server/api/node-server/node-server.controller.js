@@ -4,7 +4,7 @@ import request from 'request';
 import Promise from 'bluebird';
 
 const nodeController = {};
-  // Create records in NodeServer table for each server submitted, if ip does not already exist in the table
+
   function createServers(servers, userId) {
 
     servers.forEach(server => {

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Auth } from './auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'profile',
   templateUrl: './client/app/authentication/profile.component.html',

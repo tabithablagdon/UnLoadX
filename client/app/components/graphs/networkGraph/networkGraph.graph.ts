@@ -2,6 +2,7 @@ import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {nvD3} from '.././ng2-nvd3/lib/ng2-nvd3';
 declare let d3, nv: any;
 
+
 @Component({
   selector: 'networkGraph',
   directives: [nvD3],
@@ -32,7 +33,7 @@ export class networkGraph implements OnInit{
           .attr("dx", 20)
           .attr("dy", ".35em")
           .text(function(d) { return d.name })
-          .style('font-size', '15px') 
+          .style('font-size', '15px')
           .style('fill', 'white');
 
       }
