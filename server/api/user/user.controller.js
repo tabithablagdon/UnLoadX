@@ -3,7 +3,6 @@ import { handleError } from '../../config/utils';
 import { loadBalancerController } from '../loadbalancer/loadbalancer.controller';
 import request from 'request';
 
-
 const userController = {
 
   // Creates a new User upon sign-up/sign-in
