@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 
+
 @Injectable()
 export class Auth {
   // Configure Auth0

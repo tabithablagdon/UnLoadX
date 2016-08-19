@@ -8,6 +8,7 @@ declare let d3: any;
   templateUrl: './client/app/components/graphs/statusCodeBar/statusCodeBar.component.html'
 })
 
+
 export class statusCodeBar implements OnInit{
   options;
   data;

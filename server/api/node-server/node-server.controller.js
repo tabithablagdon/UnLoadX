@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 
 const nodeController = {};
 
+
   // Create records in NodeServer table for each server submitted
   function createServers(servers, userId) {
 

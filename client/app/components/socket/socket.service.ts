@@ -8,6 +8,7 @@ let requestData;
 
 @Injectable()
 
+
 export default class SocketService {
   private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);

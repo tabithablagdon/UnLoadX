@@ -9,7 +9,6 @@ declare let d3: any;
   providers: []
 })
 
-
 export class latencyLineGraph implements OnInit{
   options;
   data;
@@ -54,7 +53,7 @@ export class latencyLineGraph implements OnInit{
           axisLabelDistance: -10
         },
         styles: {
-          
+
         }
       }
     }
