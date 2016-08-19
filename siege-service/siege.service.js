@@ -1,41 +1,45 @@
 import fs from 'fs';
 import SiegeController from './siege.controller';
+import request from 'request';
+import Promise from 'bluebird';
 
 const exec = require('child_process').exec;
 const SiegeService = {};
 
-const LB_URL = 'http://52.8.16.173:9090';
-// const LB_URL = 'http://www.google.com';
 /**
  * function runSiege - runs siege test and logs response time for each request in siegelog.txt
  *
  * @param  {[INTEGER]} volume [number of concurrent users]
  */
 SiegeService.runSiege = (data) => {
-  // Assumes that data coming from siegeController is:  {Volume: 100, testId: 2}
+  // Assumes that data coming from siegeController is:  {Volume: 100, testId: 2, userId: 3}
   const volume = data.Volume;
   const testId = data.TestId;
+  const userId = data.userId;
+  const LB_URL = data.ip;
   const filename = `${__dirname}/siege-logs/siegelog${testId}.txt`;
 
-  // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
-
-  console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
-
   return new Promise((resolve, reject) => {
+    // Pull LoadBalancerIP from provided UserId to run siege on User's specific IP instance
+
+    console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
+
+    // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
     exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
       if (err) {
         console.error(`exec error: ${err}`);
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log(`stdout: ${stdout}, stderr: ${stderr}`);
         reject(err);
       }
 
       return SiegeService.parseSiegeLog(filename, testId)
-        .then(parsedLogs => {
-          console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
-          resolve(parsedLogs);
-        });
+      .then(parsedLogs => {
+        console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
+
+        resolve(parsedLogs);
+      });
     });
+
   });
 }
 

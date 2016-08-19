@@ -7,14 +7,14 @@ const SiegeController = {};
 
 SiegeController.startSiegeSocket = (req, res) => {
   // Assumes that req.body coming from Load Balancer is: [ {Volume: 100, testId: 2}
-   console.log(`[STEP 4]: Handling /POST request to /siege - in startSiegeSocket with req as ${req} - running SiegeService.runSiege...`);
+  console.log(`[STEP 4]: Handling /POST request to /siege - in startSiegeSocket with req as ${JSON.stringify(req.body)} - running SiegeService.runSiege...`);
 
-   return SiegeService.runSiege(req.body)
-     .then(data => {
-       console.log(`[Step 6.7]: Received requests data back from SiegeService!  ${JSON.stringify(data)}`);
+  return SiegeService.runSiege(req.body)
+    .then(data => {
+      console.log('[Step 6.7]: Received requests data back from SiegeService!', data);
        res.status(201).json(data);
-     })
-     .catch(err => console.log(`Error sending requests data from SiegeController.startSiege ${err.message}`));
+    })
+    .catch(err => console.log(`Error sending requests data from SiegeController.startSiege ${err.message}`));
 };
 
 // Creates a new entry in the Requests table for each request received from the Siege Service
