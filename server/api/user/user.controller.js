@@ -1,6 +1,6 @@
 import { User, LoadBalancer } from '../../db/db';
 import { handleError } from '../../config/utils';
-import { loadBalancerController } from '../loadBalancer/loadBalancer.controller';
+import { loadBalancerController } from '../loadbalancer/loadbalancer.controller';
 import request from 'request';
 
 
