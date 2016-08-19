@@ -18,6 +18,7 @@ const serverHealthController = {
           return {
             memory: serverHealth.Mem,
             CPU: serverHealth.Cpu,
+            available: serverHealth.Avail,
             serverId: server.id,
             testId: testId
           };
