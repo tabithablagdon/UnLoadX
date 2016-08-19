@@ -15,7 +15,7 @@ var ipPort_1 = require('../../types/ipPort');
 var FormItemComponent = (function () {
     function FormItemComponent() {
         this.formUpdate = new core_1.EventEmitter();
-        this.model = new ipPort_1.ipPort(null, null, null);
+        this.model = new ipPort_1.ipPort(null, null, null, null);
         this.formAdded = false;
     }
     // Created a new form the first time the function is called

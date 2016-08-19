@@ -21,45 +21,12 @@ import { Auth } from '../../authentication/auth.service';
   templateUrl: './client/app/components/form/form.component.html',
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
   providers: [HTTP_PROVIDERS, SocketService],
-  styles: [`
-    h4 {
-      color: orange
-    }
-
-    input {
-      color: #FFF;
-    }
-
-    .form-box {
-      background-color: rgba(255, 255, 255, .05);
-      border: 1px solid #FFF;
-      border-radius: 10px;
-      padding: 2em;
-      margin-top: 2.5em;
-    }
-
-    .form-submit {
-      margin: 0 auto;
-    }
-
-    .main-text {
-      color: #FFF;
-      font-size: 1.4em;
-      padding-left: 1.5em;
-    }
-
-    ul {
-      list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');
-    }
-    .notifier {
-      color: red;
-    }
-  `]
+  styleUrls: ['./client/app/components/form/form.component.css']
 })
 
 export class FormComponent {
   @ViewChildren(FormItemComponent) formItemComponents;
-  servers = [new ipPort(null, null, null)];
+  servers = [new ipPort(null, null, null, null)];
   numReqModel = new numReq(0);
   signInNotifier = false;
 

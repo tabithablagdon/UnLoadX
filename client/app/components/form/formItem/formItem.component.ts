@@ -24,7 +24,7 @@ import { ipPort } from '../../types/ipPort';
 
 export class FormItemComponent {
   @Output() formUpdate: EventEmitter<ipPort> = new EventEmitter<ipPort>();
-  model = new ipPort(null, null, null);
+  model = new ipPort(null, null, null, null);
   formAdded = false;
 
   constructor() {}
