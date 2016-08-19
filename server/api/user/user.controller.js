@@ -23,9 +23,10 @@ const userController = {
         } else {
           // If user does not exist, create a new loadBalancer instance, record to db, and then create a new user with a FK to that loadbalancer instance
           console.log(`Did not find user of authId ${authUserId}`);
+
           // *** TO FIX: Replace hard coded IP.  Pull IP for LB instance using node_processes
           LoadBalancer.create({
-            ip: '126.23.14654'
+            ip: '54.67.14.186'
           })
           .then(loadBalancer => {
             const loadBalancerId = loadBalancer.dataValues.id;
@@ -42,11 +43,11 @@ const userController = {
       .catch(err => handleError(err));
   },
 
-  // Returns User and LoadBalancer record attached to the User for Client to access IP
+  // Returns User and LoadBalancer record attached to the User for Siege Service to access LoadBalancer IP
   getUser: (req, res) => {
-    const authUserId = req.params.id;
+    const id = req.params.id;
 
-    User.findOne({where: {authUserId: authUserId}, include: [LoadBalancer]})
+    User.findOne({where: {id: id}, include: [LoadBalancer]})
       .then(user => res.json(user))
       .catch(err => console.error(err.message));
   }

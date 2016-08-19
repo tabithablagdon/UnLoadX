@@ -56,7 +56,7 @@ const nodeController = {};
          console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
 
          // Send /POST request to Load Balancer
-         return nodeController.sendTestToLB(dataForLB);
+         return nodeController.sendTestToLB(dataForLB, userId);
        })
        .catch(err => console.error(err));
      });
@@ -67,7 +67,7 @@ const nodeController = {};
  * Sends loadBalancer all servers in the database
  */
 
-nodeController.sendTestToLB = (res) => {
+nodeController.sendTestToLB = (res, userId) => {
   console.log(`[STEP 2]: In sendTestToLB and sending ${JSON.stringify(res)}`);
 
   return new Promise((resolve, reject) => {
@@ -81,7 +81,12 @@ nodeController.sendTestToLB = (res) => {
         reject(err);
       } else {
         console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-        resolve(JSON.parse(body));
+        let dataFromLB = JSON.parse(body);
+        dataFromLB.userId = userId;
+
+        console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
+
+        resolve(dataFromLB);
       }
     });
   });
@@ -104,7 +109,8 @@ nodeController.startSiege = (data) => {
         console.log(`Error posting to /siege ${err.message}`);
         reject(err);
       } else {
-        console.log(`[STEP 3.5]: startSiege /POST to /siege was successful with statusCode ${res.statusCode} posting body ${body}`);
+        console.log(body);
+        console.log('[STEP 3.5]: startSiege /POST to /siege was successful posting body', body);
         resolve(body);
       }
     });
