@@ -1,4 +1,4 @@
-import { NodeServer, Test, User } from '../../db/db';
+import { NodeServer, Test, User, LoadBalancer } from '../../db/db';
 import { handleError } from '../../config/utils';
 import request from 'request';
 import Promise from 'bluebird';
@@ -94,26 +94,33 @@ nodeController.sendTestToLB = (res, userId) => {
 
 // Starts siege by sending a /POST request to Siege Service
 nodeController.startSiege = (data) => {
-  console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
 
   return new Promise((resolve, reject) => {
-    request({
-      url: 'http://localhost:4000/siege',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }, (err, res, body) => {
-      if (err) {
-        console.log(`Error posting to /siege ${err.message}`);
-        reject(err);
-      } else {
-        console.log(body);
-        console.log('[STEP 3.5]: startSiege /POST to /siege was successful posting body', body);
-        resolve(body);
-      }
-    });
+    // Query Users to find Load Balancer IP for that User to pass to Siege Service
+    User.findOne({where: {id: data.userId}, include: [LoadBalancer]})
+      .then(user => {
+        data.ip = user.LoadBalancer.ip;
+
+        console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
+
+        // Sent /POST request to start Siege Service
+        request({
+          url: 'http://localhost:4000/siege',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }, (err, res, body) => {
+          if (err) {
+            console.log(`Error posting to /siege ${err.message}`);
+            reject(err);
+          } else {
+            console.log('[STEP 3.5]: startSiege /POST to /siege was successful posting body', body);
+            resolve(body);
+          }
+        });
+      });
   });
 };
 

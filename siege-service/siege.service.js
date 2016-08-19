@@ -5,28 +5,6 @@ import Promise from 'bluebird';
 
 const exec = require('child_process').exec;
 const SiegeService = {};
-const findLoadBalancerIpPromise = Promise.promisify(findLoadBalancerIp);
-
-//const LB_URL = 'http://52.8.16.173:9090';
-function findLoadBalancerIp(userId) {
-  return new Promise((resolve, reject) => {
-    request({
-      url: `http://localhost:3000/api/user/${userId}`,
-      method: 'GET'
-    }, (err, res, body) => {
-      if (err) {
-        console.log(`Error getting user data ${err.message}`);
-        reject(err);
-      } else {
-        // let ip = JSON.parse(body).LoadBalancer.ip;
-        // console.log('Retrieved ip from findLoadBalancerIp', ip);
-        //
-        console.log('body from findLoadBalancer', body);
-        //resolve(body);
-      }
-    });
-  });
-}
 
 /**
  * function runSiege - runs siege test and logs response time for each request in siegelog.txt
@@ -38,40 +16,30 @@ SiegeService.runSiege = (data) => {
   const volume = data.Volume;
   const testId = data.TestId;
   const userId = data.userId;
+  const LB_URL = data.ip;
   const filename = `${__dirname}/siege-logs/siegelog${testId}.txt`;
 
   return new Promise((resolve, reject) => {
     // Pull LoadBalancerIP from provided UserId to run siege on User's specific IP instance
 
-    request({
-      url: `http://localhost:3000/api/user/${userId}`,
-      method: 'GET'
-    }, (err, res, body) => {
+    console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
+
+    // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
+    exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
       if (err) {
-        console.log(`Error getting user data ${err.message}`);
+        console.error(`exec error: ${err}`);
+        console.log(`stdout: ${stdout}, stderr: ${stderr}`);
         reject(err);
-      } else {
-        let LB_URL = JSON.parse(body).LoadBalancer.ip;
-
-        console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
-
-        // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
-        exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
-          if (err) {
-            console.error(`exec error: ${err}`);
-            console.log(`stdout: ${stdout}, stderr: ${stderr}`);
-            reject(err);
-          }
-
-          return SiegeService.parseSiegeLog(filename, testId)
-          .then(parsedLogs => {
-            console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
-
-            resolve(parsedLogs);
-          });
-        });
       }
+
+      return SiegeService.parseSiegeLog(filename, testId)
+      .then(parsedLogs => {
+        console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
+
+        resolve(parsedLogs);
+      });
     });
+
   });
 }
 
