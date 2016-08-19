@@ -26,7 +26,7 @@ const userController = {
 
           // *** TO FIX: Replace hard coded IP.  Pull IP for LB instance using node_processes
           LoadBalancer.create({
-            ip: '54.67.14.186'
+            ip: '52.8.16.173:9000'
           })
           .then(loadBalancer => {
             const loadBalancerId = loadBalancer.dataValues.id;
