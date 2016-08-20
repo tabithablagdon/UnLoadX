@@ -31,9 +31,11 @@ requestController.createRequest = (data) => {
 };
 
 requestController.getTestRequestsSocket = (requestData, id) => {
-  const testId = id || 4;
+
+  // Test with server health data
+  const testId = 4;
   // ** Query for ServerHealth data by same testId - could be issue with timing here to test!
-  return ServerHealth.findOne({where: {testId: id}})
+  return ServerHealth.findAll({where: {testId: id}, include: [NodeServer]})
     .then(serverHealthData => {
       return parseRequests(requestData, serverHealthData);
     });
