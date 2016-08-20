@@ -85,6 +85,7 @@ nodeController.sendTestToLB = (res, userId) => {
         reject(err);
       } else {
         console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
+
         let dataFromLB = JSON.parse(body);
         dataFromLB.userId = userId;
 
