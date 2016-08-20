@@ -2,7 +2,6 @@ import express from 'express';
 import SiegeController from './siege.controller';
 import SiegeService from './siege.service';
 import bodyParser from 'body-parser';
-
 import SiegeRouter from './router';
 
 const app = express();
