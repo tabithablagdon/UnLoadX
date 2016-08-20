@@ -4,21 +4,25 @@ import request from 'request';
 import Promise from 'bluebird';
 
 const nodeController = {};
-
-  // Create records in NodeServer table for each server submitted
+  // Create records in NodeServer table for each server submitted, if ip does not already exist in the table
   function createServers(servers, userId) {
 
-    let serversArray = servers.map(server => {
-      return {
-        ip: server.ip,
-        port: server.port,
-        application_type: server.application_type,
-        userId: userId
-      };
+    servers.forEach(server => {
+      NodeServer.findOne({where: {ip: server.ip}})
+        .then(server => {
+          if (!server) {
+            NodeServer.create({
+              ip: server.ip,
+              port: server.port,
+              application_type: server.application_type,
+              userId: userId
+            });
+          } else {
+            console.log('NodeServer already exists', server);
+          }
+        })
+        .catch(err => console.error(err.message));
     });
-
-    NodeServer.bulkCreate(serversArray)
-    .catch(err => console.error(`Error createServerNodeSocket ${err}`));
 
   }
 

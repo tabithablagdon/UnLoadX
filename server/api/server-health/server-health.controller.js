@@ -28,7 +28,27 @@ const serverHealthController = {
     serverHealths
       .then(data => ServerHealth.bulkCreate(data))
       .catch(err => console.log(`some error: ${err}`))
+  },
+
+  getServerHealth: (req, res) => {
+    const id = req.params.id;
+    ServerHealth.findAll()
+      .then(health => {
+        console.log(health);
+        res.json(health);
+      });
+  },
+
+  getTestServerHealth: (req, res) => {
+    const id = req.params.id;
+    ServerHealth.findAll({where: {testId: 4}, include: [NodeServer]})
+      .then(serverHealthData => {
+        res.json(serverHealthData);
+      });
   }
+
 };
+
+
 
 export default serverHealthController;

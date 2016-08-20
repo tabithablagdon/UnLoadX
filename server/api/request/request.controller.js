@@ -1,4 +1,4 @@
-import { Test, NodeServer, Request } from '../../db/db';
+import { Test, NodeServer, Request, ServerHealth } from '../../db/db';
 import { handleError } from '../../config/utils';
 
 const requestController = {};
@@ -31,12 +31,17 @@ requestController.createRequest = (data) => {
 };
 
 requestController.getTestRequestsSocket = (requestData, id) => {
-  const testId = id;
-  return parseRequests(requestData);
 
+  // Test with server health data
+  const testId = 4;
+  // ** Query for ServerHealth data by same testId - could be issue with timing here to test!
+  return ServerHealth.findAll({where: {testId: id}, include: [NodeServer]})
+    .then(serverHealthData => {
+      return parseRequests(requestData, serverHealthData);
+    });
 };
 
-function parseRequests(data) {
+function parseRequests(data, serverHealthData) {
 
   console.log(`[STEP 8]: In parseRequests parsing data`);
 
@@ -87,11 +92,11 @@ function parseRequests(data) {
     stdDev: latencyStdDev
   };
   stats.status = status;
+  stats.serverhealth = serverHealthData;
 
   console.log('[STEP 8.5]: Finished parsing requests - sending back stats ', stats);
 
   return stats;
-
 }
 
 requestController.getAllRequests = (req, res) => {

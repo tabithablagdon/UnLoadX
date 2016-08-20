@@ -16,7 +16,7 @@ SiegeService.runSiege = (data) => {
   const volume = data.Volume;
   const testId = data.TestId;
   const userId = data.userId;
-  const LB_URL = data.ip;
+  const LB_URL = data.ip || '52.8.16.173:9000';
   const filename = `${__dirname}/siege-logs/siegelog${testId}.txt`;
 
   return new Promise((resolve, reject) => {
