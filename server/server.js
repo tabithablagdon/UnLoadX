@@ -15,10 +15,7 @@ const TBDRestEndPoint = '/';
 LB_Ready.parseLBPublicIPAddress(filename)
 .then(LB_IP => {
   console.log('LB_IP', LB_IP);
-  SetInterval()
-
   async.retry({times : 30, interval : 1000}, () => {
-    console.log('hi');
     LB_Ready.get200fromLB(LB_IP, TBDRestEndPoint);
   }, function(err, results) {
 
