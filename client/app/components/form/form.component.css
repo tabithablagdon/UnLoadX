@@ -1,0 +1,33 @@
+h4 {
+  color: orange
+}
+
+input {
+  color: #FFF;
+}
+
+ul {
+  list-style: square outside url('http://www.crbci.org/images/arrow-bullet-icon.png');
+}
+
+.form-box {
+  background-color: rgba(255, 255, 255, .05);
+  border: 1px solid #FFF;
+  border-radius: 10px;
+  padding: 2em;
+  margin-top: 2.5em;
+}
+
+.form-submit {
+  margin: 0 auto;
+}
+
+.main-text {
+  color: #FFF;
+  font-size: 1.4em;
+  padding-left: 1.5em;
+}
+
+.notifier {
+  color: red;
+}

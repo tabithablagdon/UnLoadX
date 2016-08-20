@@ -1,9 +1,10 @@
 "use strict";
 var ipPort = (function () {
-    function ipPort(ip, port, application_type) {
+    function ipPort(ip, port, application_type, endpoint) {
         this.ip = ip;
         this.port = port;
         this.application_type = application_type;
+        this.endpoint = endpoint;
     }
     return ipPort;
 }());

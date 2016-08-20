@@ -1,14 +1,42 @@
 <div class="row">
-  <div class="input-field col s4">
-    <input name="ip" type="text" class="validate" [(ngModel)]="model.ip" (ngModelChange)="onChange()">
+  <div class="input-field col s3">
+    <input
+      name="ip"
+      type="text"
+      class="validate"
+      [(ngModel)]="model.ip"
+      (ngModelChange)="onChange()"
+    >
     <label for="ip">IP Address</label>
   </div>
-  <div class="input-field col s4">
-    <input name="port" type="text" class="validate" [(ngModel)]="model.port" (ngModelChange)="onChange()" >
+  <div class="input-field col s3">
+    <input
+      name="port"
+      type="text"
+      class="validate"
+      [(ngModel)]="model.port"
+      (ngModelChange)="onChange()"
+    >
     <label for="port">Port</label>
   </div>
-  <div class="input-field col s4">
-    <input name="type" type="text" class="validate" [(ngModel)]="model.application_type" (ngModelChange)="onChange()">
+  <div class="input-field col s3">
+    <input
+      name="type"
+      type="text"
+      class="validate"
+      [(ngModel)]="model.endpoint"
+      (ngModelChange)="onChange()"
+    >
+    <label for="type">Endpoint (Ex: /user)</label>
+  </div>
+  <div class="input-field col s3">
+    <input
+      name="type"
+      type="text"
+      class="validate"
+      [(ngModel)]="model.application_type"
+      (ngModelChange)="onChange()"
+    >
     <label for="type">Application Type</label>
   </div>
 </div>
