@@ -37,7 +37,16 @@ const serverHealthController = {
         console.log(health);
         res.json(health);
       });
+  },
+
+  getTestServerHealth: (req, res) => {
+    const id = req.params.id;
+    ServerHealth.findAll({where: {testId: 4}, include: [NodeServer]})
+      .then(serverHealthData => {
+        res.json(serverHealthData);
+      });
   }
+
 };
 
 
