@@ -5,7 +5,8 @@ import Promise from 'bluebird';
 
 const nodeController = {};
 
-  function createServers(servers, userId) {
+
+  nodeController.createServers = (servers, userId) => {
 
     servers.forEach(server => {
       NodeServer.findOne({where: {ip: server.ip}})
