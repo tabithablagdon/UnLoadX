@@ -5,6 +5,30 @@ import db from './db/db';
 import nodeController from './api/node-server/node-server.controller';
 import requestController from './api/request/request.controller';
 
+// //
+// import LB_Ready from './config/LB_Ready.js';
+// import async from 'async';
+
+// const filename = __dirname + '/config/dummyArraydata.txt';
+// const TBDRestEndPoint = '/';
+// let LB_IP = '54.153.124.136';
+
+
+
+// let IP = null;
+
+// setInterval(() => {
+//     LB_Ready.get200fromLB(LB_IP, TBDRestEndPoint)
+//     .then(results => {
+//       IP = results;
+//       console.log(IP);
+//     });
+// }, 10000);
+
+
+// //
+
+
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
