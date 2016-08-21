@@ -1,7 +1,13 @@
-import fs from 'fs';
-import Promise from 'bluebird';
-import request from 'request';
-import async from 'async';
+'use strict'
+// import fs from 'fs';
+// import Promise from 'bluebird';
+// import request from 'request';
+// import async from 'async';
+const fs = require('fs');
+const Promise = require('bluebird');
+const request = require('request');
+const async = require('async');
+
 
 // const filename = './dummyArraydata.txt';
 // const TBDRestEndPoint = '/';
@@ -33,7 +39,8 @@ LB_Ready.parseLBPublicIPAddress = (filename) => {
 LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
   console.log(`getting 200 Status from LB`);
   return new Promise((resolve, reject) => {
-    let path = `http://${parsedPublicIP}:3000${TBDRestEndPoint}`
+    let path = `http://${parsedPublicIP}:9000${TBDRestEndPoint}/`
+    console.log('path: ', path)
     exec(`curl ${path}`, (err, res, body) => {
       if (err) {
         console.error(`exec error: ${err}`);
@@ -46,7 +53,7 @@ LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
         resolve(path);
       }
     });
- 
+
   });
 
 };
@@ -73,7 +80,9 @@ LB_Ready.sendIPToAPIServer = (LB_IP) => {
 
 
 
-export default LB_Ready;
+// export default LB_Ready;
+module.exports = LB_Ready;
+LB_Ready.get200fromLB('127.0.0.1', '/')
 //instance
 //  [
 //    "54.193.54.140"

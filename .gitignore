@@ -7,3 +7,9 @@ node_modules
 
 # Client-side transpiled js files
 client/app/**/*.js
+
+# Siege Logs
+siege-service/siege-logs
+
+# Shell logs
+server/api/loadbalancer/lb-ips

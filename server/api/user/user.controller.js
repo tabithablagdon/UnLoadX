@@ -23,21 +23,25 @@ const userController = {
         } else {
           // If user does not exist, create a new loadBalancer instance, record to db, and then create a new user with a FK to that loadbalancer instance
           console.log(`Did not find user of authId ${authUserId}`);
-
-          // *** TO FIX: Replace hard coded IP.  Pull IP for LB instance using node_processes
-          LoadBalancer.create({
-            ip: '52.8.16.173:9000'
-          })
-          .then(loadBalancer => {
-            const loadBalancerId = loadBalancer.dataValues.id;
-            console.log('loadbal after create ID', loadBalancer.dataValues.id);
-            User.create({
-              name: name,
-              email: email,
-              authUserId: authUserId,
-              loadbalancerId: loadBalancerId
-            });
-          });
+          loadBalancerController.createLoadBalancer()
+            .then(ip => {
+              // invoke James' function to figure out when docker is up and running
+              // loadBalancerController.getLoadBalancerReadyStatus
+              return LoadBalancer.create({
+                ip: ip
+              })
+            })
+            .then(loadBalancer => {
+              const loadBalancerId = loadBalancer.dataValues.id;
+              console.log('loadbal after create ID', loadBalancer.dataValues.id);
+              User.create({
+                name: name,
+                email: email,
+                authUserId: authUserId,
+                loadbalancerId: loadBalancerId
+              });
+            })
+            .catch(err => console.log(`Error in user/loadbalancer creation promise chain: ${err}`));
         }
       })
       .catch(err => handleError(err));
