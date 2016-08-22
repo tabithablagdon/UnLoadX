@@ -9,13 +9,14 @@ import requestController from './api/request/request.controller';
 // import LB_Ready from './config/LB_Ready.js';
 // import async from 'async';
 
+// //
+// import LB_Ready from './config/LB_Ready.js';
+// import async from 'async';
+
 // const filename = __dirname + '/config/dummyArraydata.txt';
 // const TBDRestEndPoint = '/';
 // let LB_IP = '54.153.124.136';
 
-
-
-// let IP = null;
 
 // setInterval(() => {
 //     LB_Ready.get200fromLB(LB_IP, TBDRestEndPoint)
@@ -24,7 +25,6 @@ import requestController from './api/request/request.controller';
 //       console.log(IP);
 //     });
 // }, 10000);
-
 
 // //
 
