@@ -36,6 +36,7 @@ describe('Environment Setup', function() {
 
 describe('Users', function() {
   it('should create records for new users', function(done) {
+    // increase mocha timeout since there are many async calls
     this.timeout(10000);
     setTimeout(() => {
       // remove records created from previous test
@@ -56,11 +57,9 @@ describe('Users', function() {
         })
       })
       .then(row => {
-        console.log(`lb id: ${row.id}`);
         return row.id;
       })
       .then(id => {
-        console.log('here is the id', id)
         return User.create({
           name: 'adam test',
           email: 'adam@test.com',
@@ -90,26 +89,8 @@ describe('Users', function() {
     }, 2000)
   })
 
-//   it('should sign in existing users', function(done) {
-//     // first create a test user record in the db
-//     User.create({
-//       name: 'joe test',
-//       email: 'joe@test.com',
-//       authUserId: 'testId1234567890',
-//       loadbalancerId: 'testlbid'
-//     })
-//     .then()
-//     // then call this sign in function with that data
-//     // then delete the test record
-//     request(server)
-//       .post('/api/user')
-//       .end(function(err, res){
-//         if (err) { console.log(`Error creating user: ${err}`); }
-//         else { console.log(`Response: ${res}`); }
-//         res.should.have.status(200);
-//         done();
-//       });
-//   });
+  it('should sign in existing users', function(done) {
+  });
 });
 
 // CLIENT
