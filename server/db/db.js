@@ -2,8 +2,6 @@ import Sequelize from 'sequelize';
 import dbHost from '../../config/config';
 
 const db = new Sequelize(`postgres://postgres@${dbHost.db}/unloadx`,{dialect: 'postgres'});
- // const db = new Sequelize('unloadx', 'root', 'mainstreet', {dialect: 'mysql'});
-
 /**
  * CONNECT TO THE DATABASE
  */
