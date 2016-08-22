@@ -1,5 +1,6 @@
 export default function NodeServer(db, DataTypes) {
 
+
   return db.define('NodeServer', {
     ip: {
       type: DataTypes.STRING,

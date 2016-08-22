@@ -16,6 +16,7 @@ import * as io from 'socket.io-client';
 import SocketService from '../socket/socket.service';
 import { Auth } from '../../authentication/auth.service';
 
+
 @Component({
   selector: 'my-form',
   templateUrl: './client/app/components/form/form.component.html',

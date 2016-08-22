@@ -8,7 +8,6 @@ import { appRoutes } from './app.routing';
 import { Auth } from '../authentication/auth.service';
 
 
-
 @Component({
   selector: 'my-app',
   templateUrl: './client/app/components/app.component.html',
@@ -34,6 +33,3 @@ export class AppComponent {
 
   constructor(private auth: Auth) {}
 }
-
-
-

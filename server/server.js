@@ -17,7 +17,6 @@ import requestController from './api/request/request.controller';
 // const TBDRestEndPoint = '/';
 // let LB_IP = '54.153.124.136';
 
-
 // setInterval(() => {
 //     LB_Ready.get200fromLB(LB_IP, TBDRestEndPoint)
 //     .then(results => {
@@ -43,6 +42,7 @@ io.on('connection', (socket) => {
 
   socket.on('receive-post', (requests) => {
     console.log('Received POST from client socket!', requests);
+
 
     nodeController.createServerNodeSocket(requests) // returns dataFromLB = {'Volume': 10, 'TestId': 2}
       .then(dataFromLB => nodeController.startSiege(dataFromLB)) // returns requestBody = {requests: parsedDataArray, testId: testId}

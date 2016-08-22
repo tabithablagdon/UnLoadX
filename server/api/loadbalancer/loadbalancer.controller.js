@@ -6,6 +6,8 @@ import fs from 'fs';
 
 const exec = require('child_process').exec;
 
+
+
 const loadBalancerController = {
 
   logLoadBalancer: (ip) => {
@@ -15,23 +17,30 @@ const loadBalancerController = {
     });
   },
 
+  // spins up a new load balancer, passing a string containing the IP address
+  // to the resolving function
   createLoadBalancer: () => {
-
     return new Promise((resolve, reject) => {
-
       exec('. ./startEC2.sh', (err, stdout, stderr) => {
         if (err) {
           console.log(err, stdout, stderr);
           reject(err);
         } else {
-          console.log('got stdout from shell script: ', stdout);
-
+          resolve(stdout.split('"')[1]);
         }
       });
-
     });
   }
 
+
+  // sends get requests to the new LB until a 200 response is received, indicating
+  // docker is running and that it is safe to start siege
+  getLoadBalancerReadyStatus: () {
+    // call James' functions.
+
+
+    // then indicate it is safe to start siege
+  }
 };
 
 export default loadBalancerController;

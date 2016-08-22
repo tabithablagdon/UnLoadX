@@ -8,6 +8,7 @@ declare let d3: any;
   templateUrl: './client/app/components/graphs/successBarChart/successBarChart.component.html'
 })
 
+
 export class successBarChart implements OnInit{
   options;
   data;

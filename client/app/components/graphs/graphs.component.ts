@@ -10,6 +10,7 @@ import { networkGraph } from './networkGraph/networkGraph.graph';
 import { serverHealthChart } from './serverHealthChart/serverhealthchart.component';
 import SocketService from '../socket/socket.service';
 
+
 @Component({
   selector: 'graphs',
   templateUrl: './client/app/components/graphs/graphs.component.html',

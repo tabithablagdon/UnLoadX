@@ -35,7 +35,6 @@ SiegeService.runSiege = (data) => {
       return SiegeService.parseSiegeLog(filename, testId)
       .then(parsedLogs => {
         console.log('[STEP 5.5]: Siege complete!  Starting parseSiegeLog.  Output: ', parsedLogs);
-
         resolve(parsedLogs);
       });
     });

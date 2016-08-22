@@ -1,6 +1,12 @@
-import fs from 'fs';
-import Promise from 'bluebird';
-import request from 'request';
+'use strict'
+// import fs from 'fs';
+// import Promise from 'bluebird';
+// import request from 'request';
+// import async from 'async';
+const fs = require('fs');
+const Promise = require('bluebird');
+const request = require('request');
+const async = require('async');
 
 const LB_Ready = {};
 
@@ -21,46 +27,26 @@ LB_Ready.parseLBPublicIPAddress = (filename) => {
       }
     });
   });
-
 };
 
 LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
-
+  console.log(`getting 200 Status from LB`);
   return new Promise((resolve, reject) => {
-    request({
-      url: `http://${parsedPublicIP}:80${TBDRestEndPoint}`,
-      method: 'GET'
-    }, (err, res, body) => {
+    let path = `http://${parsedPublicIP}:9000${TBDRestEndPoint}/`
+    console.log('path: ', path)
+    exec(`curl ${path}`, (err, res, body) => {
       if (err) {
-        console.log(`Error in get200fromLB ${err.message}`);
+        console.error(`exec error: ${err}`);
+        console.log(`res: ${res}, body: ${body}`);
         reject(err);
-      } else {
-        console.log(`${res.statusCode} received from LB: ${JSON.stringify(body)}`);
-        if(`${res.statusCode}` === '200') {
-          resolve(parsedPublicIP);
-        } else {
-          resolve(null);
-        }
+      }
+      if (body) {
+        console.log('body', body);
+        console.log('path', path)
+        resolve(path);
       }
     });
   });
-  
 };
-
-export default LB_Ready;
-//instance
-//  [
-//    "54.193.54.140"
-// ]
-
-//LB
-//  [
-//    "52.8.16.173"
-// ]
-// node script:
-//     • read the file using fs (DONE)
-//     • extract the ip address (DONE)
-//     • every second, send HTTP GET to a TBD rest endpoint at the IP
-//     • once we have a 200 response, notify the API server:
-// send HTTP POST to API server (endpoint TBD) with the ip
-// Add Comment Collapse
+module.exports = LB_Ready;
+// LB_Ready.get200fromLB('127.0.0.1', '/')
