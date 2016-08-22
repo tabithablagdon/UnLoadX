@@ -31,7 +31,7 @@ var descriptiveInfo = (function () {
         this.calculateSuccessRate(this.statusCodeCounts[200]);
     };
     descriptiveInfo.prototype.calculateSuccessRate = function (successes) {
-        this.successRate = successes / this.totalReqs;
+        this.successRate = successes ? (successes / this.totalReqs) : 0;
     };
     descriptiveInfo.prototype.keys = function () {
         return Object.keys(this.statusCodeCounts);
