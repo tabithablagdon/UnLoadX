@@ -31,9 +31,8 @@ requestController.createRequest = (data) => {
 };
 
 requestController.getTestRequestsSocket = (requestData, id) => {
-
-  // Test with server health data
-  const testId = 4;
+  // Set if to 4 for testing - delete this line in deployment
+  id = 4;
   // ** Query for ServerHealth data by same testId - could be issue with timing here to test!
   return ServerHealth.findAll({where: {testId: id}, include: [NodeServer]})
     .then(serverHealthData => {
