@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var ipPort_1 = require('../types/ipPort');
-var numReq_1 = require('../types/numReq');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
@@ -23,7 +22,6 @@ var FormComponent = (function () {
         this.SocketService = SocketService;
         this.Auth = Auth;
         this.servers = [new ipPort_1.ipPort(null, null, null, null)];
-        this.numReqModel = new numReq_1.numReq(0);
         this.signInNotifier = false;
     }
     FormComponent.prototype.onSubmit = function () {
@@ -33,7 +31,7 @@ var FormComponent = (function () {
             var formData = {
                 authUserId: JSON.parse(localStorage.getItem('profile')).user_id,
                 servers: models,
-                volume: this.numReqModel.numReq
+                volume: this.numReqModel
             };
             this.SocketService.sendServers(formData);
             this.Router.navigate(['/graphs']);

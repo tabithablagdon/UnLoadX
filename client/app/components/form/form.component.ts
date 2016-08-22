@@ -28,7 +28,7 @@ import { Auth } from '../../authentication/auth.service';
 export class FormComponent {
   @ViewChildren(FormItemComponent) formItemComponents;
   servers = [new ipPort(null, null, null, null)];
-  numReqModel = new numReq(0);
+  numReqModel;
   signInNotifier = false;
 
   constructor(private Router: Router, private SocketService: SocketService, private Auth: Auth) {}
@@ -43,7 +43,7 @@ export class FormComponent {
       let formData = {
         authUserId: JSON.parse(localStorage.getItem('profile')).user_id,
         servers: models,
-        volume: this.numReqModel.numReq
+        volume: this.numReqModel
       }
       this.SocketService.sendServers(formData);
 

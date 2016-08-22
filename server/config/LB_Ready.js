@@ -8,13 +8,7 @@ const Promise = require('bluebird');
 const request = require('request');
 const async = require('async');
 
-
-// const filename = './dummyArraydata.txt';
-// const TBDRestEndPoint = '/';
-
 const LB_Ready = {};
-const exec = require('child_process').exec;
-
 
 LB_Ready.parseLBPublicIPAddress = (filename) => {
 
@@ -33,7 +27,6 @@ LB_Ready.parseLBPublicIPAddress = (filename) => {
       }
     });
   });
-
 };
 
 LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
@@ -53,49 +46,7 @@ LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
         resolve(path);
       }
     });
-
-  });
-
-};
-
-LB_Ready.sendIPToAPIServer = (LB_IP) => {
-  console.log(`sending LB IP to API Server`);
-  return new Promise((resolve, reject) => {
-    request({
-      url: 'http://52.9.136.53:3000',
-      method: 'POST',
-      body: JSON.stringify(LB_IP)
-    }, (err, res, body) => {
-      if (err) {
-        console.log(`Error in send sendIPToAPIServer ${err.message}`);
-        reject(err);
-      } else {
-        console.log(`Sent LB_IP to API Server successfully` );
-        resolve(LB_IP);
-      }
-    });
   });
 };
-
-
-
-
-// export default LB_Ready;
 module.exports = LB_Ready;
-LB_Ready.get200fromLB('127.0.0.1', '/')
-//instance
-//  [
-//    "54.193.54.140"
-// ]
-
-//LB
-//  [
-//    "52.8.16.173"
-// ]
-// node script:
-//     • read the file using fs (DONE)
-//     • extract the ip address (DONE)
-//     • every second, send HTTP GET to a TBD rest endpoint at the IP
-//     • once we have a 200 response, notify the API server:
-// send HTTP POST to API server (endpoint TBD) with the ip
-// Add Comment Collapse
+// LB_Ready.get200fromLB('127.0.0.1', '/')
