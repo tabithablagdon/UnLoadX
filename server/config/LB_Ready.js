@@ -1,14 +1,8 @@
 import fs from 'fs';
 import Promise from 'bluebird';
 import request from 'request';
-import async from 'async';
-
-// const filename = './dummyArraydata.txt';
-// const TBDRestEndPoint = '/';
 
 const LB_Ready = {};
-const exec = require('child_process').exec;
-
 
 LB_Ready.parseLBPublicIPAddress = (filename) => {
 
@@ -31,47 +25,27 @@ LB_Ready.parseLBPublicIPAddress = (filename) => {
 };
 
 LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
-  console.log(`getting 200 Status from LB`);
-  return new Promise((resolve, reject) => {
-    let path = `http://${parsedPublicIP}:3000${TBDRestEndPoint}`
-    exec(`curl ${path}`, (err, res, body) => {
-      if (err) {
-        console.error(`exec error: ${err}`);
-        console.log(`res: ${res}, body: ${body}`);
-        reject(err);
-      }
-      if (body) {
-        console.log('body', body);
-        console.log('path', path)
-        resolve(path);
-      }
-    });
- 
-  });
 
-};
-
-LB_Ready.sendIPToAPIServer = (LB_IP) => {
-  console.log(`sending LB IP to API Server`);
   return new Promise((resolve, reject) => {
     request({
-      url: 'http://52.9.136.53:3000',
-      method: 'POST',
-      body: JSON.stringify(LB_IP)
+      url: `http://${parsedPublicIP}:80${TBDRestEndPoint}`,
+      method: 'GET'
     }, (err, res, body) => {
       if (err) {
-        console.log(`Error in send sendIPToAPIServer ${err.message}`);
+        console.log(`Error in get200fromLB ${err.message}`);
         reject(err);
       } else {
-        console.log(`Sent LB_IP to API Server successfully` );
-        resolve(LB_IP);
+        console.log(`${res.statusCode} received from LB: ${JSON.stringify(body)}`);
+        if(`${res.statusCode}` === '200') {
+          resolve(parsedPublicIP);
+        } else {
+          resolve(null);
+        }
       }
     });
   });
+  
 };
-
-
-
 
 export default LB_Ready;
 //instance
