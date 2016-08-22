@@ -21,21 +21,23 @@ const loadBalancerController = {
   // to the resolving function
   createLoadBalancer: () => {
     return new Promise((resolve, reject) => {
-      exec('. ./startEC2.sh', (err, stdout, stderr) => {
+      const dir = __dirname;
+      exec('. ' + dir + '/startEC2.sh', (err, stdout, stderr) => {
         if (err) {
           console.log(err, stdout, stderr);
           reject(err);
         } else {
+          console.log('finished ec2 script, got', stdout)
           resolve(stdout.split('"')[1]);
         }
       });
     });
-  }
+  },
 
 
   // sends get requests to the new LB until a 200 response is received, indicating
   // docker is running and that it is safe to start siege
-  getLoadBalancerReadyStatus: () {
+  getLoadBalancerReadyStatus: () => {
     // call James' functions.
 
 
