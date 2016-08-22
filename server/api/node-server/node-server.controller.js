@@ -19,7 +19,7 @@ const nodeController = {};
               userId: userId
             });
           } else {
-            console.log('NodeServer already exists', server);
+            console.log('NodeServer already exists');
           }
         })
         .catch(err => console.error(err.message));
@@ -37,13 +37,15 @@ const nodeController = {};
    const servers = post.servers;
    const authUserId = post.authUserId;
    let userId;
+   let lbIp;
 
    // Retrieve UserId from User table
-   return User.findOne({where: {authUserId: authUserId}})
+   return User.findOne({where: {authUserId: authUserId}, include: [LoadBalancer]})
      .then(user => {
        userId = user.dataValues.id;
+       lbIp = user.LoadBalancer.ip;
        // Create records in NodeServer table for each server submitted
-       createServers(servers, userId);
+       nodeController.createServers(servers, userId);
      })
      .then(() => {
        // Create record in Test Table
@@ -61,7 +63,7 @@ const nodeController = {};
          console.log(`[STEP 1]: Finished Test.Create - Calling sendTestToLB and sending ${JSON.stringify(dataForLB)}`);
 
          // Send /POST request to Load Balancer
-         return nodeController.sendTestToLB(dataForLB, userId);
+         return nodeController.sendTestToLB(dataForLB, userId, lbIp);
        })
        .catch(err => console.error(err));
      });
@@ -72,12 +74,12 @@ const nodeController = {};
  * Sends loadBalancer all servers in the database
  */
 
-nodeController.sendTestToLB = (res, userId) => {
+nodeController.sendTestToLB = (res, userId, ip) => {
   console.log(`[STEP 2]: In sendTestToLB and sending ${JSON.stringify(res)}`);
 
   return new Promise((resolve, reject) => {
     request({
-      url: 'http://52.8.16.173:9000/iptables',
+      url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
       method: 'POST',
       body: JSON.stringify(res)
     }, (err, res, body) => {

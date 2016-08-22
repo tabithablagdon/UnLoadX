@@ -8,8 +8,8 @@ aws ec2 run-instances --image-id ami-b57536d5 --count 1 --instance-type t2.micro
 resId=$(cat $DIR/lb-ips/awscli$AWSCLICOUNTER.log | grep ReservationId)
 
 # test mode:
-let AWSCLICOUNTER-=1
-resId=$(cat $DIR/lb-ips/awscli$AWSCLICOUNTER.log | grep ReservationId)
+# let AWSCLICOUNTER-=1
+# resId=$(cat $DIR/lb-ips/awscli$AWSCLICOUNTER.log | grep ReservationId)
 
 
 resId=${resId:22}
