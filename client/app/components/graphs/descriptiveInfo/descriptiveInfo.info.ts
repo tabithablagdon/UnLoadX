@@ -58,14 +58,11 @@ export class descriptiveInfo implements OnInit {
   }
 
   calculateSuccessRate (successes) {
-   this.successRate = successes / this.totalReqs;
+   this.successRate = successes ? (successes / this.totalReqs) : 0;
   }
 
   keys() : Array<string> {
     return Object.keys(this.statusCodeCounts);
   }
-
-// [{"key":"200","values":[{"label":"Status Code","value":460}]},...]
-
 
 }

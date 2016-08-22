@@ -15,35 +15,12 @@ var statusCodeBar_graph_1 = require('./statusCodeBar/statusCodeBar.graph');
 var latencyLineGraph_graph_1 = require('./latencyLineGraph/latencyLineGraph.graph');
 var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
 var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
+var serverhealthchart_component_1 = require('./serverHealthChart/serverhealthchart.component');
 var socket_service_1 = require('../socket/socket.service');
 var Graphs = (function () {
     function Graphs(_SocketService, _http) {
         this._SocketService = _SocketService;
         this._http = _http;
-        this.requestData = {
-            testId: 61,
-            totalReqs: 117,
-            latency: {
-                latencySet: [{ x: 1, y: 3 }],
-                max: 0.24,
-                min: 0.01,
-                stdDev: 0.04860175076594251
-            },
-            status: [{
-                    key: "404",
-                    values: [{ label: "Status Code", value: 117 }]
-                }],
-            serverhealth: {
-                id: 1,
-                memory: 3.55,
-                CPU: 4.55,
-                available: true,
-                createdAt: "2016-08-19T22:36:38.000Z",
-                updatedAt: "2016-08-19T22:36:48.000Z",
-                serverId: null,
-                testId: 4
-            }
-        };
         this.isDataAvailable = false;
         this.clicked = false;
         this.loadingURL = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
@@ -77,7 +54,7 @@ var Graphs = (function () {
             selector: 'graphs',
             templateUrl: './client/app/components/graphs/graphs.component.html',
             styleUrls: ['./client/app/components/graphs/graphs.component.css'],
-            directives: [descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar, latencyLineGraph_graph_1.latencyLineGraph],
+            directives: [descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar, latencyLineGraph_graph_1.latencyLineGraph, serverhealthchart_component_1.serverHealthChart],
             providers: [socket_service_1.default]
         }), 
         __metadata('design:paramtypes', [socket_service_1.default, http_1.Http])

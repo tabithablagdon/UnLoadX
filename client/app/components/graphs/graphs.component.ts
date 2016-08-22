@@ -7,41 +7,19 @@ import { statusCodeBar} from './statusCodeBar/statusCodeBar.graph';
 import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
 import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
 import { networkGraph } from './networkGraph/networkGraph.graph';
+import { serverHealthChart } from './serverHealthChart/serverhealthchart.component';
 import SocketService from '../socket/socket.service';
 
 @Component({
   selector: 'graphs',
   templateUrl: './client/app/components/graphs/graphs.component.html',
   styleUrls: ['./client/app/components/graphs/graphs.component.css'],
-  directives: [descriptiveInfo, networkGraph, statusCodeBar, latencyLineGraph],
+  directives: [descriptiveInfo, networkGraph, statusCodeBar, latencyLineGraph, serverHealthChart],
   providers: [SocketService]
 })
 
 export class Graphs implements OnInit {
-  requestData = {
-    testId: 61,
-    totalReqs: 117,
-    latency: {
-      latencySet: [{x: 1, y: 3}],
-      max: 0.24,
-      min: 0.01,
-      stdDev: 0.04860175076594251
-    },
-    status: [{
-      key: "404",
-      values: [{label: "Status Code", value: 117}]
-    }],
-    serverhealth: {
-    	id: 1,
-    	memory: 3.55,
-    	CPU: 4.55,
-    	available: true,
-    	createdAt: "2016-08-19T22:36:38.000Z",
-    	updatedAt: "2016-08-19T22:36:48.000Z",
-    	serverId: null,
-    	testId: 4
-    }
-  };
+  requestData;
   subscription: Subscription;
   isDataAvailable: boolean = false;
   clicked: boolean = false;

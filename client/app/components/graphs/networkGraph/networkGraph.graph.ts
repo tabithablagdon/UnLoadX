@@ -19,10 +19,10 @@ export class networkGraph implements OnInit{
       chart: {
       type: 'forceDirectedGraph',
       height: 500,
-      width: 1000,
-      margin:{top: 20, right: 20, bottom: 20, left: 20},
+      width: 500,
+      margin:{top: 20, right: 20, bottom: 20, left: 0},
       radius: 15,
-      linkDist:450,
+      linkDist:300,
       color: function(d){
         return color(d.group)
       },
@@ -32,7 +32,7 @@ export class networkGraph implements OnInit{
           .attr("dx", 20)
           .attr("dy", ".35em")
           .text(function(d) { return d.name })
-          .style('font-size', '15px') 
+          .style('font-size', '15px')
           .style('fill', 'white');
 
       }
