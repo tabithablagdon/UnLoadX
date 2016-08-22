@@ -12,4 +12,4 @@ client/app/**/*.js
 siege-service/siege-logs
 
 # Shell logs
-server/api/loadbalancer/lb-ips
+server/api/loadbalancer/lb-ips/**/*

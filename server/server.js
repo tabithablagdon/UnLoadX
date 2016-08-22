@@ -42,8 +42,6 @@ io.on('connection', (socket) => {
 
   socket.on('receive-post', (requests) => {
     console.log('Received POST from client socket!', requests);
-
-
     nodeController.createServerNodeSocket(requests) // returns dataFromLB = {'Volume': 10, 'TestId': 2}
       .then(dataFromLB => nodeController.startSiege(dataFromLB)) // returns requestBody = {requests: parsedDataArray, testId: testId}
       .then(requestBody => requestController.createRequest(requestBody)) // returns statsData  = {testId: 1, totalReqs: 400, latency: {latencySet, avg, max, min, stdDev}, status }-=
@@ -62,4 +60,6 @@ db.sync()
   })
   .catch(err => console.log(`Error loading server ${err}`));
 
-export default app;
+// changed this to module.exports because it made the test work
+// export default app;
+module.exports = app;

@@ -1,6 +1,6 @@
 import { User, LoadBalancer } from '../../db/db';
 import { handleError } from '../../config/utils';
-import { loadBalancerController } from '../loadbalancer/loadbalancer.controller';
+import loadBalancerController from '../loadbalancer/loadbalancer.controller';
 import request from 'request';
 
 const userController = {
@@ -27,6 +27,7 @@ const userController = {
             .then(ip => {
               // invoke James' function to figure out when docker is up and running
               // loadBalancerController.getLoadBalancerReadyStatus
+              console.log(`ip from lb ec2 creation: ${ip}`)
               return LoadBalancer.create({
                 ip: ip
               })
@@ -41,6 +42,7 @@ const userController = {
                 loadbalancerId: loadBalancerId
               });
             })
+            .then(user => res.json(user))
             .catch(err => console.log(`Error in user/loadbalancer creation promise chain: ${err}`));
         }
       })
