@@ -19,10 +19,10 @@ var networkGraph = (function () {
             chart: {
                 type: 'forceDirectedGraph',
                 height: 500,
-                width: 1000,
-                margin: { top: 20, right: 20, bottom: 20, left: 20 },
+                width: 500,
+                margin: { top: 20, right: 20, bottom: 20, left: 0 },
                 radius: 15,
-                linkDist: 450,
+                linkDist: 200,
                 color: function (d) {
                     return color(d.group);
                 },
