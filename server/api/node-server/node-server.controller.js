@@ -75,29 +75,42 @@ const nodeController = {};
  */
 
 nodeController.sendTestToLB = (res, userId, ip) => {
-  console.log(`[STEP 2]: In sendTestToLB and sending ${JSON.stringify(res)}`);
+  console.log('here');
+  console.log(`[STEP 2]: In sendTestToLB and sending form to ${ip}`);
 
-  return new Promise((resolve, reject) => {
-    request({
-      url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
-      method: 'POST',
-      body: JSON.stringify(res)
-    }, (err, res, body) => {
-      if (err) {
-        console.log(`Error in sendTestToLB ${err.message}`);
-        reject(err);
-      } else {
-        console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-
-        let dataFromLB = JSON.parse(body);
-        dataFromLB.userId = userId;
-
-        console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
-
-        resolve(dataFromLB);
-      }
-    });
+  // first tell the LBserver to start the LB...
+  request({
+    url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
+    method: 'POST',
+    body: JSON.stringify(res)
+  }, (err, res, body) => {
+    if (err) { console.log(`Error posting to LBserver: ${err}`); }
   });
+
+  // then submit the form
+  setTimeout(() => {
+    return new Promise((resolve, reject) => {
+      request({
+        url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
+        method: 'POST',
+        body: JSON.stringify(res)
+      }, (err, res, body) => {
+        if (err) {
+          console.log(`Error in sendTestToLB ${err.message}`);
+          reject(err);
+        } else {
+          console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
+
+          let dataFromLB = JSON.parse(body);
+          dataFromLB.userId = userId;
+
+          console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
+
+          resolve(dataFromLB);
+        }
+      });
+    });
+  }, 1000)
 };
 
 // Starts siege by sending a /POST request to Siege Service
