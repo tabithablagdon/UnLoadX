@@ -7,6 +7,7 @@ RUN pip install awscli
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 ADD . .
+RUN mv /usr/src/app/.aws /root
 RUN npm install
 RUN apt-get update
 RUN apt-get install siege
