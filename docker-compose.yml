@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: apiserverphusion
+    image: apiserver
     ports:
      - "3000:3000"
      - "4000:4000"
