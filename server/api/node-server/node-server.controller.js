@@ -93,7 +93,6 @@ nodeController.sendTestToLB = (res, userId, ip) => {
   function wait() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        console.log('1 second wait over')
         resolve()
       }, 1000)
     });
