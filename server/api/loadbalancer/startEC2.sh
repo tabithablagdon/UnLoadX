@@ -2,7 +2,7 @@
 
 #start an instance, storing the output in awscli*.log
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-aws ec2 run-instances --image-id ami-b57536d5 --count 1 --instance-type t2.micro --key-name awskey1 --security-groups launch-wizard-3 --user-data file://$DIR/awsCLI-options.sh > $DIR/lb-ips/awscli$AWSCLICOUNTER.log
+# aws ec2 run-instances --image-id ami-b57536d5 --count 1 --instance-type t2.micro --key-name awskey1 --security-groups launch-wizard-3 --user-data file://$DIR/awsCLI-options.sh > $DIR/lb-ips/awscli$AWSCLICOUNTER.log
 
 # extract reservation id and use it to get public ip
 resId=$(cat $DIR/lb-ips/awscli$AWSCLICOUNTER.log | grep ReservationId)
