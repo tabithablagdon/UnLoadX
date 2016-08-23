@@ -10,6 +10,9 @@ import { networkGraph } from './networkGraph/networkGraph.graph';
 import { serverHealthChart } from './serverHealthChart/serverhealthchart.component';
 import SocketService from '../socket/socket.service';
 
+import { LatencyComponent } from '../latency/latency.component';
+import { RequestSummaryComponent } from '../requestSummary/requestSummary.component';
+import { ServerHealthComponent } from '../serverhealth/serverhealth.component';
 
 @Component({
   selector: 'graphs',
