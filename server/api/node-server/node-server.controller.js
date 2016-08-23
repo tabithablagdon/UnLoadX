@@ -82,7 +82,7 @@ nodeController.sendTestToLB = (res, userId, ip) => {
   // and call then.  But we do need to wait for it to start, hence the wait function
   // below
   request({
-    url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
+    url: 'http://' + ip + ':9000/iptables',
     method: 'POST',
     body: JSON.stringify(res)
   }, (err, res, body) => {
@@ -103,7 +103,7 @@ nodeController.sendTestToLB = (res, userId, ip) => {
     .then(() => {
       return new Promise((resolve, reject) => {
         request({
-          url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
+          url: 'http://' + ip + ':9000/iptables',
           method: 'POST',
           body: JSON.stringify(res)
         }, (err, res, body) => {
@@ -157,7 +157,7 @@ nodeController.startSiege = (data) => {
 };
 
 /**
- * function getServers
+ * function getServer
  * Retrieves all servers in the database
  */
 
