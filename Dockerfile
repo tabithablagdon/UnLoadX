@@ -10,7 +10,6 @@ ADD . .
 RUN npm install
 RUN apt-get update
 RUN apt-get install siege
-RUN cp -r ~/.aws ~
 ENV NODE_ENV production
 ENV AWS prod
 
