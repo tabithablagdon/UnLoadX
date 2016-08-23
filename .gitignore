@@ -1,15 +1,11 @@
 # Logs
 npm-debug.log*
 
+# Sensitive information
+server/api/loadbalancer/.aws
 
 # Dependency directories
 node_modules
 
-# Client-side transpiled js files
-client/app/**/*.js
-
 # Siege Logs
 siege-service/siege-logs
-
-# Shell logs
-server/api/loadbalancer/lb-ips/**/*
