@@ -157,7 +157,7 @@ nodeController.startSiege = (data) => {
 };
 
 /**
- * function getServers
+ * function getServer
  * Retrieves all servers in the database
  */
 

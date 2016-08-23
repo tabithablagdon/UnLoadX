@@ -10,7 +10,7 @@ services:
      - .:/code
     links:
       - db:pgcontainer
-    command: tsc && npm start
+    command: npm start
   db:
     image: postgres
     volumes:

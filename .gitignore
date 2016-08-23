@@ -5,8 +5,6 @@ npm-debug.log*
 # Dependency directories
 node_modules
 
-# Client-side transpiled js files
-client/app/**/*.js
 
 # Siege Logs
 siege-service/siege-logs
