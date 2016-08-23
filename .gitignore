@@ -1,10 +1,11 @@
 # Logs
 npm-debug.log*
 
+# Sensitive information
+server/api/loadbalancer/.aws
 
 # Dependency directories
 node_modules
-
 
 # Siege Logs
 siege-service/siege-logs
