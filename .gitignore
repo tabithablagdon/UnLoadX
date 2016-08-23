@@ -9,6 +9,3 @@ node_modules
 
 # Siege Logs
 siege-service/siege-logs
-
-# Shell logs
-server/api/loadbalancer/lb-ips/**/*
