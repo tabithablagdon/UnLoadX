@@ -75,10 +75,12 @@ const nodeController = {};
  */
 
 nodeController.sendTestToLB = (res, userId, ip) => {
-  console.log('here');
   console.log(`[STEP 2]: In sendTestToLB and sending form to ${ip}`);
 
   // first tell the LBserver to start the LB...
+  // the LB does not send a response to this initial request so we cannot promisify
+  // and call then.  But we do need to wait for it to start, hence the wait function
+  // below
   request({
     url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
     method: 'POST',
@@ -87,35 +89,45 @@ nodeController.sendTestToLB = (res, userId, ip) => {
     if (err) { console.log(`Error posting to LBserver: ${err}`); }
   });
 
-  // then submit the form
-  setTimeout(() => {
+  // define a promisified function to wait 1S for LB to start
+  function wait() {
     return new Promise((resolve, reject) => {
-      request({
-        url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
-        method: 'POST',
-        body: JSON.stringify(res)
-      }, (err, res, body) => {
-        if (err) {
-          console.log(`Error in sendTestToLB ${err.message}`);
-          reject(err);
-        } else {
-          console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-
-          let dataFromLB = JSON.parse(body);
-          dataFromLB.userId = userId;
-
-          console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
-
-          resolve(dataFromLB);
-        }
-      });
+      setTimeout(() => {
+        console.log('1 second wait over')
+        resolve()
+      }, 1000)
     });
-  }, 1000)
+  }
+
+  return new Promise((resolve, reject) => {
+    wait()
+    .then(() => {
+      return new Promise((resolve, reject) => {
+        request({
+          url: 'http://' + ip + ':9000/iptables', /*http://52.8.16.173:9000/iptables'*/
+          method: 'POST',
+          body: JSON.stringify(res)
+        }, (err, res, body) => {
+          if (err) {
+            console.log(`Error in sendTestToLB ${err.message}`);
+            reject(err);
+          } else {
+            console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
+            let dataFromLB = JSON.parse(body);
+            dataFromLB.userId = userId;
+            console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
+            resolve(dataFromLB);
+          }
+        });
+      });
+    })
+    .then(dataFromLB => resolve(dataFromLB))
+  })
 };
 
 // Starts siege by sending a /POST request to Siege Service
 nodeController.startSiege = (data) => {
-
+  console.log(`starting siege with data ${data}`)
   return new Promise((resolve, reject) => {
     // Query Users to find Load Balancer IP for that User to pass to Siege Service
     User.findOne({where: {id: data.userId}, include: [LoadBalancer]})
