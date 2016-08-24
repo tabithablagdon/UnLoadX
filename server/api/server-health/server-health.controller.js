@@ -8,6 +8,7 @@ const serverHealthController = {
   createServerHealth: (req, res) => {
     // assumes req.body is {testId: 2, serverHealths: [{ip: '1.23.23', memory: 34, CPU: 423, available: true}, {etc}]}
     const serverHealthData = req.body.ServerHealths;
+    console.log(`POST from LB: ${serverHealthData}`)
     const testId = req.body.TestId;
     res.sendStatus(200);
     // create an array of create objects to pass into bulkCreate
@@ -15,6 +16,7 @@ const serverHealthController = {
       let ip = serverHealth.Address;
       return NodeServer.findOne({where: {ip: ip}})
         .then(server => {
+          console.log(`server from DB: ${server}`)
           return {
             memory: serverHealth.Mem,
             CPU: serverHealth.Cpu,
