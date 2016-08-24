@@ -8,7 +8,6 @@ declare let d3: any;
   templateUrl: './client/app/components/graphs/statusCodeBar/statusCodeBar.component.html'
 })
 
-
 export class statusCodeBar implements OnInit{
   options;
   data;
@@ -19,54 +18,40 @@ export class statusCodeBar implements OnInit{
   @ViewChild(nvD3)
   nvD3: nvD3;
   ngOnInit(){
-    this.parsedData = this.requestData;
     this.options = {
       chart: {
-        type: 'multiBarChart',
-        height: 200,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 50,
-          left: 55
-        },
-        x: function(d){return d.label;},
-        y: function(d){return d.value;},
-        showValues: true,
-        valueFormat: function(d){
-          return d3.format(',0%')(d);
+        type: 'pieChart',
+        height: 250,
+        donut: true,
+        x: function(d){return d.key;},
+        y: function(d){return d.y;},
+        showLabels: true,
+        pie: {
+          startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
+          endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
         },
         duration: 500,
-        xAxis: {
-          axisLabel: ''
-        },
-        yAxis: {
-          axisLabel: '# of Status Codes',
-          axisLabelDistance: -10
+        legend: {
+          margin: {
+            top: 5,
+            right: 140,
+            bottom: 5,
+            left: 0
+          }
         }
       }
     }
-    this.data = this.parsedData.status;
-    // this.data = [
-    //   {
-    //     key: "200",
-    //     values: [
-    //       {
-    //         "label" : "Status Code" ,
-    //         "value" : 80
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     key: "400",
-    //     values: [
-    //       {
-    //         "label" : "Status Code" ,
-    //         "value" : 50
-    //       }
-    //     ]
-    //   }
-    // ];
+    // this.data = this.parsedData.status;
+    this.data = this.requestData.status || [
+      {
+        key: "Status Code 200",
+        y: 125
+      },
+      {
+        key: "Status Code 400",
+        y: 25
+      }
+    ];
   }
 
   ngAfterViewInit() {
