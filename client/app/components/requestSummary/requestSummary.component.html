@@ -1,5 +1,16 @@
 <div>
-  <h2>Request Summary Component</h2>
-  <descriptiveInfo  [requestData]="requestData"></descriptiveInfo>
-  <statusCodeBar [requestData]="requestData"></statusCodeBar>
+  <h5>Summary of Results</h5>
+  <div class="row">
+    <div class="col s3 requestBox total-requests z-depth-3">
+      <h3>{{totalReqs}}</h3>
+      <h5>Total Requests</h5>
+    </div>
+    <div class="col s3 requestBox success-rate z-depth-3">
+      <h3>{{successRate | percent: '3.2-2'}}</h3>
+      <h5>Success Rate</h5>
+    </div>
+    <div class="col s5 z-depth-3 status-code-chart">
+      <statusCodeBar [requestData]="requestData"></statusCodeBar>
+    </div>
+  </div>
 </div>

@@ -14,6 +14,23 @@ var descriptiveInfo_info_1 = require('../graphs/descriptiveInfo/descriptiveInfo.
 var RequestSummaryComponent = (function () {
     function RequestSummaryComponent() {
     }
+    RequestSummaryComponent.prototype.ngOnInit = function () {
+        this.totalReqs = this.requestData.totalReqs;
+        this.summarizeStatusCodes(this.requestData.status);
+    };
+    RequestSummaryComponent.prototype.summarizeStatusCodes = function (statusCodeArray) {
+        this.statusCodeCounts = {};
+        for (var i = 0; i < statusCodeArray.length; i++) {
+            this.statusCodeCounts[statusCodeArray[i].key] = statusCodeArray[i].values[0].value;
+        }
+        this.calculateSuccessRate(this.statusCodeCounts[200]);
+    };
+    RequestSummaryComponent.prototype.calculateSuccessRate = function (successes) {
+        this.successRate = successes ? (successes / this.totalReqs) : 0;
+    };
+    RequestSummaryComponent.prototype.keys = function () {
+        return Object.keys(this.statusCodeCounts);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

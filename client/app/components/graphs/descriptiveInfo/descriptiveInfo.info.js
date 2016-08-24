@@ -12,16 +12,15 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var descriptiveInfo = (function () {
     function descriptiveInfo() {
-        this.dataReceived = new core_1.EventEmitter();
     }
     descriptiveInfo.prototype.ngOnInit = function () {
         this.parsedData = this.requestData;
-        this.totalReqs = this.parsedData.totalReqs;
-        this.latencyAvg = this.parsedData.latency.avg;
-        this.latencyMin = this.parsedData.latency.min;
-        this.latencyMax = this.parsedData.latency.max;
-        this.latencyStdDev = this.parsedData.latency.stdDev;
-        this.summarizeStatusCodes(this.parsedData.status);
+        this.totalReqs = this.requestData.totalReqs;
+        this.latencyAvg = this.requestData.latency.avg;
+        this.latencyMin = this.requestData.latency.min;
+        this.latencyMax = this.requestData.latency.max;
+        this.latencyStdDev = this.requestData.latency.stdDev;
+        this.summarizeStatusCodes(this.requestData.status);
     };
     descriptiveInfo.prototype.summarizeStatusCodes = function (statusCodeArray) {
         this.statusCodeCounts = {};
@@ -40,15 +39,11 @@ var descriptiveInfo = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], descriptiveInfo.prototype, "requestData", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], descriptiveInfo.prototype, "dataReceived", void 0);
     descriptiveInfo = __decorate([
         core_1.Component({
             selector: 'descriptiveInfo',
             templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
-            styles: ["\n     table {\n       color: #FFF;\n       font-size: 1.2em;\n       font-weight: 500;\n       border: 1px solid #FFF;\n       width: 70%;\n     }\n     th {\n       background-color: orange;\n     }\n     tr, td {\n       padding: 1em;\n     }\n   "],
+            styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.css'],
             directives: [common_1.NgStyle]
         }), 
         __metadata('design:paramtypes', [])

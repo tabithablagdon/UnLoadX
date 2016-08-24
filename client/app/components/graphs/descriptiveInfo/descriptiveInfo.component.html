@@ -1,4 +1,20 @@
-<h5 [style.color]="'orange'"> Summary Statistics </h5>
+<div class="row">
+  <div class="col s3">
+    <div class="requestBox total-requests">
+      {{totalReqs}}
+      <p>Total Requests</p>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="requestBox success-rate">
+      {{successRate | percent: '3.2-2'}}
+      <p>Success Rate</p>
+    </div>
+  </div>
+  <div class="col s6">
+    <!-- Promo Content 3 goes here -->
+  </div>
+</div>
 
 <table class="highlight">
   <thead>

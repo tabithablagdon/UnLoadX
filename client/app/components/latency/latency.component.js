@@ -13,6 +13,12 @@ var latencyLineGraph_graph_1 = require('../graphs/latencyLineGraph/latencyLineGr
 var LatencyComponent = (function () {
     function LatencyComponent() {
     }
+    LatencyComponent.prototype.ngOnInit = function () {
+        this.latencyAvg = this.requestData.latency.avg.toFixed(2);
+        this.latencyMin = this.requestData.latency.min;
+        this.latencyMax = this.requestData.latency.max;
+        this.latencyStdDev = this.requestData.latency.stdDev.toFixed(2);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

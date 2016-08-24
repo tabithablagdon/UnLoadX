@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { latencyLineGraph } from '../graphs/latencyLineGraph/latencyLineGraph.graph';
 
 
@@ -9,11 +9,19 @@ import { latencyLineGraph } from '../graphs/latencyLineGraph/latencyLineGraph.gr
   directives: [latencyLineGraph]
 })
 
-export class LatencyComponent {
+export class LatencyComponent implements OnInit {
   @Input() requestData: any;
+  latencyAvg;
+  latencyMax;
+  latencyMin;
+  latencyStdDev;
 
-  constructor() {
+  constructor() {}
 
+  ngOnInit() {
+    this.latencyAvg = this.requestData.latency.avg.toFixed(2);
+    this.latencyMin = this.requestData.latency.min;
+    this.latencyMax = this.requestData.latency.max;
+    this.latencyStdDev = this.requestData.latency.stdDev.toFixed(2);
   }
-
 }

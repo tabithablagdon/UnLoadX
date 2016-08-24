@@ -1,4 +1,33 @@
-<div>
-  <h2>Latency Component</h2>
-  <latencyLineGraph  [requestData]="requestData"></latencyLineGraph>
+<div class="row latency-chart">
+  <h5>Latency Summary</h5>
+  <div class="col s3">
+    <div class="latencyBox latencyAvg z-depth-3">
+      <h5>Avg</h5>
+      <h3>{{latencyAvg}}</h3>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="latencyBox latencyMax z-depth-3">
+      <h5>Max</h5>
+      <h3>{{latencyMax}}</h3>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="latencyBox latencyAvg z-depth-3">
+      <h5>Min</h5>
+      <h3>{{latencyMin}}</h3>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="latencyBox latencyStdDev z-depth-3">
+      <h5>Std Dev</h5>
+      <h3>{{latencyStdDev}}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 latency-chart z-depth-3">
+    <latencyLineGraph  [requestData]="requestData"></latencyLineGraph>
+  </div>
 </div>

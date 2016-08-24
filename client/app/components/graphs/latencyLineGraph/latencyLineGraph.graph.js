@@ -19,7 +19,7 @@ var latencyLineGraph = (function () {
         this.options = {
             chart: {
                 type: 'lineChart',
-                height: 450,
+                height: 200,
                 margin: {
                     top: 20,
                     right: 20,

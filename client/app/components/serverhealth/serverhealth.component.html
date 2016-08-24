@@ -1,4 +1,9 @@
-<div>
-  <h2>Server Health Component</h2>
-  <serverHealthChart  [requestData]="requestData"></serverHealthChart>
+<div class="row">
+  <h5>Server Health Breakdown</h5>
+  <div class="col s6 serverhealth-chart z-depth-3">
+    [insert server health components here]
+  </div>
+  <div class="col s6 serverhealth-chart z-depth-3">
+    <serverHealthChart  [requestData]="requestData"></serverHealthChart>
+  </div>
 </div>
