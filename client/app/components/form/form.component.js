@@ -14,7 +14,6 @@ var ipPort_1 = require('../types/ipPort');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
-// import * as io from 'socket.io-client';
 var socket_service_1 = require('../socket/socket.service');
 var auth_service_1 = require('../../authentication/auth.service');
 var FormComponent = (function () {
