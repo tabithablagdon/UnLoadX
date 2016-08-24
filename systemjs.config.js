@@ -10,7 +10,11 @@
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
     'socket.io-client':           'node_modules/socket.io-client/socket.io.js',
-    'angular2-jwt':               'node_modules/angular2-jwt'
+    'angular2-jwt':               'node_modules/angular2-jwt',
+    'jasmine-core':               'node_modules/jasmine-core',
+    '@angular/core/testing':      'node_modules/@angular/core/testing',
+    // 'reflect-metadata':           'node_modules/reflect-metadata',
+    // 'zone.js':                    'node_modules/zone.js'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
@@ -19,6 +23,7 @@
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'socket.io-client':           { defaultExtension: 'js' },
     'angular2-jwt':               { defaultExtension: 'js' },
+    '@angular/core/testing':      { defaultExtension: 'js' },
   };
   var ngPackageNames = [
     'common',

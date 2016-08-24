@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test-client && npm run test-server",
-    "test-client": "mocha spec/clientspec.js",
+    "test-client": "live-server --open=client/www/unit_tests.html",
     "test-server": "mocha spec/serverspec.js",
     "start": "npm run startsiege | npm run startserver",
     "startsiege": "nodemon siege-service/server.js --exec babel-node --presets es2015",
@@ -52,6 +52,8 @@
     "core-js": "^2.4.0",
     "d3": "^3.5.17",
     "express": "^4.14.0",
+    "jasmine": "^2.4.1",
+    "lite-server": "^2.2.2",
     "mocha": "^3.0.0",
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
@@ -64,7 +66,7 @@
     "sequelize": "^3.23.6",
     "siege": "^0.2.0",
     "socket.io": "^1.4.8",
-    "systemjs": "0.19.27",
+    "systemjs": "^0.19.27",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
@@ -73,6 +75,7 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "concurrently": "^2.0.0",
+    "jasmine-core": "2.4.1",
     "node-mocks-http": "^1.5.3",
     "supertest": "^2.0.0",
     "supertest-chai": "0.0.8",
