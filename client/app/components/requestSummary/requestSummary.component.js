@@ -9,46 +9,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var descriptiveInfo = (function () {
-    function descriptiveInfo() {
+var statusCodeBar_graph_1 = require('../graphs/statusCodeBar/statusCodeBar.graph');
+var descriptiveInfo_info_1 = require('../graphs/descriptiveInfo/descriptiveInfo.info');
+var RequestSummaryComponent = (function () {
+    function RequestSummaryComponent() {
     }
-    descriptiveInfo.prototype.ngOnInit = function () {
-        this.parsedData = this.requestData;
+    RequestSummaryComponent.prototype.ngOnInit = function () {
         this.totalReqs = this.requestData.totalReqs;
-        this.latencyAvg = this.requestData.latency.avg;
-        this.latencyMin = this.requestData.latency.min;
-        this.latencyMax = this.requestData.latency.max;
-        this.latencyStdDev = this.requestData.latency.stdDev;
         this.summarizeStatusCodes(this.requestData.status);
     };
-    descriptiveInfo.prototype.summarizeStatusCodes = function (statusCodeArray) {
+    RequestSummaryComponent.prototype.summarizeStatusCodes = function (statusCodeArray) {
         this.statusCodeCounts = {};
         for (var i = 0; i < statusCodeArray.length; i++) {
             this.statusCodeCounts[statusCodeArray[i].key] = statusCodeArray[i].values[0].value;
         }
         this.calculateSuccessRate(this.statusCodeCounts[200]);
     };
-    descriptiveInfo.prototype.calculateSuccessRate = function (successes) {
+    RequestSummaryComponent.prototype.calculateSuccessRate = function (successes) {
         this.successRate = successes ? (successes / this.totalReqs) : 0;
     };
-    descriptiveInfo.prototype.keys = function () {
+    RequestSummaryComponent.prototype.keys = function () {
         return Object.keys(this.statusCodeCounts);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], descriptiveInfo.prototype, "requestData", void 0);
-    descriptiveInfo = __decorate([
+    ], RequestSummaryComponent.prototype, "requestData", void 0);
+    RequestSummaryComponent = __decorate([
         core_1.Component({
-            selector: 'descriptiveInfo',
-            templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
-            styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.css'],
-            directives: [common_1.NgStyle]
+            selector: 'request-summary',
+            templateUrl: './client/app/components/requestsummary/requestsummary.component.html',
+            styleUrls: ['./client/app/components/requestsummary/requestsummary.component.css'],
+            directives: [statusCodeBar_graph_1.statusCodeBar, descriptiveInfo_info_1.descriptiveInfo]
         }), 
         __metadata('design:paramtypes', [])
-    ], descriptiveInfo);
-    return descriptiveInfo;
+    ], RequestSummaryComponent);
+    return RequestSummaryComponent;
 }());
-exports.descriptiveInfo = descriptiveInfo;
-//# sourceMappingURL=descriptiveInfo.info.js.map
+exports.RequestSummaryComponent = RequestSummaryComponent;
+//# sourceMappingURL=requestSummary.component.js.map

@@ -17,7 +17,7 @@ var successBarChart = (function () {
         this.options = {
             chart: {
                 type: 'discreteBarChart',
-                height: 450,
+                height: 300,
                 margin: {
                     top: 20,
                     right: 20,

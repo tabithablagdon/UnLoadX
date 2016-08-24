@@ -11,12 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
-var statusCodeBar_graph_1 = require('./statusCodeBar/statusCodeBar.graph');
-var latencyLineGraph_graph_1 = require('./latencyLineGraph/latencyLineGraph.graph');
-var descriptiveInfo_info_1 = require('./descriptiveInfo/descriptiveInfo.info');
-var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
-var serverhealthchart_component_1 = require('./serverHealthChart/serverhealthchart.component');
 var socket_service_1 = require('../socket/socket.service');
+var networkGraph_graph_1 = require('./networkGraph/networkGraph.graph');
+var latency_component_1 = require('../latency/latency.component');
+var requestSummary_component_1 = require('../requestSummary/requestSummary.component');
+var serverhealth_component_1 = require('../serverhealth/serverhealth.component');
 var Graphs = (function () {
     function Graphs(_SocketService, _http) {
         this._SocketService = _SocketService;
@@ -54,7 +53,7 @@ var Graphs = (function () {
             selector: 'graphs',
             templateUrl: './client/app/components/graphs/graphs.component.html',
             styleUrls: ['./client/app/components/graphs/graphs.component.css'],
-            directives: [descriptiveInfo_info_1.descriptiveInfo, networkGraph_graph_1.networkGraph, statusCodeBar_graph_1.statusCodeBar, latencyLineGraph_graph_1.latencyLineGraph, serverhealthchart_component_1.serverHealthChart],
+            directives: [networkGraph_graph_1.networkGraph, latency_component_1.LatencyComponent, requestSummary_component_1.RequestSummaryComponent, serverhealth_component_1.ServerHealthComponent],
             providers: [socket_service_1.default]
         }), 
         __metadata('design:paramtypes', [socket_service_1.default, http_1.Http])

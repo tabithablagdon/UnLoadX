@@ -19,7 +19,7 @@ var statusCodeBar = (function () {
         this.options = {
             chart: {
                 type: 'multiBarChart',
-                height: 450,
+                height: 200,
                 margin: {
                     top: 20,
                     right: 20,

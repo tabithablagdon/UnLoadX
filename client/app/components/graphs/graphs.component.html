@@ -12,11 +12,14 @@
   <div class="graph-box">
     <h4>Test Results</h4>
     <hr />
-    <descriptiveInfo *ngIf="isDataAvailable" [requestData]="requestData"></descriptiveInfo>
-    <serverHealthChart *ngIf="isDataAvailable" [requestData]="requestData"></serverHealthChart>
-    <statusCodeBar *ngIf="isDataAvailable" [requestData]="requestData"></statusCodeBar>
-    <latencyLineGraph *ngIf="isDataAvailable" [requestData]="requestData"></latencyLineGraph>
+    <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
+
+    <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>
+
+    <server-health *ngIf="isDataAvailable" [requestData]="requestData"></server-health>
+
     <networkGraph></networkGraph>
+
   </div>
-  
+
 </div>

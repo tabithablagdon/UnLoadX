@@ -5,21 +5,7 @@ import {NgStyle} from '@angular/common';
 @Component({
   selector: 'descriptiveInfo',
   templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
-   styles: [`
-     table {
-       color: #FFF;
-       font-size: 1.2em;
-       font-weight: 500;
-       border: 1px solid #FFF;
-       width: 70%;
-     }
-     th {
-       background-color: orange;
-     }
-     tr, td {
-       padding: 1em;
-     }
-   `],
+   styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.css'],
    directives: [NgStyle]
 })
 
@@ -34,17 +20,17 @@ export class descriptiveInfo implements OnInit {
   successRate;
 
   @Input () requestData: any;
-  @Output () dataReceived = new EventEmitter();
+
   constructor () {}
 
   ngOnInit() {
    this.parsedData = this.requestData;
-   this.totalReqs = this.parsedData.totalReqs
-   this.latencyAvg = this.parsedData.latency.avg;
-   this.latencyMin = this.parsedData.latency.min;
-   this.latencyMax = this.parsedData.latency.max;
-   this.latencyStdDev = this.parsedData.latency.stdDev;
-   this.summarizeStatusCodes(this.parsedData.status);
+   this.totalReqs = this.requestData.totalReqs
+   this.latencyAvg = this.requestData.latency.avg;
+   this.latencyMin = this.requestData.latency.min;
+   this.latencyMax = this.requestData.latency.max;
+   this.latencyStdDev = this.requestData.latency.stdDev;
+   this.summarizeStatusCodes(this.requestData.status);
   }
 
   summarizeStatusCodes(statusCodeArray) {

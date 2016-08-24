@@ -112,11 +112,11 @@ nodeController.sendTestToLB = (res, userId, ip) => {
           body: JSON.stringify(res)
         }, (err, res, body) => {
           if (err) {
-            console.log(`Error in sendTestToLB ${err.message}`);
+            console.log(`Error in sendTestToLB at ${ip} ${err.message}`);
             reject(err);
           } else {
-            console.log(`[STEP 2.5]: Send Test to LB resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-            let dataFromLB = JSON.parse(body);
+            console.log(`[STEP 2.5]: Send Test to LB at ${ip} resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
+            let dataFromLB = body ? JSON.parse(body) : {'Volume': 10, 'TestId': 4};
             dataFromLB.userId = userId;
             console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
             resolve(dataFromLB);

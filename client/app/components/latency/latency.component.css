@@ -1,0 +1,32 @@
+.latencyBox {
+  border-radius: 10px;
+  color: #FFF;
+  height: 150px;
+  margin-right: 1em;
+  padding: 2em 1em 2em 1em;
+  text-align: center;
+  width: 150px;
+}
+
+.latency-chart {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 250px;
+  padding: 1em;
+}
+
+.latencyMin {
+  background-color: #28D8B2;
+}
+
+.latencyMax {
+  background-color: #7560A5;
+}
+
+.latencyAvg {
+  background-color: #28D8B2;
+}
+
+.latencyStdDev {
+  background-color: #7560A5;
+}
