@@ -3,13 +3,8 @@ import { HTTP_PROVIDERS, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
 
-import { statusCodeBar} from './statusCodeBar/statusCodeBar.graph';
-import { latencyLineGraph } from './latencyLineGraph/latencyLineGraph.graph';
-import { descriptiveInfo } from './descriptiveInfo/descriptiveInfo.info';
-import { networkGraph } from './networkGraph/networkGraph.graph';
-import { serverHealthChart } from './serverHealthChart/serverhealthchart.component';
 import SocketService from '../socket/socket.service';
-
+import { networkGraph } from './networkGraph/networkGraph.graph';
 import { LatencyComponent } from '../latency/latency.component';
 import { RequestSummaryComponent } from '../requestSummary/requestSummary.component';
 import { ServerHealthComponent } from '../serverhealth/serverhealth.component';
@@ -18,7 +13,7 @@ import { ServerHealthComponent } from '../serverhealth/serverhealth.component';
   selector: 'graphs',
   templateUrl: './client/app/components/graphs/graphs.component.html',
   styleUrls: ['./client/app/components/graphs/graphs.component.css'],
-  directives: [descriptiveInfo, networkGraph, statusCodeBar, latencyLineGraph, serverHealthChart],
+  directives: [networkGraph, LatencyComponent, RequestSummaryComponent, ServerHealthComponent],
   providers: [SocketService]
 })
 
