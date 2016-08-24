@@ -79,7 +79,9 @@ const nodeController = {};
  */
 
 nodeController.sendTestToLB = (res, userId, ip) => {
-  console.log(`[STEP 2]: In sendTestToLB and sending form to ${ip}`);
+  let lb_url = `http://${ip}:9000/iptables`;
+
+  console.log(`[STEP 2]: In sendTestToLB and sending form to ${ip} and sending body ${JSON.stringify(res)} to ${lb_url}`);
 
   // first tell the LBserver to start the LB...
   // the LB does not send a response to this initial request so we cannot promisify
@@ -107,7 +109,7 @@ nodeController.sendTestToLB = (res, userId, ip) => {
     .then(() => {
       return new Promise((resolve, reject) => {
         request({
-          url: 'http://' + ip + ':9000/iptables',
+          url: lb_url,
           method: 'POST',
           body: JSON.stringify(res)
         }, (err, res, body) => {
@@ -115,8 +117,8 @@ nodeController.sendTestToLB = (res, userId, ip) => {
             console.log(`Error in sendTestToLB at ${ip} ${err.message}`);
             reject(err);
           } else {
-            console.log(`[STEP 2.5]: Send Test to LB at ${ip} resolved successfully with ${res.statusCode} and received back body ${JSON.stringify(body)}`);
-            let dataFromLB = body ? JSON.parse(body) : {'Volume': 10, 'TestId': 4};
+            console.log(`[STEP 2.5]: Send Test to LB at ${ip} resolved successfully with ${res.statusCode} and received back body ${body}`);
+            let dataFromLB = JSON.parse(body);
             dataFromLB.userId = userId;
             console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
             resolve(dataFromLB);
