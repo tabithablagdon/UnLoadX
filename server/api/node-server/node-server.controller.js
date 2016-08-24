@@ -10,8 +10,8 @@ const nodeController = {};
 
     servers.forEach(server => {
       NodeServer.findOne({where: {ip: server.ip}})
-        .then(server => {
-          if (!server) {
+        .then(result => {
+          if (!result) {
             NodeServer.create({
               ip: server.ip,
               port: server.port,
@@ -42,8 +42,12 @@ const nodeController = {};
    // Retrieve UserId from User table
    return User.findOne({where: {authUserId: authUserId}, include: [LoadBalancer]})
      .then(user => {
+
+       console.log('here is user: ', user);
+       console.log('here is users LB: ', user.LoadBalancer);
+
        userId = user.dataValues.id;
-       lbIp = user.LoadBalancer.ip;
+       lbIp = user.LoadBalancer.dataValues.ip;
        // Create records in NodeServer table for each server submitted
        nodeController.createServers(servers, userId);
      })

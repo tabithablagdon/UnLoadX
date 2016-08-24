@@ -22,7 +22,7 @@ const loadBalancerController = {
   createLoadBalancer: () => {
     return new Promise((resolve, reject) => {
       const dir = __dirname;
-      exec('. ' + dir + '/startEC2.sh', (err, stdout, stderr) => {
+      exec('bash ' + dir + '/startEC2.sh', (err, stdout, stderr) => {
         if (err) {
           console.log(err, stdout, stderr);
           reject(err);
