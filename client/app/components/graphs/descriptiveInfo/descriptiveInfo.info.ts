@@ -4,8 +4,8 @@ import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'descriptiveInfo',
-  templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
-   styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.css'],
+  templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveinfo.component.html',
+   styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveinfo.component.css'],
    directives: [NgStyle]
 })
 

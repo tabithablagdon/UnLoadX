@@ -42,8 +42,8 @@ var descriptiveInfo = (function () {
     descriptiveInfo = __decorate([
         core_1.Component({
             selector: 'descriptiveInfo',
-            templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.html',
-            styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveInfo.component.css'],
+            templateUrl: './client/app/components/graphs/descriptiveInfo/descriptiveinfo.component.html',
+            styleUrls: ['./client/app/components/graphs/descriptiveInfo/descriptiveinfo.component.css'],
             directives: [common_1.NgStyle]
         }), 
         __metadata('design:paramtypes', [])

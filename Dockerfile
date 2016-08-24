@@ -12,6 +12,7 @@ RUN npm install
 RUN apt-get update
 RUN apt-get install siege
 RUN cat siege-service/.siegerc > /etc/siege/siegerc
+RUN mkdir siege-service/siege-logs
 ENV NODE_ENV production
 ENV AWS prod
 
