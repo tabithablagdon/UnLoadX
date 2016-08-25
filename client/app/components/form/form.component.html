@@ -18,7 +18,8 @@
       </div>
     </div>
     <div class="row form-submit">
-      <button type= "submit" class="btn waves-effect waves-light orange">Run Tests </button>
+      <button *ngIf="lb === false" type= "submit" disabled="true" btnEnable class="btn waves-effect waves-light orange">Waiting for Load Balancer</button>
+      <button *ngIf="lb === true" type= "submit" btnEnable class="btn waves-effect waves-light orange">Run Test</button>
     </div>
   </form>
 </div>

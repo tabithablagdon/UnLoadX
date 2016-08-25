@@ -16,12 +16,16 @@ var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/toPromise');
+var Subject_1 = require('rxjs/Subject');
 var Auth = (function () {
     function Auth(authHttp, router, http) {
         var _this = this;
         this.authHttp = authHttp;
         this.router = router;
         this.http = http;
+        // subject to notify component when promise chain resolves
+        this.lbStatus = false;
+        this.lbUp = new Subject_1.Subject();
         // Configure Auth0
         this.lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
             languageDictionary: {
@@ -141,11 +145,18 @@ var Auth = (function () {
     };
     ;
     Auth.prototype.postAuthUser = function (body) {
+        var _this = this;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post('/api/user', JSON.stringify(body), options)
             .toPromise()
-            .then(function (res) { return console.log('response from post'); })
+            .then(function (res) {
+            console.log('response from post');
+            // change the button to enabled
+            // emit an event, or whatever
+            _this.lbStatus = true;
+            _this.lbUp.next(_this.lbStatus);
+        })
             .catch(function (err) { return console.log("err from psot: " + err); });
     };
     Auth.prototype.authenticated = function () {
