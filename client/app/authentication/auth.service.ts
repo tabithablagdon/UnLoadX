@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { Subject } from 'rxjs/Subject';
+
 
 
 // Avoid name not found warnings
@@ -14,6 +16,9 @@ declare var Auth0Lock: any;
 
 @Injectable()
 export class Auth {
+  // subject to notify component when promise chain resolves
+  lbStatus: boolean = false;
+  lbUp: Subject<boolean> = new Subject<boolean>();
   // Configure Auth0
   lock = new Auth0Lock('lSGQqNGvDdE2GQdwFCQ9det1PCZUEU5q', 'jamesramadan.auth0.com', {
     languageDictionary: { // allows to override dictionary entries
@@ -161,7 +166,14 @@ export class Auth {
      const options = new RequestOptions({ headers: headers })
      return this.http.post('/api/user', JSON.stringify(body), options)
       .toPromise()
-      .then(res => console.log('response from post'))
+      .then(res => {
+        console.log('response from post')
+
+        // change the button to enabled
+        // emit an event, or whatever
+        this.lbStatus = true
+        this.lbUp.next(this.lbStatus)
+      })
       .catch(err => console.log(`err from psot: ${err}`))
    }
 

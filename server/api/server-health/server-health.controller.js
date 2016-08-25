@@ -32,6 +32,7 @@ const serverHealthController = {
       .catch(err => console.log(`some error: ${err}`))
   },
 
+
   getServerHealth: (req, res) => {
     const id = req.params.id;
     ServerHealth.findAll()

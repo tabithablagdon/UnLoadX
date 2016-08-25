@@ -15,12 +15,13 @@ import { FormItemComponent } from './formItem/formItem.component';
 import * as io from 'socket.io-client';
 import SocketService from '../socket/socket.service';
 import { Auth } from '../../authentication/auth.service';
+import { EnableButtonDirective } from '../../directives/enable.directive';
 
 
 @Component({
   selector: 'my-form',
   templateUrl: './client/app/components/form/form.component.html',
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent],
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, FormItemComponent, EnableButtonDirective],
   providers: [HTTP_PROVIDERS, SocketService],
   styleUrls: ['./client/app/components/form/form.component.css']
 })
@@ -30,8 +31,16 @@ export class FormComponent {
   servers = [new ipPort(null, null, null, null)];
   numReqModel;
   signInNotifier = false;
+  lb: boolean;
+  _subscription: any;
 
-  constructor(private Router: Router, private SocketService: SocketService, private Auth: Auth) {}
+  constructor(private Router: Router, private SocketService: SocketService, private Auth: Auth) {
+    this.lb = Auth.lbStatus;
+    this._subscription = Auth.lbUp.subscribe((val) => {
+      this.lb = val;
+      console.log('event detected from form component')
+    });
+  }
 
 
   onSubmit() {

@@ -26,7 +26,7 @@ var RequestSummaryComponent = (function () {
         this.calculateSuccessRate(this.statusCodeCounts[200]);
     };
     RequestSummaryComponent.prototype.calculateSuccessRate = function (successes) {
-        this.successRate = successes ? Math.round((successes / this.totalReqs)) : 0;
+        this.successRate = successes ? Math.round((successes / this.totalReqs) * 100) : 0;
     };
     RequestSummaryComponent.prototype.keys = function () {
         return Object.keys(this.statusCodeCounts);
@@ -38,8 +38,8 @@ var RequestSummaryComponent = (function () {
     RequestSummaryComponent = __decorate([
         core_1.Component({
             selector: 'request-summary',
-            templateUrl: './client/app/components/requestsummary/requestsummary.component.html',
-            styleUrls: ['./client/app/components/requestsummary/requestsummary.component.css'],
+            templateUrl: './client/app/components/requestSummary/requestSummary.component.html',
+            styleUrls: ['./client/app/components/requestSummary/requestSummary.component.css'],
             directives: [statusCodeBar_graph_1.statusCodeBar, descriptiveInfo_info_1.descriptiveInfo]
         }), 
         __metadata('design:paramtypes', [])

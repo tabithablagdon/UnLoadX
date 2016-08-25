@@ -2,6 +2,7 @@ import { User, LoadBalancer } from '../../db/db';
 import { handleError } from '../../config/utils';
 import loadBalancerController from '../loadbalancer/loadbalancer.controller';
 import request from 'request';
+import { get200fromLB } from '../../config/LB_Ready.js';
 
 const userController = {
 
@@ -14,6 +15,8 @@ const userController = {
     const authUserId = req.body.authUserId;
     const name = req.body.name;
     const email = req.body.email;
+    let lbip;
+    let lbuser;
 
     User.findOne({where: {authUserId: authUserId}})
       .then(user => {
@@ -28,6 +31,7 @@ const userController = {
               // invoke James' function to figure out when docker is up and running
               // loadBalancerController.getLoadBalancerReadyStatus
               console.log(`ip from lb ec2 creation: ${ip}`)
+              lbip = ip;
               return LoadBalancer.create({
                 ip: ip
               })
@@ -41,6 +45,14 @@ const userController = {
                 authUserId: authUserId,
                 loadbalancerId: loadBalancerId
               });
+            })
+            // add a promise here that won't resolve until the LB instance proves docker is ready
+            .then(user => {
+              lbuser = user;
+              return get200fromLB(lbip)
+            })
+            .then(() => {
+              return lbuser;
             })
             .then(user => res.json(user))
             .catch(err => console.log(`Error in user/loadbalancer creation promise chain: ${err}`));

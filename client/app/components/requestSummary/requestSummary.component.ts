@@ -4,8 +4,8 @@ import { descriptiveInfo } from '../graphs/descriptiveInfo/descriptiveInfo.info'
 
 @Component({
   selector: 'request-summary',
-  templateUrl: './client/app/components/requestsummary/requestsummary.component.html',
-  styleUrls: ['./client/app/components/requestsummary/requestsummary.component.css'],
+  templateUrl: './client/app/components/requestSummary/requestSummary.component.html',
+  styleUrls: ['./client/app/components/requestSummary/requestSummary.component.css'],
   directives: [statusCodeBar, descriptiveInfo]
 })
 
@@ -33,7 +33,7 @@ export class RequestSummaryComponent implements OnInit {
   }
 
   calculateSuccessRate (successes) {
-   this.successRate = successes ? Math.round((successes / this.totalReqs)) : 0;
+   this.successRate = successes ? Math.round((successes / this.totalReqs)*100) : 0;
   }
 
   keys() : Array<string> {
