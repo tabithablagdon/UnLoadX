@@ -23,7 +23,7 @@ export class latencyLineGraph implements OnInit{
     this.options = {
       chart: {
         type: 'lineChart',
-        height: 200,
+        height: 350,
         margin : {
           top: 20,
           right: 20,
@@ -52,8 +52,9 @@ export class latencyLineGraph implements OnInit{
           axisLabel: 'Time Latency (ms)',
           axisLabelDistance: -10
         },
-        styles: {
-
+        style: {
+          fill: 'white',
+          stroke: 'white'
         }
       }
     }
@@ -61,7 +62,7 @@ export class latencyLineGraph implements OnInit{
       {
         values: this.parsedData.latency.latencySet, //values - represents the array of {x,y} data points
         key: 'Latency Per Request', //key  - the name of the series.
-        color: '#ff7f0e'  //color - optional: choose your own line color.
+        color: 'orange'  //color - optional: choose your own line color.
       }
     ];
   }

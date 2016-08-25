@@ -74,10 +74,7 @@ function parseRequests(data, serverHealthData) {
   for (let key in statusCodesCache) {
     status.push({
       'key': key,
-      'values': [{
-        'label': 'Status Code',
-        'value': statusCodesCache[key]
-      }]
+      'y': statusCodesCache[key]
     });
   }
 

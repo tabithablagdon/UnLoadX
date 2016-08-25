@@ -10,9 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var serverhealthchart_component_1 = require('../graphs/serverHealthChart/serverhealthchart.component');
+var server_stats_component_1 = require('../graphs/server-stats/server-stats.component');
 var ServerHealthComponent = (function () {
     function ServerHealthComponent() {
     }
+    ServerHealthComponent.prototype.ngOnInit = function () {
+        this.serverData = this.requestData.serverhealth;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -22,7 +26,7 @@ var ServerHealthComponent = (function () {
             selector: 'server-health',
             templateUrl: './client/app/components/serverhealth/serverhealth.component.html',
             styleUrls: ['./client/app/components/serverhealth/serverhealth.component.css'],
-            directives: [serverhealthchart_component_1.serverHealthChart]
+            directives: [serverhealthchart_component_1.serverHealthChart, server_stats_component_1.ServerStatsComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], ServerHealthComponent);

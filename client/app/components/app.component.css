@@ -1,0 +1,21 @@
+img {
+  max-width: 60;
+  vertical-align: sub;
+}
+
+.button-nav {
+  text-align: right;
+}
+
+.button-style {
+  margin: 20px;
+}
+
+.main-logo {
+  color: orange;
+  font-size: 3.7em;
+  font-weight: 400;
+}
+
+.main-nav {
+}
