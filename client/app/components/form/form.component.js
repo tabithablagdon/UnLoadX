@@ -16,13 +16,20 @@ var router_1 = require('@angular/router');
 var formItem_component_1 = require('./formItem/formItem.component');
 var socket_service_1 = require('../socket/socket.service');
 var auth_service_1 = require('../../authentication/auth.service');
+var enable_directive_1 = require('../../directives/enable.directive');
 var FormComponent = (function () {
     function FormComponent(Router, SocketService, Auth) {
+        var _this = this;
         this.Router = Router;
         this.SocketService = SocketService;
         this.Auth = Auth;
         this.servers = [new ipPort_1.ipPort(null, null, null, null)];
         this.signInNotifier = false;
+        this.lb = Auth.lbStatus;
+        this._subscription = Auth.lbUp.subscribe(function (val) {
+            _this.lb = val;
+            console.log('event detected from form component');
+        });
     }
     FormComponent.prototype.onSubmit = function () {
         if (!!this.Auth.authenticated()) {
@@ -52,7 +59,7 @@ var FormComponent = (function () {
         core_1.Component({
             selector: 'my-form',
             templateUrl: './client/app/components/form/form.component.html',
-            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent],
+            directives: [forms_1.FORM_DIRECTIVES, forms_1.REACTIVE_FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, formItem_component_1.FormItemComponent, enable_directive_1.EnableButtonDirective],
             providers: [http_1.HTTP_PROVIDERS, socket_service_1.default],
             styleUrls: ['./client/app/components/form/form.component.css']
         }), 

@@ -1,0 +1,87 @@
+{
+    "OwnerId": "006949578634",
+    "ReservationId": "r-033d7168c029a2e70",
+    "Groups": [],
+    "Instances": [
+        {
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "PublicDnsName": "",
+            "RootDeviceType": "ebs",
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "EbsOptimized": false,
+            "LaunchTime": "2016-08-25T03:17:27.000Z",
+            "PrivateIpAddress": "172.31.15.4",
+            "ProductCodes": [],
+            "VpcId": "vpc-ea1d488f",
+            "StateTransitionReason": "",
+            "InstanceId": "i-05b4204191a596864",
+            "ImageId": "ami-b57536d5",
+            "PrivateDnsName": "ip-172-31-15-4.us-west-1.compute.internal",
+            "KeyName": "awskey1",
+            "SecurityGroups": [
+                {
+                    "GroupName": "launch-wizard-3",
+                    "GroupId": "sg-fbb62f9f"
+                }
+            ],
+            "ClientToken": "",
+            "SubnetId": "subnet-84581add",
+            "InstanceType": "t2.micro",
+            "NetworkInterfaces": [
+                {
+                    "Status": "in-use",
+                    "MacAddress": "06:23:e3:51:96:eb",
+                    "SourceDestCheck": true,
+                    "VpcId": "vpc-ea1d488f",
+                    "Description": "",
+                    "NetworkInterfaceId": "eni-7061b67f",
+                    "PrivateIpAddresses": [
+                        {
+                            "PrivateDnsName": "ip-172-31-15-4.us-west-1.compute.internal",
+                            "Primary": true,
+                            "PrivateIpAddress": "172.31.15.4"
+                        }
+                    ],
+                    "PrivateDnsName": "ip-172-31-15-4.us-west-1.compute.internal",
+                    "Attachment": {
+                        "Status": "attaching",
+                        "DeviceIndex": 0,
+                        "DeleteOnTermination": true,
+                        "AttachmentId": "eni-attach-7fd391dd",
+                        "AttachTime": "2016-08-25T03:17:27.000Z"
+                    },
+                    "Groups": [
+                        {
+                            "GroupName": "launch-wizard-3",
+                            "GroupId": "sg-fbb62f9f"
+                        }
+                    ],
+                    "SubnetId": "subnet-84581add",
+                    "OwnerId": "006949578634",
+                    "PrivateIpAddress": "172.31.15.4"
+                }
+            ],
+            "SourceDestCheck": true,
+            "Placement": {
+                "Tenancy": "default",
+                "GroupName": "",
+                "AvailabilityZone": "us-west-1c"
+            },
+            "Hypervisor": "xen",
+            "BlockDeviceMappings": [],
+            "Architecture": "x86_64",
+            "StateReason": {
+                "Message": "pending",
+                "Code": "pending"
+            },
+            "RootDeviceName": "/dev/xvda",
+            "VirtualizationType": "hvm",
+            "AmiLaunchIndex": 0
+        }
+    ]
+}
