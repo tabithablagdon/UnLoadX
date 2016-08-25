@@ -38,8 +38,8 @@ var RequestSummaryComponent = (function () {
     RequestSummaryComponent = __decorate([
         core_1.Component({
             selector: 'request-summary',
-            templateUrl: './client/app/components/requestsummary/requestsummary.component.html',
-            styleUrls: ['./client/app/components/requestsummary/requestsummary.component.css'],
+            templateUrl: './client/app/components/requestSummary/requestSummary.component.html',
+            styleUrls: ['./client/app/components/requestSummary/requestSummary.component.css'],
             directives: [statusCodeBar_graph_1.statusCodeBar, descriptiveInfo_info_1.descriptiveInfo]
         }), 
         __metadata('design:paramtypes', [])

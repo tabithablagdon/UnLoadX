@@ -8,4 +8,4 @@ server/api/loadbalancer/.aws
 node_modules
 
 # Siege Logs
-siege-service/siege-logs
+siege-service/siege-logs/*.txt
