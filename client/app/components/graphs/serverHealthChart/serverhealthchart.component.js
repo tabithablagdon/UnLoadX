@@ -19,7 +19,7 @@ var serverHealthChart = (function () {
         this.options = {
             chart: {
                 type: 'discreteBarChart',
-                height: 220,
+                height: 400,
                 margin: {
                     top: 20,
                     right: 20,
@@ -37,31 +37,35 @@ var serverHealthChart = (function () {
                     axisLabel: 'Servers'
                 },
                 yAxis: {
-                    axisLabel: 'GHz',
+                    axisLabel: '% Capacity Used',
                     axisLabelDistance: -10
                 }
             }
         };
         this.data = [
             {
-                key: "Cumulative Return",
+                key: "Server Health",
                 values: this.values
             }
         ];
     };
     serverHealthChart.prototype.parseData = function (serverHealthData) {
+        var _this = this;
         return serverHealthData.reduce(function (serverHealthArray, serverHealth) {
             var CPU = {
-                "label": "CPU (GHz): " + serverHealth.NodeServer.ip,
-                "value": serverHealth.CPU
+                "label": "CPU: " + serverHealth.NodeServer.ip,
+                "value": _this.convertToPercent(serverHealth.CPU)
             };
             var memory = {
-                "label": "Memory (GB): " + serverHealth.NodeServer.ip,
-                "value": serverHealth.memory
+                "label": "Mem: " + serverHealth.NodeServer.ip,
+                "value": _this.convertToPercent(serverHealth.memory)
             };
             serverHealthArray.push(CPU, memory);
             return serverHealthArray;
         }, []);
+    };
+    serverHealthChart.prototype.convertToPercent = function (num) {
+        return Number((num * 100).toFixed(2));
     };
     serverHealthChart.prototype.ngAfterViewInit = function () {
         this.nvD3.chart.update();

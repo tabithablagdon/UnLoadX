@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HTTP_PROVIDERS, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';

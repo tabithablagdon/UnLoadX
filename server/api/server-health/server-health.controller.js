@@ -6,9 +6,9 @@ import request from 'request';
 const serverHealthController = {
   // Create entries recording server health for each server - accepts /POST request from loadBalancer
   createServerHealth: (req, res) => {
-    // assumes req.body is {testId: 2, serverHealths: [{ip: '1.23.23', memory: 34, CPU: 423, available: true}, {etc}]}
+    // assumes req.body is {TestId: 2, serverHealths: [{ip: '1.23.23', memory: 34, CPU: 423, available: true}, {etc}]}
     const serverHealthData = req.body.ServerHealths;
-    console.log(`POST from LB: ${serverHealthData}`)
+    console.log(`CreateServerHealth: POST from LB: ${serverHealthData}`)
     const testId = req.body.TestId;
     res.sendStatus(200);
     // create an array of create objects to pass into bulkCreate

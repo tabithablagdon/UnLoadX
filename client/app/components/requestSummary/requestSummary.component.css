@@ -1,23 +1,31 @@
 .requestBox {
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 3px;
   color: #FFF;
-  height: 250px;
-  margin-right: 1em;
+  height: 200px;
+  min-height: 240px;
+  min-width: 150px;
   text-align: center;
-  padding: 3em 1em 3em 1em;
+  padding: 2em 1em 2em 1em;
+  vertical-align: middle;
 }
 
+.request-data-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  padding: 2em 1em 2em 1em;
+}
 .status-code-chart {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  height: 250px;
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 3px;
+  border-top: solid 15px #7560A5;
+  min-height: 200;
 }
 
 .success-rate {
-  background-color: #EDC54B;
+  border-top: solid 15px #EDC54B;
 }
 
-
 .total-requests {
-  background-color: #57A6E1;
+  border-top: solid 15px #57A6E1;
 }

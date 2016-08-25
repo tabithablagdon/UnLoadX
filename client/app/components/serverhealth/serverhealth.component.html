@@ -1,9 +1,11 @@
-<div class="row">
-  <h5>Server Health Breakdown</h5>
-  <div class="col s6 serverhealth-chart z-depth-3">
-    [insert server health components here]
+<h5>Server Health Breakdown</h5>
+<div class="row serverhealth z-depth-3">
+  <div class="col s6">
+
+    <server-stats [serverData]="server" *ngFor="let server of serverData"></server-stats>
+
   </div>
-  <div class="col s6 serverhealth-chart z-depth-3">
-    <serverHealthChart  [requestData]="requestData"></serverHealthChart>
+  <div class="col s6 serverhealth-chart z-depth-1">
+    <serverHealthChart [requestData]="requestData"></serverHealthChart>
   </div>
 </div>

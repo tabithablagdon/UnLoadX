@@ -19,11 +19,11 @@ export class networkGraph implements OnInit{
     this.options = {
       chart: {
       type: 'forceDirectedGraph',
-      height: 500,
-      width: 500,
+      height: 400,
+      width: 600,
       margin:{top: 20, right: 20, bottom: 20, left: 0},
       radius: 15,
-      linkDist:300,
+      linkDist:400,
       color: function(d){
         return color(d.group)
       },

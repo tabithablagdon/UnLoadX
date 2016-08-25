@@ -1,6 +1,21 @@
+.serverhealth {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 2em 1em 2em 1em;
+}
+
+.serverhealth-box {
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 3px;
+  border-top: solid 15px #EDC54B;
+  min-width: 200px;
+  padding: .5em 2em 1em 0;
+  text-align: center;
+}
 
 .serverhealth-chart {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  height: 250px;
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 3px;
+  border-top: solid 15px #FA6B5B;
+  min-height: 200;
 }

@@ -1,13 +1,18 @@
-  <div class="navbar-header">
-    <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-    <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
-  </div>
 <header>
-  <div class="main-nav">
-    <a routerLink="/"><button class="btn waves-effect waves-light orange">Run New Test</button></a>
+  <div class="row main-nav">
+    <div class="col s6">
+      <span class="main-logo number-focus">UnLoadX</span>
+      <img src="https://cdn4.iconfinder.com/data/icons/orb/128/7.png"/>
+    </div>
+    <div class="col s6 button-nav">
+      <a routerLink="/"><button class="btn waves-effect waves-light orange button-style">New Test</button></a>
+
+      <button class="btn waves-effect waves-light orange button-style" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+      <button class="btn waves-effect waves-light orange button-style" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+    </div>
   </div>
-  <span class="main-logo">UnLoadX</span><img src="https://cdn4.iconfinder.com/data/icons/orb/128/7.png"/>
 </header>
+
 <main>
   <router-outlet></router-outlet>
 </main>
