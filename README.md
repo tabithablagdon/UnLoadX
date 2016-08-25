@@ -1,7 +1,7 @@
 ### UnLoadX - Load balancing and testing tool with UI measuring performance
 
 ## Description
-UnLoadX is a load balancer capable of managing user-generated network traffic. Users supply inputs to the load balancer and view load balancer performance via metrics & graphs. Users send an IP address, a port number, and the number of requests for the load balancer to process.
+UnLoadX is a load balancer capable of managing user-generated network traffic. Users supply inputs to the load balancer to generate traffic for the load balancer to process and can view load balancer performance metrics and charts. Users send an IP address, a port number, and the number of requests for the load balancer to process.
 
 ## Tech Stack
 Angular 2

@@ -10,8 +10,8 @@ let requestData;
 
 
 export default class SocketService {
-  private _url = 'http://52.9.136.53:3000';
-  // private _url = 'http://localhost:3000';
+  // private _url = 'http://52.9.136.53:3000';
+  private _url = 'http://localhost:3000';
   private _socket = io.connect(this._url);
   requestDataSource = new ReplaySubject();
 
