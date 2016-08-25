@@ -9,24 +9,23 @@
 }
 
 .memory {
-  background-color: #7560A5;
+  background-color: orange;
 }
 
 .serverhealth-box {
   background-color: rgba(255, 255, 255, .05);
-  border-radius: 5px;
-  border-top: solid 15px #EDC54B;
+  border-radius: 3px;
   min-width: 200px;
   padding: .5em 2em 1em 0;
   text-align: center;
 }
 
 .server-stats {
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 2em;
   font-weight: 600;
   margin-top: 5px;
-  min-height: 75px;
+  min-height: 100px;
   max-height: 120px;
   padding: 5px 0 5px 0;
   text-align: center;

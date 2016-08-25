@@ -1,6 +1,6 @@
 .latencyBox {
   background-color: rgba(255, 255, 255, .05);
-  border-radius: 5px;
+  border-radius: 3px;
   color: #FFF;
   min-height: 150px;
   min-width: 150px;
@@ -10,18 +10,18 @@
 
 .latency {
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 1em;
 }
 
 .latencyChart {
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: rgba(255, 255, 255, .05);
-  border-top: solid 15px #FA6B5B;
+  border-top: solid 15px #28D8B2;
 }
 
 .latencyMin {
-  border-top: solid 15px #28D8B2;
+  border-top: solid 15px #FA6B5B;
 }
 
 .latencyMax {

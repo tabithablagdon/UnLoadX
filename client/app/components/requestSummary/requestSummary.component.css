@@ -1,9 +1,9 @@
 .requestBox {
   background-color: rgba(255, 255, 255, .05);
-  border-radius: 5px;
+  border-radius: 3px;
   color: #FFF;
   height: 200px;
-  min-height: 215px;
+  min-height: 240px;
   min-width: 150px;
   text-align: center;
   padding: 2em 1em 2em 1em;
@@ -12,13 +12,13 @@
 
 .request-data-box {
   background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 2em 1em 2em 1em;
 }
 .status-code-chart {
   background-color: rgba(255, 255, 255, .05);
-  border-radius: 5px;
-  border-top: solid 15px #28D8B2;
+  border-radius: 3px;
+  border-top: solid 15px #7560A5;
   min-height: 200;
 }
 

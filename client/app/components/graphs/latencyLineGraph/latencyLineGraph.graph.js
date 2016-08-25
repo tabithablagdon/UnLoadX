@@ -19,7 +19,7 @@ var latencyLineGraph = (function () {
         this.options = {
             chart: {
                 type: 'lineChart',
-                height: 200,
+                height: 350,
                 margin: {
                     top: 20,
                     right: 20,
@@ -48,14 +48,17 @@ var latencyLineGraph = (function () {
                     axisLabel: 'Time Latency (ms)',
                     axisLabelDistance: -10
                 },
-                styles: {}
+                style: {
+                    fill: 'white',
+                    stroke: 'white'
+                }
             }
         };
         this.data = [
             {
                 values: this.parsedData.latency.latencySet,
                 key: 'Latency Per Request',
-                color: '#ff7f0e' //color - optional: choose your own line color.
+                color: 'orange' //color - optional: choose your own line color.
             }
         ];
     };

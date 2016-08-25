@@ -19,7 +19,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: './client/app/components/app.component.html',
-            styles: ["\n    img {\n      max-width: 60;\n      vertical-align: sub;\n    }\n    .main-logo {\n      color: orange;\n      font-size: 4em;\n      font-weight: 400;\n    }\n    .main-nav {\n      float: right;\n    }\n  "],
+            styleUrls: ['./client/app/components/app.component.css'],
             directives: [router_1.ROUTER_DIRECTIVES],
             providers: [auth_service_1.Auth]
         }), 

@@ -1,11 +1,49 @@
+@import 'https://fonts.googleapis.com/css?family=Oswald';
+
 body {
   background: #312e2e !important;
+  color: #FFF;
   font-family: 'Raleway', sans-serif !important;
   margin: 4em !important;
 }
 
+.center {
+  margin: 0 auto;
+  padding: 1em;
+  text-align: center;
+}
+
+.color-blue {
+  color: #57A6E1;
+}
+
 .color-orange {
   color: orange;
+}
+
+.color-light-gray {
+  color: #bdbdbd;
+}
+
+.color-teal {
+  color: #28D8B2;
+}
+
+.color-yellow {
+  color: #EDC54B;
+}
+
+.number-focus {
+  font-family: 'oswald', 'san serif';
+}
+
+.number-regular {
+  font-family: 'arial', 'verdena';
+}
+
+.shadow-box {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .05);
 }
 
 .small {

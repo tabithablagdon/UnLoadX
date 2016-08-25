@@ -33,7 +33,7 @@ export class RequestSummaryComponent implements OnInit {
   }
 
   calculateSuccessRate (successes) {
-   this.successRate = successes ? (successes / this.totalReqs) : 0;
+   this.successRate = successes ? Math.round((successes / this.totalReqs)) : 0;
   }
 
   keys() : Array<string> {

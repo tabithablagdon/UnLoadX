@@ -26,7 +26,7 @@ var RequestSummaryComponent = (function () {
         this.calculateSuccessRate(this.statusCodeCounts[200]);
     };
     RequestSummaryComponent.prototype.calculateSuccessRate = function (successes) {
-        this.successRate = successes ? (successes / this.totalReqs) : 0;
+        this.successRate = successes ? Math.round((successes / this.totalReqs)) : 0;
     };
     RequestSummaryComponent.prototype.keys = function () {
         return Object.keys(this.statusCodeCounts);

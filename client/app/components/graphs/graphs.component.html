@@ -1,24 +1,25 @@
 <div class="test-stats">
-  <div class="row">
-    <div class="col s6">
-      <button (click)="getTestSummaryData()" class="btn waves-effect waves-light"> Retrieve Test Statistics </button>
-    </div>
-    <div class="col s6">
+  <div class="graph-box">
+    <div class="row center">
+      <div class="col s12">
+        <button (click)="getTestSummaryData()" class="btn waves-effect waves-light test-btn">Click to See Test Results</button>
+      </div>
+      <!-- <div class="col s6">
       <img src={{loadingURL}} *ngIf="clicked && !isDataAvailable"/>
       <img src={{checkURL}} *ngIf="clicked && isDataAvailable"/><br>
       <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
+    </div> -->
     </div>
-  </div>
-  <div class="graph-box">
 
     <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
-
     <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>
-
     <server-health *ngIf="isDataAvailable" [requestData]="requestData"></server-health>
 
-    <networkGraph></networkGraph>
-
+    <div class="row">
+      <h5>Network Architecture</h5>
+      <div class="col s12 shadow-box z-depth-3">
+        <networkGraph></networkGraph>
+      </div>
+    </div>
   </div>
-
 </div>

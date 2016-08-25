@@ -2,10 +2,23 @@ img {
   width: 50px;
 }
 
+.test-btn {
+  display: block;
+  width: 100%;
+}
+
+.test-results {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .test-stats {
   color: #FFF;
 }
 
 .graph-box {
+  border: solid thin gray;
+  border-radius: 3px
   margin: 0 auto;
+  padding: 1em;
 }

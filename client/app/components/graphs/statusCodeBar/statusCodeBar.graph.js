@@ -18,7 +18,7 @@ var statusCodeBar = (function () {
         this.options = {
             chart: {
                 type: 'pieChart',
-                height: 200,
+                height: 175,
                 donut: true,
                 x: function (d) { return d.key; },
                 y: function (d) { return d.y; },
@@ -38,15 +38,17 @@ var statusCodeBar = (function () {
                 }
             }
         };
-        // this.data = this.parsedData.status;
+        // this.data = this.requestData.status;
         this.data = this.requestData.status || [
             {
                 key: "Status Code 200",
-                y: 125
+                y: 125,
+                color: 'orange'
             },
             {
                 key: "Status Code 400",
-                y: 25
+                y: 25,
+                color: 'red'
             }
         ];
     };
