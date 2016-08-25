@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { statusCodeBar} from '../graphs/statusCodeBar/statusCodeBar.graph';
-import { descriptiveInfo } from '../graphs/descriptiveInfo/descriptiveInfo.info';
 
 @Component({
   selector: 'request-summary',
   templateUrl: './client/app/components/requestSummary/requestSummary.component.html',
   styleUrls: ['./client/app/components/requestSummary/requestSummary.component.css'],
-  directives: [statusCodeBar, descriptiveInfo]
+  directives: [statusCodeBar]
 })
 
 export class RequestSummaryComponent implements OnInit {
