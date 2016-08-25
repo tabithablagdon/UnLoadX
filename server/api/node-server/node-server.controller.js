@@ -137,6 +137,11 @@ nodeController.startSiege = (data) => {
     // Query Users to find Load Balancer IP for that User to pass to Siege Service
     User.findOne({where: {id: data.userId}, include: [LoadBalancer]})
       .then(user => {
+        // handling failed server message
+        if (!data.hasOwnProperty('Volume')) {
+          data = {'Volume': 5, 'TestId': 4};
+        }
+
         data.ip = user.LoadBalancer.ip;
 
         console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);
