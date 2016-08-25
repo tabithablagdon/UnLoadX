@@ -13,16 +13,17 @@ LB_Ready.get200fromLB = (parsedPublicIP) => {
   function checkEc2Avail() {
     console.log('inec2avail')
     return new Promise((resolve, reject) => {
-      let attempt = 0;
-      const httpRecursion = attempt => {
+      let startTime = new Date()
+      const httpRecursion = start => {
         request(options, (err, resp, body) => {
           if (err) {
             console.log('err')
-            if (attempt < 60) {
-              console.log(`not yet, attempt ${attempt}`)
-              httpRecursion(++attempt);
+            // try for 10 minutes
+            if ((new Date() - start) / 1000 < 600) {
+              console.log(`not yet, time ${(new Date() - start) / 1000 < 600)}`)
+              httpRecursion(start);
             } else {
-              console.log('60 attempts, done')
+              console.log('times up, done')
               reject(err);
             }
           } else {
@@ -31,7 +32,7 @@ LB_Ready.get200fromLB = (parsedPublicIP) => {
           }
         });
       }
-      httpRecursion(attempt);
+      httpRecursion(startTime);
     });
   }
   return checkEc2Avail()
