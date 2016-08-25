@@ -1,52 +1,43 @@
 'use strict'
-// import fs from 'fs';
-// import Promise from 'bluebird';
-// import request from 'request';
-// import async from 'async';
-const fs = require('fs');
-const Promise = require('bluebird');
 const request = require('request');
-const async = require('async');
 
 const LB_Ready = {};
 
-LB_Ready.parseLBPublicIPAddress = (filename) => {
+LB_Ready.get200fromLB = (parsedPublicIP) => {
 
-  console.log(`parsing LB_IP`);
-  return new Promise((resolve, reject) => {
-    fs.readFile(filename, 'utf8', (err, data) => {
-      if (err) {
-        console.log(`Error reading file ${err.message}`);
-        reject(err);
-      } else {
-        console.log('data',data);
-        let dataArray = data.toString().replace(/ /g,'').split('\n');
-        let parsedPublicIP = dataArray[1].slice(2).slice(0,-1);
-        console.log('inArray1', parsedPublicIP);
-        resolve(parsedPublicIP);
-      }
-    });
-  });
-};
+  const options = {
+    timeout: 5000,
+    uri: `http://${parsedPublicIP}:9000/`,
+  }
 
-LB_Ready.get200fromLB = (parsedPublicIP, TBDRestEndPoint) => {
-  console.log(`getting 200 Status from LB`);
-  return new Promise((resolve, reject) => {
-    let path = `http://${parsedPublicIP}:9000${TBDRestEndPoint}/`
-    console.log('path: ', path)
-    exec(`curl ${path}`, (err, res, body) => {
-      if (err) {
-        console.error(`exec error: ${err}`);
-        console.log(`res: ${res}, body: ${body}`);
-        reject(err);
+  function checkEc2Avail() {
+    console.log('inec2avail')
+    return new Promise((resolve, reject) => {
+      let startTime = new Date()
+      const httpRecursion = start => {
+        request(options, (err, resp, body) => {
+          if (err) {
+            console.log('err')
+            // try for 10 minutes
+            if ((new Date() - start) / 1000 < 600) {
+              console.log(`not yet, time ${((new Date() - start) / 1000) < 600}`)
+              httpRecursion(start);
+            } else {
+              console.log('times up, done')
+              reject(err);
+            }
+          } else {
+            console.log('success?')
+            resolve();
+          }
+        });
       }
-      if (body) {
-        console.log('body', body);
-        console.log('path', path)
-        resolve(path);
-      }
+      httpRecursion(startTime);
     });
-  });
-};
+  }
+  return checkEc2Avail()
+    .then(() => console.log('it worked!'))
+    .catch(err => console.log(`${err}`))
+}
+
 module.exports = LB_Ready;
-// LB_Ready.get200fromLB('127.0.0.1', '/')
