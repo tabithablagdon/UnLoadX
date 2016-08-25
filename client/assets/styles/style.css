@@ -3,3 +3,12 @@ body {
   font-family: 'Raleway', sans-serif !important;
   margin: 4em !important;
 }
+
+.color-orange {
+  color: orange;
+}
+
+.small {
+  font-size: .5em;
+  font-weight: 600;
+}

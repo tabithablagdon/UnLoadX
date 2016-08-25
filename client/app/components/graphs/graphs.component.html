@@ -10,8 +10,7 @@
     </div>
   </div>
   <div class="graph-box">
-    <h4>Test Results</h4>
-    <hr />
+
     <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
 
     <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>

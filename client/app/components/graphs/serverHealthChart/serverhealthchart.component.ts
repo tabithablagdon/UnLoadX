@@ -27,7 +27,7 @@ export class serverHealthChart implements OnInit{
     this.options = {
       chart: {
         type: 'discreteBarChart',
-        height: 220,
+        height: 400,
         margin : {
           top: 20,
           right: 20,
@@ -45,7 +45,7 @@ export class serverHealthChart implements OnInit{
           axisLabel: 'Servers'
         },
         yAxis: {
-          axisLabel: 'GHz',
+          axisLabel: '% Capacity Used',
           axisLabelDistance: -10
         }
       }
@@ -53,7 +53,7 @@ export class serverHealthChart implements OnInit{
 
     this.data = [
       {
-        key: "Cumulative Return",
+        key: "Server Health",
         values: this.values
       }
     ];
@@ -63,12 +63,12 @@ export class serverHealthChart implements OnInit{
 
     return serverHealthData.reduce((serverHealthArray, serverHealth) => {
       let CPU = {
-        "label": `CPU (GHz): ${serverHealth.NodeServer.ip}`,
-        "value": serverHealth.CPU
+        "label": `CPU: ${serverHealth.NodeServer.ip}`,
+        "value": this.convertToPercent(serverHealth.CPU)
       };
       let memory = {
-        "label": `Memory (GB): ${serverHealth.NodeServer.ip}`,
-        "value": serverHealth.memory
+        "label": `Mem: ${serverHealth.NodeServer.ip}`,
+        "value": this.convertToPercent(serverHealth.memory)
       };
 
       serverHealthArray.push(CPU, memory);
@@ -76,6 +76,10 @@ export class serverHealthChart implements OnInit{
 
     }, []);
 
+  }
+
+  convertToPercent(num) {
+    return Number((num * 100).toFixed(2));
   }
 
   ngAfterViewInit() {

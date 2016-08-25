@@ -1,6 +1,45 @@
+.serverhealth {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 2em 1em 2em 1em;
+}
+
+.serverhealth-box {
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 5px;
+  border-top: solid 15px #EDC54B;
+  min-width: 200px;
+  padding: .5em 2em 1em 0;
+  text-align: center;
+}
 
 .serverhealth-chart {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  height: 250px;
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 5px;
+  border-top: solid 15px #28D8B2;
+  min-height: 200;
+}
+
+.server-stats {
+  border-radius: 5px;
+  font-size: 2.5em;
+  font-weight: 600;
+  margin-top: 5px;
+  min-height: 75px;
+  padding: 5px 0 5px 0;
+  text-align: center;
+}
+
+.cpu {
+  background-color: #57A6E1;
+}
+
+.ip {
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.memory {
+  background-color: #7560A5;
 }

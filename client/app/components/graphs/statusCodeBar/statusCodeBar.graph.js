@@ -18,7 +18,7 @@ var statusCodeBar = (function () {
         this.options = {
             chart: {
                 type: 'pieChart',
-                height: 250,
+                height: 200,
                 donut: true,
                 x: function (d) { return d.key; },
                 y: function (d) { return d.y; },
@@ -30,9 +30,9 @@ var statusCodeBar = (function () {
                 duration: 500,
                 legend: {
                     margin: {
-                        top: 5,
-                        right: 140,
-                        bottom: 5,
+                        top: 15,
+                        right: 0,
+                        bottom: 0,
                         left: 0
                     }
                 }

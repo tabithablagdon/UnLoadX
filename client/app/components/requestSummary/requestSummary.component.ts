@@ -26,7 +26,7 @@ export class RequestSummaryComponent implements OnInit {
    this.statusCodeCounts = {};
 
    for (let i=0; i < statusCodeArray.length; i++) {
-     this.statusCodeCounts[statusCodeArray[i].key] = statusCodeArray[i].values[0].value;
+     this.statusCodeCounts[statusCodeArray[i].key] = statusCodeArray[i].y;
    }
 
    this.calculateSuccessRate(this.statusCodeCounts[200]);

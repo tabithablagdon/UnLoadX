@@ -1,32 +1,37 @@
 .latencyBox {
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .05);
+  border-radius: 5px;
   color: #FFF;
-  height: 150px;
-  margin-right: 1em;
+  min-height: 150px;
+  min-width: 150px;
   padding: 2em 1em 2em 1em;
   text-align: center;
-  width: 150px;
 }
 
-.latency-chart {
+.latency {
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  height: 250px;
+  border-radius: 5px;
   padding: 1em;
 }
 
+.latencyChart {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .05);
+  border-top: solid 15px #FA6B5B;
+}
+
 .latencyMin {
-  background-color: #28D8B2;
+  border-top: solid 15px #28D8B2;
 }
 
 .latencyMax {
-  background-color: #7560A5;
+  border-top: solid 15px #7560A5;
 }
 
 .latencyAvg {
-  background-color: #28D8B2;
+  border-top: solid 15px #EDC54B;
 }
 
 .latencyStdDev {
-  background-color: #7560A5;
+  border-top: solid 15px #57A6E1;
 }
