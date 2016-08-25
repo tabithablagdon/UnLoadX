@@ -14,7 +14,8 @@ var ReplaySubject_1 = require('rxjs/ReplaySubject');
 var requestData;
 var SocketService = (function () {
     function SocketService() {
-        this._url = 'http://52.9.136.53:3000';
+        // private _url = 'http://52.9.136.53:3000';
+        this._url = 'http://localhost:3000';
         this._socket = io.connect(this._url);
         this.requestDataSource = new ReplaySubject_1.ReplaySubject();
         this.setRequestData();
