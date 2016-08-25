@@ -20,7 +20,7 @@ LB_Ready.get200fromLB = (parsedPublicIP) => {
             console.log('err')
             // try for 10 minutes
             if ((new Date() - start) / 1000 < 600) {
-              console.log(`not yet, time ${(new Date() - start) / 1000 < 600)}`)
+              console.log(`not yet, time ${((new Date() - start) / 1000) < 600}`)
               httpRecursion(start);
             } else {
               console.log('times up, done')
