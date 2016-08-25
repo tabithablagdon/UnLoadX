@@ -40,7 +40,6 @@ var FormComponent = (function () {
                 servers: models,
                 volume: this.numReqModel
             };
-            console.log(formData);
             this.SocketService.sendServers(formData);
             this.Router.navigate(['/graphs']);
         }
