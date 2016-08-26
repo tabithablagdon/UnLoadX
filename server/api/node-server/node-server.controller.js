@@ -5,7 +5,6 @@ import Promise from 'bluebird';
 
 const nodeController = {};
 
-
   nodeController.createServers = (servers, userId) => {
 
     servers.forEach(server => {

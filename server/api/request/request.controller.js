@@ -22,7 +22,7 @@ requestController.createRequest = (data) => {
     .then(requestData => {
       console.log('[STEP 7.5]: Completed all Request.create records - running parseRequests with resolved requestData');
 
-      let parsedData = requestController.getTestRequestsSocket(requestData, testId);
+      let parsedData = requestController.getServerHealth(requestData, testId);
 
       return parsedData;
     })
@@ -31,15 +31,20 @@ requestController.createRequest = (data) => {
      });
 };
 
-requestController.getTestRequestsSocket = (requestData, id) => {
-  // Set if to 4 for testing - delete this line in deployment
-  id = 4;
-  // ** Query for ServerHealth data by same testId - could be issue with timing here to test!
+// function requestController() - retrieves serverhealth information for specific test
+
+requestController.getServerHealth = (requestData, id) => {
+
   return ServerHealth.findAll({where: {testId: id}, include: [NodeServer]})
     .then(serverHealthData => {
+
+      console.log('[STEP 7.7]: In requestController.getServerHealth - retrieved ServerHealth data', serverHealthData);
+
       return parseRequests(requestData, serverHealthData);
     });
 };
+
+// function parseRequests() - Parses data into data structure needed by Client to visualize on front-end
 
 function parseRequests(data, serverHealthData) {
 
@@ -91,13 +96,12 @@ function parseRequests(data, serverHealthData) {
   stats.status = status;
   stats.serverhealth = serverHealthData;
 
-  console.log('[STEP 8.5]: Finished parsing requests - sending back stats ', stats);
+  console.log('[STEP 8.5]: Finished parsing requests - sending back statsData ', stats);
 
   return stats;
 }
 
 requestController.getAllRequests = (req, res) => {
-
   Request.findAll()
     .then(requests => res.json(requests))
     .catch(handleError(res));
