@@ -4,26 +4,42 @@
     <div class="row">
       <div class="col s3">
         <div class="latencyBox latencyAvg z-depth-1">
-          <h5>Avg</h5>
-          <h3 class="number-focus">{{latencyAvg}}</h3>
+          <div class="circle-yellow center">
+            <span>Avg</span>
+            <br>
+            <span class="number-focus">{{latencyAvg}}</span>
+            <!-- <h3 class="number-focus">0.05</h3> -->
+          </div>
         </div>
       </div>
       <div class="col s3">
         <div class="latencyBox latencyMax z-depth-1">
-          <h5>Max</h5>
-          <h3 class="number-focus">{{latencyMax}}</h3>
+          <div class="circle-purple center">
+            <span>Max</span>
+            <br>
+            <span class="number-focus">{{latencyMax}}</span>
+            <!-- <h3 class="number-focus">0.07</h3> -->
+          </div>
         </div>
       </div>
       <div class="col s3">
         <div class="latencyBox latencyMin z-depth-1">
-          <h5>Min</h5>
-          <h3 class="number-focus">{{latencyMin}}</h3>
+          <div class="circle-red center">
+            <span>Min</span>
+            <br>
+            <span class="number-focus">{{latencyMin}}</span>
+            <!-- <h3 class="number-focus">0.01</h3> -->
+          </div>
         </div>
       </div>
       <div class="col s3">
         <div class="latencyBox latencyStdDev z-depth-1">
-          <h5>Std Dev</h5>
-          <h3 class="number-focus">{{latencyStdDev}}</h3>
+          <div class="circle-blue center">
+            <span>Std Dev</span>
+            <br>
+            <span class="number-focus">{{latencyStdDev}}</span>
+            <!-- <h3 class="number-focus">0.01</h3> -->
+          </div>
         </div>
       </div>
     </div>

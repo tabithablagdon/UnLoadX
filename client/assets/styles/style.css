@@ -9,8 +9,88 @@ body {
 
 .center {
   margin: 0 auto;
-  padding: 1em;
+  padding: .7em;
   text-align: center;
+}
+
+.circle-blue {
+  background-color: rgba(87, 166, 225, .2);
+  border: solid 3px #57A6E1;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.circle-blue:hover {
+  background-color: rgba(87, 166, 225, .8);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.circle-yellow {
+  background-color: rgba(237, 197, 75, .2);
+  border: solid 3px #EDC54B;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.circle-yellow:hover {
+  background-color: rgba(237, 197, 75, .8);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.circle-purple {
+  background-color: rgba(117, 96, 165, .2);
+  border: solid 3px #7560A5;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.circle-purple:hover {
+  background-color: rgba(117, 96, 165, .8);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.circle-red {
+  background-color: rgba(250, 107, 91, .2);
+  border: solid 3px #FA6B5B;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.circle-red:hover {
+  background-color: rgba(250, 107, 91, .8);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.circle-teal {
+  background-color: rgba(40, 216, 178, .2);
+  border: solid 3px #28D8B2;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.circle-teal:hover {
+  background-color: rgba(40, 216, 178, .8);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .color-blue {
@@ -35,6 +115,7 @@ body {
 
 .number-focus {
   font-family: 'oswald', 'san serif';
+  font-size: 2em;
 }
 
 .number-regular {
