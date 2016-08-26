@@ -2,7 +2,6 @@ import { ServerHealth, NodeServer } from '../../db/db';
 import { handleError } from '../../config/utils';
 import request from 'request';
 
-
 const serverHealthController = {
   // Create entries recording server health for each server - accepts /POST request from loadBalancer
   createServerHealth: (req, res) => {
@@ -31,7 +30,6 @@ const serverHealthController = {
       .then(data => ServerHealth.bulkCreate(data))
       .catch(err => console.log(`some error: ${err}`))
   },
-
 
   getServerHealth: (req, res) => {
     const id = req.params.id;
