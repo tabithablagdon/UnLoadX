@@ -1,23 +1,52 @@
 <div class="test-stats">
   <div class="graph-box">
     <div class="row center">
-      <div class="col s12">
-        <button (click)="getTestSummaryData()" class="btn waves-effect waves-light test-btn">Click to See Test Results</button>
+
+      <!-- spinner -->
+      <div class="preloader-wrapper big active" *ngIf="!isDataAvailable">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
       </div>
-      <!-- <div class="col s6">
-      <img src={{loadingURL}} *ngIf="clicked && !isDataAvailable"/>
-      <img src={{checkURL}} *ngIf="clicked && isDataAvailable"/><br>
-      <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
-    </div> -->
+      <!-- end spinner -->
+
+      <p></p>
+      <div class="col s12">
+        <button (click)="getTestSummaryData()" class="btn waves-effect waves-light test-btn" [disabled]="!isDataAvailable">Click to See Test Results</button>
+      </div>
+
     </div>
+    <div class="row graphs">
 
-    <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
-    <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>
-    <server-health *ngIf="isDataAvailable" [requestData]="requestData"></server-health>
+      <!-- Display Error Message if Server is down -->
+      <div *ngIf="displayError" class="error">
+        <p class="error">ERROR: Cannot run tests.  Server with ip {{requestData.Servers[0].Ip}} is not responding.  Please fix and re-run tests.</p>
+      </div>
+      <!-- End Error Message -->
 
-    <div class="row">
-      <h5>Network Architecture</h5>
-      <div class="col s12 shadow-box z-depth-3">
+      <div class="col s12">
+        <request-summary *ngIf="displayData" [requestData]="requestData"></request-summary>
+      </div>
+    </div>
+    <div class="row graphs">
+      <div class="col s12">
+        <latency *ngIf="displayData" [requestData]="requestData"></latency>
+      </div>
+    </div>
+    <div class="row graphs">
+      <div class="col s12">
+        <server-health *ngIf="displayData" [requestData]="requestData"></server-health>
+      </div>
+    </div>
+    <div class="row graphs network">
+      <h4>Network Architecture</h4>
+      <div class="col s12 z-depth-3">
         <networkGraph></networkGraph>
       </div>
     </div>

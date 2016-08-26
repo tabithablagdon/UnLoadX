@@ -20,11 +20,17 @@ io.on('connection', (socket) => {
   socket.on('receive-post', (requests) => {
     console.log('Received POST from client socket!', requests);
     nodeController.createServerNodeSocket(requests)
-      .then(dataFromLB => nodeController.startSiege(dataFromLB)) 
-      .then(requestBody => requestController.createRequest(requestBody))
-      .then(statsData => {
-        console.log('[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ', statsData);
-        socket.emit('receive-requests', statsData);
+      .then(dataFromLB => {
+        if (dataFromLB.hasOwnProperty('Volume')) {
+          nodeController.startSiege(dataFromLB)
+          .then(requestBody => requestController.createRequest(requestBody))
+          .then(statsData => {
+            console.log('[STEP 9]: Received statsData back from requestController - sending back up to client - statsData is: ', statsData);
+            socket.emit('receive-requests', statsData);
+          });
+        } else {
+          socket.emit('receive-requests', dataFromLB);
+        }
       })
       .catch(err => console.log(`Error in socket chain ${err.message}`));
   });

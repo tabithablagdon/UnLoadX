@@ -21,14 +21,21 @@ var Graphs = (function () {
         this._SocketService = _SocketService;
         this._http = _http;
         this.isDataAvailable = false;
-        this.clicked = false;
+        this.displayData = false;
+        this.displayError = false;
         this.loadingURL = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
         this.checkURL = 'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-glossy-orange-orbs-icons-symbols-shapes/106567-3d-glossy-orange-orb-icon-symbols-shapes-check-mark5-ps.png';
     }
     Graphs.prototype.getTestSummaryData = function () {
-        this.clicked = true;
         this.requestData = this._SocketService.getData();
-        this.isDataAvailable = true;
+        if (!this.requestData.hasOwnProperty('Servers')) {
+            this.displayData = true;
+            this.isDataAvailable = true;
+        }
+        else {
+            this.displayError = true;
+            this.isDataAvailable = true;
+        }
         console.log('Set requestData from SocketService to ', this.requestData);
     };
     Graphs.prototype.ngOnInit = function () {
@@ -37,8 +44,13 @@ var Graphs = (function () {
         this.subscription = this._SocketService.requestDataSource.subscribe({
             next: function (requestDataAvailable) {
                 _this.requestData = _this._SocketService.getData();
-                _this.isDataAvailable = Boolean(requestDataAvailable);
-                console.log("GraphComponent - Changed isDataAvailable to " + _this.isDataAvailable);
+                if (!_this.requestData.hasOwnProperty('Servers')) {
+                    _this.isDataAvailable = Boolean(requestDataAvailable);
+                    console.log("GraphComponent - Changed isDataAvailable to " + _this.isDataAvailable);
+                }
+                else {
+                    _this.displayError = true;
+                }
             },
             error: function (err) { return console.log("Error subscribing to subject " + err.message); },
             complete: function () { return console.log('Done subscribing'); }

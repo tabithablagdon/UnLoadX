@@ -2,6 +2,21 @@ img {
   width: 50px;
 }
 
+.graphs {
+  margin-top: 20px;
+}
+
+.graph-box {
+  border: solid thin gray;
+  border-radius: 3px;
+  margin: 0 auto;
+  padding: 2em;
+}
+
+.network {
+  margin: 0 10px;
+}
+
 .test-btn {
   display: block;
   width: 100%;
@@ -14,11 +29,4 @@ img {
 
 .test-stats {
   color: #FFF;
-}
-
-.graph-box {
-  border: solid thin gray;
-  border-radius: 3px;
-  margin: 0 auto;
-  padding: 1em;
 }

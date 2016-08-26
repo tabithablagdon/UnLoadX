@@ -1,5 +1,6 @@
 .cpu {
-  background-color: #57A6E1;
+  background-color: rgba(87,166,225,.2);
+  border: solid 3px #57A6E1;
 }
 
 .ip {
@@ -9,7 +10,8 @@
 }
 
 .memory {
-  background-color: orange;
+  background-color: rgba(250,107,91,.2);
+  border: solid 3px #FA6B5B;
 }
 
 .serverhealth-box {
