@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var statusCodeBar_graph_1 = require('../graphs/statusCodeBar/statusCodeBar.graph');
-var descriptiveInfo_info_1 = require('../graphs/descriptiveInfo/descriptiveInfo.info');
 var RequestSummaryComponent = (function () {
     function RequestSummaryComponent() {
     }
@@ -40,7 +39,7 @@ var RequestSummaryComponent = (function () {
             selector: 'request-summary',
             templateUrl: './client/app/components/requestSummary/requestSummary.component.html',
             styleUrls: ['./client/app/components/requestSummary/requestSummary.component.css'],
-            directives: [statusCodeBar_graph_1.statusCodeBar, descriptiveInfo_info_1.descriptiveInfo]
+            directives: [statusCodeBar_graph_1.statusCodeBar]
         }), 
         __metadata('design:paramtypes', [])
     ], RequestSummaryComponent);
