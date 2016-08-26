@@ -26,7 +26,7 @@ SiegeService.runSiege = (data) => {
     console.log(`Step 5: In SiegeService.runSiege - Running siege using command: siege ${LB_URL} -t${volume}S > ${filename} using ${JSON.stringify(data)}`);
 
     // Runs shell script that starts 'siege utility' and logs test data to a unique txt file differentiated by ID
-    exec(`siege ${LB_URL} -t${volume}S > ${filename}`, (err, stdout, stderr) => {
+    exec(`siege ${LB_URL} -r${volume} > ${filename}`, (err, stdout, stderr) => {
       if (err) {
         console.error(`exec error: ${err}`);
         console.log(`stdout: ${stdout}, stderr: ${stderr}`);
