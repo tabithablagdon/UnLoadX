@@ -10,14 +10,24 @@
       <span *ngIf="isDataAvailable"> Results ready below. Thanks for waiting! </span>
     </div> -->
     </div>
-
-    <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
-    <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>
-    <server-health *ngIf="isDataAvailable" [requestData]="requestData"></server-health>
-
-    <div class="row">
-      <h5>Network Architecture</h5>
-      <div class="col s12 shadow-box z-depth-3">
+    <div class="row graphs">
+      <div class="col s12">
+        <request-summary *ngIf="isDataAvailable" [requestData]="requestData"></request-summary>
+      </div>
+    </div>
+    <div class="row graphs">
+      <div class="col s12">
+        <latency *ngIf="isDataAvailable" [requestData]="requestData"></latency>
+      </div>
+    </div>
+    <div class="row graphs">
+      <div class="col s12">
+        <server-health *ngIf="isDataAvailable" [requestData]="requestData"></server-health>
+      </div>
+    </div>
+    <div class="row graphs network">
+      <h4>Network Architecture</h4>
+      <div class="col s12 z-depth-3">
         <networkGraph></networkGraph>
       </div>
     </div>

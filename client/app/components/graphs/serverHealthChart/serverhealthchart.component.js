@@ -19,7 +19,7 @@ var serverHealthChart = (function () {
         this.options = {
             chart: {
                 type: 'discreteBarChart',
-                height: 400,
+                height: 350,
                 margin: {
                     top: 20,
                     right: 20,

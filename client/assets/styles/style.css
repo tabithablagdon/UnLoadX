@@ -115,11 +115,12 @@ body {
 
 .number-focus {
   font-family: 'oswald', 'san serif';
-  font-size: 2em;
+  font-size: 30px;
 }
 
 .number-regular {
   font-family: 'arial', 'verdena';
+  font-size: 20px;
 }
 
 .shadow-box {
@@ -128,6 +129,6 @@ body {
 }
 
 .small {
-  font-size: .75em;
+  font-size: 15px;
   font-weight: 600;
 }
