@@ -23,8 +23,6 @@ var Graphs = (function () {
         this.isDataAvailable = false;
         this.displayData = false;
         this.displayError = false;
-        this.loadingURL = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
-        this.checkURL = 'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-glossy-orange-orbs-icons-symbols-shapes/106567-3d-glossy-orange-orb-icon-symbols-shapes-check-mark5-ps.png';
     }
     Graphs.prototype.getTestSummaryData = function () {
         this.requestData = this._SocketService.getData();
@@ -44,7 +42,7 @@ var Graphs = (function () {
         this.subscription = this._SocketService.requestDataSource.subscribe({
             next: function (requestDataAvailable) {
                 _this.requestData = _this._SocketService.getData();
-                if (!_this.requestData.hasOwnProperty('Servers')) {
+                if (_this.requestData && !_this.requestData.hasOwnProperty('Servers')) {
                     _this.isDataAvailable = Boolean(requestDataAvailable);
                     console.log("GraphComponent - Changed isDataAvailable to " + _this.isDataAvailable);
                 }

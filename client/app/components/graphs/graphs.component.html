@@ -3,7 +3,7 @@
     <div class="row center">
 
       <!-- spinner -->
-      <div class="preloader-wrapper big active" *ngIf="!isDataAvailable">
+      <div class="preloader-wrapper big active" *ngIf="!isDataAvailable || !displayError">
         <div class="spinner-layer spinner-blue">
           <div class="circle-clipper left">
             <div class="circle"></div>
@@ -16,7 +16,12 @@
       </div>
       <!-- end spinner -->
 
-      <p></p>
+      <!-- Display Error Message if Server is down -->
+      <div *ngIf="displayError" class="error">
+        <p>ERROR: Cannot run tests.  Server is not responding.  Please fix and re-run tests.</p>
+      </div>
+      <!-- End Error Message -->
+
       <div class="col s12">
         <button (click)="getTestSummaryData()" class="btn waves-effect waves-light test-btn" [disabled]="!isDataAvailable">Click to See Test Results</button>
       </div>
@@ -24,11 +29,6 @@
     </div>
     <div class="row graphs">
 
-      <!-- Display Error Message if Server is down -->
-      <div *ngIf="displayError" class="error">
-        <p class="error">ERROR: Cannot run tests.  Server with ip {{requestData.Servers[0].Ip}} is not responding.  Please fix and re-run tests.</p>
-      </div>
-      <!-- End Error Message -->
 
       <div class="col s12">
         <request-summary *ngIf="displayData" [requestData]="requestData"></request-summary>

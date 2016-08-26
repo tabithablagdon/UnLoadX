@@ -118,11 +118,11 @@ nodeController.sendTestToLB = (res, userId, ip) => {
           } else {
             console.log(`[STEP 2.5]: Send Test to LB at ${ip} resolved successfully with ${res.statusCode} and received back body ${body}`);
             let dataFromLB = JSON.parse(body);
-            
+
             // Patch for handling failed server message for testing - comment out
-            if (!dataFromLB.hasOwnProperty('Volume')) {
-              dataFromLB = {'Volume': 5, 'TestId': 4};
-            }
+            // if (!dataFromLB.hasOwnProperty('Volume')) {
+            //   dataFromLB = {'Volume': 5, 'TestId': 4};
+            // }
             // End patch
 
             dataFromLB.userId = userId;
