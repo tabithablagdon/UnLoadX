@@ -118,8 +118,16 @@ nodeController.sendTestToLB = (res, userId, ip) => {
           } else {
             console.log(`[STEP 2.5]: Send Test to LB at ${ip} resolved successfully with ${res.statusCode} and received back body ${body}`);
             let dataFromLB = JSON.parse(body);
+            
+            // Patch for handling failed server message for testing - comment out
+            if (!dataFromLB.hasOwnProperty('Volume')) {
+              dataFromLB = {'Volume': 5, 'TestId': 4};
+            }
+            // End patch
+
             dataFromLB.userId = userId;
             console.log('[STEP 2.7]: Resolving back to server', dataFromLB);
+
             resolve(dataFromLB);
           }
         });
@@ -137,10 +145,9 @@ nodeController.startSiege = (data) => {
     User.findOne({where: {id: data.userId}, include: [LoadBalancer]})
       .then(user => {
         // handling failed server message
-        if (!data.hasOwnProperty('Volume')) {
-          data = {'Volume': 5, 'TestId': 4};
-        }
-
+        // if (!data.hasOwnProperty('Volume')) {
+        //   data = {'Volume': 5, 'TestId': 4, 'ip': '52.8.16.173'};
+        // }
         data.ip = user.LoadBalancer.ip;
 
         console.log(`[STEP 3]: Invoked startSiege promise - sending /POST to Siege Service with this data ${JSON.stringify(data)}`);

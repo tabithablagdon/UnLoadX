@@ -113,6 +113,14 @@ body {
   color: #EDC54B;
 }
 
+.error {
+  background-color: orange;
+  border-radius: 3px;
+  font-size: 15px;
+  padding: 5px;
+  width: 80%;
+}
+
 .number-focus {
   font-family: 'oswald', 'san serif';
   font-size: 30px;

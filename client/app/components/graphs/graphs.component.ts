@@ -21,16 +21,22 @@ export class Graphs implements OnInit {
   requestData;
   subscription: Subscription;
   isDataAvailable: boolean = false;
-  clicked: boolean = false;
+  displayData: boolean = false;
+  displayError: boolean = false;
   loadingURL: string = 'http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif';
   checkURL: string = 'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-glossy-orange-orbs-icons-symbols-shapes/106567-3d-glossy-orange-orb-icon-symbols-shapes-check-mark5-ps.png';
 
   constructor(private _SocketService: SocketService, private _http: Http) {}
 
   getTestSummaryData() {
-    this.clicked = true;
     this.requestData = this._SocketService.getData();
-    this.isDataAvailable = true;
+    if (!this.requestData.hasOwnProperty('Servers')) {
+      this.displayData = true;
+      this.isDataAvailable = true;
+    } else {
+      this.displayError = true;
+      this.isDataAvailable = true;
+    }
     console.log('Set requestData from SocketService to ', this.requestData);
   }
 
@@ -40,12 +46,15 @@ export class Graphs implements OnInit {
     this.subscription = this._SocketService.requestDataSource.subscribe({
       next: requestDataAvailable => {
         this.requestData = this._SocketService.getData();
-        this.isDataAvailable = Boolean(requestDataAvailable);
-        console.log(`GraphComponent - Changed isDataAvailable to ${this.isDataAvailable}`);
+        if (!this.requestData.hasOwnProperty('Servers')) {
+          this.isDataAvailable = Boolean(requestDataAvailable);
+          console.log(`GraphComponent - Changed isDataAvailable to ${this.isDataAvailable}`);
+        } else {
+          this.displayError = true;
+        }
       },
       error: err => console.log(`Error subscribing to subject ${err.message}`),
       complete: () => console.log('Done subscribing')
-
     });
   }
 
